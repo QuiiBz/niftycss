@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
-import { useNifty, style } from '@niftycss/react';
+import { useNifty, nift } from '@niftycss/react';
 import { Theme } from './theme';
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
 
   const { setTheme } = useNifty();
 
-  const p = style<Theme>(t => ({
+  const p = nift<Theme>(t => ({
     color: t.fg,
     background: t.bg,
   }));

@@ -36,7 +36,7 @@ export default class Nifty<T> {
         return buildCssStyles(this._styles, this._theme);
     }
 
-    public style(styleProvider: StyleProvider<T>): string {
+    public nift(styleProvider: StyleProvider<T>): string {
 
         const className = `nifty-${this._styles.length.toString()}`;
 

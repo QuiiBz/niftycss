@@ -1,8 +1,8 @@
 import React, { createContext, ReactElement, ReactNode } from 'react';
-import Style, { NiftyTheme } from '@niftycss/core';
+import Nifty, { NiftyTheme } from '@niftycss/core';
 
 type Context = {
-    style: Style<any>,
+    nifty: Nifty<any>,
     theme: NiftyTheme<any>,
     setTheme: (theme: NiftyTheme<any>) => void,
 };
@@ -15,16 +15,16 @@ interface Props<T> {
     children: ReactNode;
 }
 
-const CascadingProvider = function<T>({ theme, children }: Props<T>): ReactElement {
+const NiftyProvider = function<T>({ theme, children }: Props<T>): ReactElement {
 
-    const style = Style.create(theme);
-    const setTheme = (theme: NiftyTheme<T>) => style.setTheme(theme);
+    const nifty = Nifty.create(theme);
+    const setTheme = (theme: NiftyTheme<T>) => nifty.setTheme(theme);
 
     return (
-        <NiftyContext.Provider value={{ style: style, theme: style.theme, setTheme }}>
+        <NiftyContext.Provider value={{ nifty, theme: nifty.theme, setTheme }}>
             { children }
         </NiftyContext.Provider>
     );
 }
 
-export default CascadingProvider;
+export default NiftyProvider;
