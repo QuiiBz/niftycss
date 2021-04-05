@@ -5,7 +5,7 @@ const nifty = Nifty.create({
     hover: '#FBFBFB',
 });
 
-const div = nifty.css(t => ({
+const div = nifty.css(["p-2"], t => ({
     backgroundColor: t.bg,
     fontSize: '12px',
     padding: '4px 8px',
@@ -14,4 +14,5 @@ const div = nifty.css(t => ({
     },
 }));
 
+console.log(div);
 console.log(nifty.styles, nifty.currentCss);

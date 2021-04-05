@@ -29,6 +29,11 @@ export type Style<T> = {
 };
 
 /**
+ * A type representing a list of class names.
+ */
+export type ClassProvider = string[];
+
+/**
  * A type representing a function which provides css properties with a callback or an object
  * of css properties.
  */

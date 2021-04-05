@@ -1,14 +1,15 @@
 import { useContext } from 'react';
 import { NiftyContext } from './NiftyContext';
-import { NiftyTheme, StyleProvider } from '@niftycss/core';
+import { ClassProvider, NiftyTheme, StyleProvider } from '@niftycss/core';
 
 export const css = <T>(
+    classProvider: ClassProvider,
     styleProvider: StyleProvider<T>,
 ): string => {
 
     const { nifty } = useContext(NiftyContext);
 
-    return nifty.css(styleProvider);
+    return nifty.css(classProvider, styleProvider);
 }
 
 export const useNifty = <T>(): {

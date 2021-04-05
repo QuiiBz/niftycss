@@ -9,12 +9,12 @@ function App() {
 
   const { setTheme } = useNifty();
 
-  const p = css<Theme>(t => ({
+  const p = css<Theme>([], t => ({
     color: t.fg,
     background: t.bg,
   }));
 
-  /*const btn = style<Theme>(t => ({
+  const btn = css<Theme>(['test'], t => ({
     border: 'none',
     background: t.bg,
     ':focus': {
@@ -23,7 +23,7 @@ function App() {
     ':hover': {
       background: t.fg,
     }
-  }));*/
+  }));
 
   return (
       <div className="App">
@@ -31,7 +31,7 @@ function App() {
           <img src={logo} className="App-logo" alt="logo" />
           <p className={p}>Hello Vite + React!</p>
           <p>
-            <button className={'btn'} onClick={() => setTheme<Theme>({
+            <button className={btn} onClick={() => setTheme<Theme>({
               bg: `#${Math.floor(Math.random()*16777215).toString(16)}`,
               fg:`#${Math.floor(Math.random()*16777215).toString(16)}`,
             })}>
