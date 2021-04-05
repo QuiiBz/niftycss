@@ -4,14 +4,14 @@ import Nifty from './Nifty';
 /**
  * A type representing all available css properties.
  */
-export type CSSProperties = CSS.Properties & { [P in CSS.SimplePseudos]?: CSS.Properties };
+export type CSSProperties = CSS.Properties & { [P in CSS.Pseudos]?: CSS.Properties };
 
 /**
  * A type representing a pseudo css property, with a pseudo element and an object of
  * properties.
  */
 export type PseudoCSSProperty = {
-    pseudo: CSS.SimplePseudos,
+    pseudo: CSS.Pseudos,
     properties: CSSProperties,
 }
 

@@ -22,6 +22,9 @@ function App() {
     },
     ':hover': {
       background: t.fg,
+    },
+    ':not(:hover)': {
+      fontSize: '50px',
     }
   }));
 
