@@ -8,7 +8,9 @@
   },
   "dependencies": {
     "react": "^17.0.0",
-    "react-dom": "^17.0.0"
+    "react-dom": "^17.0.0",
+    "@cascading/core": "^1.0.0",
+    "@cascading/react": "^1.0.0"
   },
   "devDependencies": {
     "@types/react": "^17.0.0",

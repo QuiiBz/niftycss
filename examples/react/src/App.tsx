@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
-import { useCascade, style } from '@cascading/react/src/hooks';
+import { useCascade, style } from '@cascading/react';
 import { Theme } from './theme';
 
 function App() {
@@ -11,12 +11,19 @@ function App() {
 
   const p = style<Theme>(t => ({
     color: t.fg,
-  }));
-
-  const btn = style<Theme>(t => ({
-    border: 'none',
     background: t.bg,
   }));
+
+  /*const btn = style<Theme>(t => ({
+    border: 'none',
+    background: t.bg,
+    ':focus': {
+      outline: 'none',
+    },
+    ':hover': {
+      background: t.fg,
+    }
+  }));*/
 
   return (
     <div className="App">
@@ -24,7 +31,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <p className={p}>Hello Vite + React!</p>
         <p>
-          <button className={btn} onClick={() => setTheme<Theme>({
+          <button className={'btn'} onClick={() => setTheme<Theme>({
             bg: `#${Math.floor(Math.random()*16777215).toString(16)}`,
             fg:`#${Math.floor(Math.random()*16777215).toString(16)}`,
           })}>

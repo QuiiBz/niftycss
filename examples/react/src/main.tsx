@@ -2,14 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
-import CascadingProvider from '@cascading/react/src/CascadingContext';
+import CascadingProvider from '@cascading/react';
 import { theme } from './theme';
 
 ReactDOM.render(
-  <React.StrictMode>
-      <CascadingProvider theme={theme}>
-          <App />
-      </CascadingProvider>
-  </React.StrictMode>,
+    <CascadingProvider theme={theme}>
+        <App />
+    </CascadingProvider>,
   document.getElementById('root')
 )

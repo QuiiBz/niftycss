@@ -2,7 +2,8 @@
   "name": "cascading",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "examples/*"
   ],
   "license": "MIT"
 }

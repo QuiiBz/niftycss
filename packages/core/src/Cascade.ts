@@ -26,6 +26,16 @@ export default class Cascade<T> {
         this.update();
     }
 
+    public get styles(): Style<T>[] {
+
+        return this._styles;
+    }
+
+    public buildCss(): string {
+
+        return buildCssStyles(this._styles, this._theme);
+    }
+
     public style(styleProvider: StyleProvider<T>): string {
 
         const className = `cascade-${this._styles.length.toString()}`;
@@ -38,7 +48,7 @@ export default class Cascade<T> {
 
     private update() {
 
-        const css = buildCssStyles(this._styles, this._theme);
+        const css = this.buildCss();
 
         injectCss(css);
     }

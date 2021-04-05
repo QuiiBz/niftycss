@@ -1,6 +1,9 @@
 const DOM_NODE_ID = 'cascade-style';
 
-const getDomNode = (): HTMLStyleElement => {
+const getDomNode = (): HTMLStyleElement | undefined => {
+
+    if(typeof window === 'undefined')
+        return;
 
     let element = document.getElementById(DOM_NODE_ID);
 
@@ -19,7 +22,8 @@ const injectCss = (css: string) => {
 
     const domNode = getDomNode();
 
-    domNode.textContent = css;
+    if(domNode)
+        domNode.textContent = css;
 }
 
 export default injectCss;

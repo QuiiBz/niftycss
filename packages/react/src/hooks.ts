@@ -1,14 +1,14 @@
-import { useContext, useMemo } from 'react';
+import { useContext } from 'react';
 import { CascadingContext } from './CascadingContext';
-import { CascadeTheme, CSSProperties, Properties } from '@cascading/core/src';
+import { CascadeTheme, StyleProvider } from '@cascading/core';
 
 export const style = <T>(
-    makeStyle: ((theme: CascadeTheme<T>) => Properties) | CSSProperties,
+    makeStyle: StyleProvider<T>,
 ): string => {
 
     const { cascade } = useContext(CascadingContext);
 
-    return useMemo(() => cascade.style(makeStyle), []);
+    return cascade.style(makeStyle);
 }
 
 export const useCascade = <T>(): { theme: CascadeTheme<T>, setTheme: <T>(theme: CascadeTheme<T>) => void } => {

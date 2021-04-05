@@ -1,4 +1,5 @@
-import { CascadeTheme, CSSProperties, Style, StyleProvider } from '../index';
+import { CascadeTheme, CSSProperties, PseudoCSSProperty, Style, StyleProvider } from '../index';
+import * as CSS from 'csstype';
 
 const getStyleFromProvider = <T>(
     styleProvider: StyleProvider<T>,
@@ -18,18 +19,37 @@ const pascalToKebabCase = (property: string): string => {
         .toLowerCase();
 }
 
-const buildCssProperties = (properties: CSSProperties): string => {
+const buildCssProperties = (properties: CSSProperties): {
+    cssProperties: string,
+    pseudoProperties: PseudoCSSProperty[],
+} => {
 
     let cssProperties = '';
+    const pseudoProperties: PseudoCSSProperty[] = [];
 
     Object.entries(properties).forEach(([property, value]) => {
 
-        const kebabProperty = pascalToKebabCase(property);
+        if(property.startsWith(':')) {
 
-        cssProperties += `${kebabProperty}: ${value};`;
+            const pseudo = property as CSS.SimplePseudos;
+
+            pseudoProperties.push({
+                pseudo,
+                properties: value,
+            });
+
+        } else {
+
+            const kebabProperty = pascalToKebabCase(property);
+
+            cssProperties += `${kebabProperty}: ${value};`;
+        }
     });
 
-    return cssProperties;
+    return {
+        cssProperties,
+        pseudoProperties,
+    };
 }
 
 const buildCssStyles = <T>(
@@ -42,9 +62,19 @@ const buildCssStyles = <T>(
     styles.forEach(({ className, styleProvider }) => {
 
         const properties = getStyleFromProvider(styleProvider, theme);
-        const cssProperties = buildCssProperties(properties);
+        const { cssProperties, pseudoProperties } = buildCssProperties(properties);
 
         css += `.${className} {${cssProperties}} `;
+
+        if(pseudoProperties.length > 0) {
+
+            pseudoProperties.forEach(({ pseudo, properties }) => {
+
+                const { cssProperties } = buildCssProperties(properties);
+
+                css += `.${className}${pseudo} {${cssProperties}} `;
+            });
+        }
     });
 
     return css;

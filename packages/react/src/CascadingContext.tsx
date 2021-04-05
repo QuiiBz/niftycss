@@ -1,5 +1,5 @@
-import React, { createContext, ReactElement, ReactNode, } from 'react';
-import Cascade, { CascadeTheme } from '@cascading/core/src';
+import React, { createContext, ReactElement, ReactNode } from 'react';
+import Cascade, { CascadeTheme } from '@cascading/core';
 
 type Context = {
     cascade: Cascade<any>,
@@ -7,11 +7,7 @@ type Context = {
     setTheme: (theme: CascadeTheme<any>) => void,
 };
 
-export const CascadingContext = createContext<Context>({
-    cascade: Cascade.create({ }),
-    theme: { },
-    setTheme: () => null,
-});
+export const CascadingContext = createContext<Context>({ } as Context);
 
 interface Props<T> {
 
@@ -22,7 +18,11 @@ interface Props<T> {
 const CascadingProvider = function<T>({ theme, children }: Props<T>): ReactElement {
 
     const cascade = Cascade.create(theme);
-    const setTheme = (theme: CascadeTheme<T>) => cascade.setTheme(theme);
+    const setTheme = (theme: CascadeTheme<T>) => {
+
+        console.log('set theme');
+        cascade.setTheme(theme);
+    }
 
     return (
         <CascadingContext.Provider value={{ cascade, theme: cascade.theme, setTheme }}>

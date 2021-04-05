@@ -1,4 +1,6 @@
 node_modules/
 lib/
+.idea/
+.vscode/
 
 .DS_STORE
