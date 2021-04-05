@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
-import { useCascade, style } from '@cascading/react';
+import { useNifty, style } from '@niftycss/react';
 import { Theme } from './theme';
 
 function App() {
   const [count, setCount] = useState(0)
 
-  const { setTheme } = useCascade();
+  const { setTheme } = useNifty();
 
   const p = style<Theme>(t => ({
     color: t.fg,

@@ -1,5 +1,5 @@
 import * as CSS from 'csstype';
-import Cascade from './Cascade';
+import Nifty from './Nifty';
 
 /**
  * A type representing all available css properties.
@@ -16,9 +16,9 @@ export type PseudoCSSProperty = {
 }
 
 /**
- * A type representing a Cascade theme.
+ * A type representing a Nifty theme.
  */
-export type CascadeTheme<T> = Record<keyof T, string>;
+export type NiftyTheme<T> = Record<keyof T, string>;
 
 /**
  * A type representing a style, which is composed of a class name, and a style provider.
@@ -32,6 +32,6 @@ export type Style<T> = {
  * A type representing a function which provides css properties with a callback or an object
  * of css properties.
  */
-export type StyleProvider<T> = ((theme: CascadeTheme<T>) => CSSProperties) | CSSProperties;
+export type StyleProvider<T> = ((theme: NiftyTheme<T>) => CSSProperties) | CSSProperties;
 
-export default Cascade;
+export default Nifty;

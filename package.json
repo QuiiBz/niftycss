@@ -1,5 +1,5 @@
 {
-  "name": "cascading",
+  "name": "style",
   "private": true,
   "workspaces": [
     "packages/*",

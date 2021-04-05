@@ -1,4 +1,4 @@
-const DOM_NODE_ID = 'cascade-style';
+const DOM_NODE_ID = 'nifty';
 
 const getDomNode = (): HTMLStyleElement | undefined => {
 

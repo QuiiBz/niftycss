@@ -1,4 +1,4 @@
-import CascadingProvider from './CascadingContext';
+import NiftyProvider from './NiftyContext';
 
-export default CascadingProvider;
-export { style, useCascade } from './hooks';
+export default NiftyProvider;
+export { style, useNifty } from './hooks';

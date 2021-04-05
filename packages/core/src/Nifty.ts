@@ -1,26 +1,26 @@
-import { CascadeTheme, Style, StyleProvider } from './index';
+import { NiftyTheme, Style, StyleProvider } from './index';
 import injectCss from './inject/inject';
 import buildCssStyles from './styles/styles';
 
-export default class Cascade<T> {
+export default class Nifty<T> {
 
-    private _theme: CascadeTheme<T>;
+    private _theme: NiftyTheme<T>;
     private readonly _styles: Style<T>[];
 
     private constructor(
-        theme: CascadeTheme<T>,
+        theme: NiftyTheme<T>,
     ) {
 
         this._theme = theme;
         this._styles = [];
     }
 
-    public get theme(): CascadeTheme<T> {
+    public get theme(): NiftyTheme<T> {
 
         return this._theme!;
     }
 
-    public setTheme(theme: CascadeTheme<T>) {
+    public setTheme(theme: NiftyTheme<T>) {
 
         this._theme = theme;
         this.update();
@@ -38,7 +38,7 @@ export default class Cascade<T> {
 
     public style(styleProvider: StyleProvider<T>): string {
 
-        const className = `cascade-${this._styles.length.toString()}`;
+        const className = `nifty-${this._styles.length.toString()}`;
 
         this._styles.push({ className, styleProvider });
         this.update();
@@ -54,9 +54,9 @@ export default class Cascade<T> {
     }
 
     public static create<T>(
-        theme: CascadeTheme<T>,
-    ): Cascade<T> {
+        theme: NiftyTheme<T>,
+    ): Nifty<T> {
 
-        return new Cascade<T>(theme);
+        return new Nifty<T>(theme);
     }
 }

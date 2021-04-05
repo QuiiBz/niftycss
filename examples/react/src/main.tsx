@@ -2,12 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
-import CascadingProvider from '@cascading/react';
+import NiftyProvider from '@niftycss/react';
 import { theme } from './theme';
 
 ReactDOM.render(
-    <CascadingProvider theme={theme}>
+    <NiftyProvider theme={theme}>
         <App />
-    </CascadingProvider>,
+    </NiftyProvider>,
   document.getElementById('root')
 )

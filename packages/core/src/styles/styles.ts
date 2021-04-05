@@ -1,9 +1,9 @@
-import { CascadeTheme, CSSProperties, PseudoCSSProperty, Style, StyleProvider } from '../index';
+import { NiftyTheme, CSSProperties, PseudoCSSProperty, Style, StyleProvider } from '../index';
 import * as CSS from 'csstype';
 
 const getStyleFromProvider = <T>(
     styleProvider: StyleProvider<T>,
-    theme: CascadeTheme<T>,
+    theme: NiftyTheme<T>,
 ): CSSProperties => {
 
     if(typeof styleProvider === 'function')
@@ -54,7 +54,7 @@ const buildCssProperties = (properties: CSSProperties): {
 
 const buildCssStyles = <T>(
     styles: Style<T>[],
-    theme: CascadeTheme<T>,
+    theme: NiftyTheme<T>,
 ): string => {
 
     let css = '';

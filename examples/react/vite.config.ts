@@ -6,8 +6,8 @@ export default defineConfig({
   plugins: [reactRefresh()],
   optimizeDeps: {
     include: [
-      '@cascading/core',
-      '@cascading/react'
+      '@niftycss/core',
+      '@niftycss/react'
     ],
   },
 });

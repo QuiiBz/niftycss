@@ -1,14 +1,14 @@
-import Cascade from '.';
+import Nifty from '.';
 
 export const theme = {
     fg: 'blue',
     bg: 'red',
 };
 
-const cascade = Cascade.create(theme);
+const style = Nifty.create(theme);
 
-const p = cascade.style(t => ({
+const p = style.style(t => ({
     color: t.fg,
 }));
 
-console.log(p, cascade.builtCss);
+console.log(p, style.buildCss());

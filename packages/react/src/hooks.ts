@@ -1,19 +1,19 @@
 import { useContext } from 'react';
-import { CascadingContext } from './CascadingContext';
-import { CascadeTheme, StyleProvider } from '@cascading/core';
+import { NiftyContext } from './NiftyContext';
+import { NiftyTheme, StyleProvider } from '@niftycss/core';
 
 export const style = <T>(
-    makeStyle: StyleProvider<T>,
+    styleProvider: StyleProvider<T>,
 ): string => {
 
-    const { cascade } = useContext(CascadingContext);
+    const { style } = useContext(NiftyContext);
 
-    return cascade.style(makeStyle);
+    return style.style(styleProvider);
 }
 
-export const useCascade = <T>(): { theme: CascadeTheme<T>, setTheme: <T>(theme: CascadeTheme<T>) => void } => {
+export const useNifty = <T>(): { theme: NiftyTheme<T>, setTheme: <T>(theme: NiftyTheme<T>) => void } => {
 
-    const { theme, setTheme } = useContext(CascadingContext);
+    const { theme, setTheme } = useContext(NiftyContext);
 
     return {
         theme,
