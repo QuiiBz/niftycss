@@ -1,0 +1,8 @@
+{
+  "name": "cascading",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "license": "MIT"
+}
