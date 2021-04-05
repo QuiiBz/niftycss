@@ -1,4 +1,2 @@
-import NiftyProvider from './NiftyContext';
-
-export default NiftyProvider;
-export { nift, useNifty } from './hooks';
+export { NiftyProvider } from './NiftyContext';
+export { css, useNifty } from './hooks';

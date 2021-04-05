@@ -1,24 +1,11 @@
 import Nifty from '.';
 
-export const theme = {
-    fg: 'blue',
-    bg: 'red',
-};
-
-const style = Nifty.create(theme);
-
-const p = style.nift(t => ({
-    color: t.fg,
-}));
-
-console.log(p, style.buildCss());
-
-const { nift } = Nifty.create({
+const nifty = Nifty.create({
     bg: '#010101',
     hover: '#FBFBFB',
 });
 
-const div = nift(t => ({
+const div = nifty.css(t => ({
     backgroundColor: t.bg,
     fontSize: '12px',
     padding: '4px 8px',
@@ -26,3 +13,5 @@ const div = nift(t => ({
         backgroundColor: t.hover,
     },
 }));
+
+console.log(nifty.styles, nifty.currentCss);

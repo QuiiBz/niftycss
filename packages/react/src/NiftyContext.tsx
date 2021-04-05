@@ -15,7 +15,7 @@ interface Props<T> {
     children: ReactNode;
 }
 
-const NiftyProvider = function<T>({ theme, children }: Props<T>): ReactElement {
+export const NiftyProvider = function<T>({ theme, children }: Props<T>): ReactElement {
 
     const nifty = Nifty.create(theme);
     const setTheme = (theme: NiftyTheme<T>) => nifty.setTheme(theme);
@@ -26,5 +26,3 @@ const NiftyProvider = function<T>({ theme, children }: Props<T>): ReactElement {
         </NiftyContext.Provider>
     );
 }
-
-export default NiftyProvider;

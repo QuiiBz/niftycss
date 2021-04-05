@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
-import NiftyProvider from '@niftycss/react';
+import { NiftyProvider } from '@niftycss/react';
 import { theme } from './theme';
 
 ReactDOM.render(
