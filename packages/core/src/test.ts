@@ -1,4 +1,4 @@
-import Nifty from '.';
+import { Nifty } from '.';
 
 const nifty = Nifty.create({
     bg: '#010101',

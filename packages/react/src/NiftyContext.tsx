@@ -1,5 +1,5 @@
 import React, { createContext, ReactElement, ReactNode } from 'react';
-import Nifty, { NiftyTheme, ThemeProvider } from '@niftycss/core';
+import { Nifty, NiftyTheme, ThemeProvider } from '@niftycss/core';
 
 type Context = {
     nifty: Nifty<any>,

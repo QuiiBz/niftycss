@@ -1,5 +1,4 @@
 import * as CSS from 'csstype';
-import Nifty from './Nifty';
 
 /**
  * A type representing all available css properties.
@@ -41,4 +40,5 @@ export type StyleProvider<T> = ((theme: NiftyTheme<T>) => CSSProperties) | CSSPr
 
 export type ThemeProvider<T> = ((theme: NiftyTheme<T>) => NiftyTheme<T>) | NiftyTheme<T>;
 
-export default Nifty;
+export { default as Nifty } from './Nifty';
+export * from './utils/cssUtils';

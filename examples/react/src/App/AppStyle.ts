@@ -1,3 +1,4 @@
+import { calc, flexCenter } from '@niftycss/core';
 import { useNifty } from '@niftycss/react';
 import { Theme } from '../theme';
 
@@ -17,11 +18,9 @@ const useAppStyle = () => {
     const appHeader = css([], t => ({
         backgroundColor: t.bg,
         minHeight: '100vh',
-        display: 'flex',
+        ...flexCenter,
         flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: 'calc(10px + 2vmin)',
+        fontSize: calc`10px + ${t.fontSize}`,
         color: t.fg,
     }));
 
