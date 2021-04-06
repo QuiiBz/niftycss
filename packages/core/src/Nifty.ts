@@ -1,6 +1,7 @@
 import { ClassProvider, NiftyTheme, Style, StyleProvider, ThemeProvider } from './index';
 import injectCss from './inject/inject';
 import buildCssStyles from './styles/styles';
+import findExistingStyle from './styles/existing';
 
 export default class Nifty<T> {
 
@@ -16,6 +17,11 @@ export default class Nifty<T> {
     }
 
     public css(classProvider: ClassProvider, styleProvider?: StyleProvider<T>): string {
+
+        const existingStyle = findExistingStyle(styleProvider, this.styles, this._theme)
+
+        if(styleProvider && existingStyle)
+            return existingStyle.className;
 
         const className = `nifty-${this._styles.length.toString()}`;
         let classes = classProvider.join(' ');

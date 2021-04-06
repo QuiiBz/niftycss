@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import logo from '../logo.svg'
 import '../App.css'
 import { useNifty } from '@niftycss/react';
@@ -9,7 +9,7 @@ function App() {
   const [count, setCount] = useState(0)
 
   const { app, appLogo, appHeader, appLink } = useAppStyle();
-  //const { setTheme } = useNifty<Theme>();
+  const { setTheme } = useNifty<Theme>();
 
   return (
       <div className={app}>
@@ -17,7 +17,7 @@ function App() {
           <img src={logo} className={appLogo} alt="logo" />
           <p>Hello Vite + React!</p>
           <p>
-            <button onClick={() => null}> { /*setTheme(theme => theme === whiteTheme ? darkTheme : whiteTheme)}> */}
+            <button onClick={() => setTheme(theme => theme === whiteTheme ? darkTheme : whiteTheme)}>
               Toggle theme
             </button>
             <button onClick={() => setCount((count) => count + 1)}>

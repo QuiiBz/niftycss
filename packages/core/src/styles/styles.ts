@@ -1,7 +1,7 @@
 import { NiftyTheme, CSSProperties, PseudoCSSProperty, Style, StyleProvider } from '../index';
 import * as CSS from 'csstype';
 
-const getStyleFromProvider = <T>(
+export const getStyleFromProvider = <T>(
     styleProvider: StyleProvider<T>,
     theme: NiftyTheme<T>,
 ): CSSProperties => {
