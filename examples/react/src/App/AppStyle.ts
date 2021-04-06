@@ -28,7 +28,10 @@ const useAppStyle = () => {
         '@sm': {
             marginTop: '10px',
             ':hover': {
-                backgroundColor: 'blue'
+                backgroundColor: 'blue',
+                ':focus': {
+                    outline: 'none',
+                }
             }
         }
     }));

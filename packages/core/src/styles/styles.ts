@@ -117,7 +117,7 @@ const buildCss = (className: string, properties: CSSProperties, context?: string
                     break;
             }
 
-            const cssProperty = customProperties.length > 1 ? customProperties[1] : '';
+            const cssProperty = customProperties.splice(1).join('');
 
             if(dev)
                 css += `@media (min-width: ${width}px) {\n  .${className}${cssProperty} {\n  ${cssProperties}  }\n}\n`;
