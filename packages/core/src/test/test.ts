@@ -1,4 +1,4 @@
-import { Nifty } from '.';
+import { Nifty } from '../index';
 
 const theme = {
     bg: '#010101',
