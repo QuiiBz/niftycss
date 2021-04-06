@@ -15,13 +15,17 @@ export type Features = {
     important: boolean,
 };
 
+export type MediaProperties = 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
+
+export type CustomProperties = `@${MediaProperties}`;
+
 /**
  * A type representing all available css properties.
  */
 export type CSSProperties =
     // Pseudo properties
     {
-        [P in CSS.Pseudos]?: CSS.Properties
+        [P in CSS.Pseudos]?: CSSProperties
     } &
     // Normal properties
     {
@@ -30,14 +34,20 @@ export type CSSProperties =
             CSSValues |
             // Key-features properties
             Features
+    } &
+    // Custom properties
+    {
+        [P in CustomProperties]?: CSSProperties
     };
 
+export type CustomCSSPropertyName = CSS.Pseudos | CustomProperties;
+
 /**
- * A type representing a pseudo css property, with a pseudo element and an object of
- * properties.
+ * A type representing a custom css property, which can be a pseudo property or any custom
+ * property.
  */
-export type PseudoCSSProperty = {
-    pseudo: CSS.Pseudos,
+export type CustomCSSProperty = {
+    name: CustomCSSPropertyName,
     properties: CSSProperties,
 }
 

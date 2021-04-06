@@ -1,13 +1,14 @@
 import {
     NiftyTheme,
     CSSProperties,
-    PseudoCSSProperty,
+    CustomCSSProperty,
     Style,
     StyleProvider,
     Features,
-    CSSValues,
+    CSSValues, CustomCSSPropertyName, MediaProperties,
 } from '../index';
-import * as CSS from 'csstype';
+
+const dev = true;
 
 export const getStyleFromProvider = <T>(
     styleProvider: StyleProvider<T>,
@@ -27,23 +28,28 @@ const pascalToKebabCase = (property: string): string => {
         .toLowerCase();
 }
 
+const isCustomProperty = (propertyName: string): boolean => {
+
+    return propertyName.startsWith(':') || propertyName.startsWith('@');
+}
+
 const buildCssProperties = (properties: CSSProperties): {
     cssProperties: string,
-    pseudoProperties: PseudoCSSProperty[],
+    customProperties: CustomCSSProperty[],
 } => {
 
     let cssProperties = '';
-    const pseudoProperties: PseudoCSSProperty[] = [];
+    const customProperties: CustomCSSProperty[] = [];
 
     Object.entries(properties).forEach(([property, propertyValue]) => {
 
-        if(property.startsWith(':')) {
+        if(isCustomProperty(property)) {
 
-            const pseudo = property as CSS.SimplePseudos;
+            const name = property as CustomCSSPropertyName;
             const properties = propertyValue as CSSProperties;
 
-            pseudoProperties.push({
-                pseudo,
+            customProperties.push({
+                name,
                 properties,
             });
 
@@ -61,13 +67,16 @@ const buildCssProperties = (properties: CSSProperties): {
 
             const { value, important } = features;
 
-            cssProperties += `${kebabProperty}: ${value}${important ? ' !important' : ''};`;
+            if(dev)
+                cssProperties += `  ${kebabProperty}: ${value}${important ? ' !important' : ''};\n`;
+            else
+                cssProperties += `${kebabProperty}:${value}${important ? '!important' : ''};`;
         }
     });
 
     return {
         cssProperties,
-        pseudoProperties,
+        customProperties,
     };
 }
 
@@ -81,17 +90,54 @@ const buildCssStyles = <T>(
     styles.forEach(({ className, styleProvider }) => {
 
         const properties = getStyleFromProvider(styleProvider, theme);
-        const { cssProperties, pseudoProperties } = buildCssProperties(properties);
+        const { cssProperties, customProperties } = buildCssProperties(properties);
 
-        css += `.${className} {${cssProperties}} `;
+        if(dev)
+            css += `.${className} {\n${cssProperties}}\n`;
+        else
+            css += `.${className}{${cssProperties}}`;
 
-        if(pseudoProperties.length > 0) {
+        if(customProperties.length > 0) {
 
-            pseudoProperties.forEach(({ pseudo, properties }) => {
+            customProperties.forEach(({ name, properties }) => {
 
                 const { cssProperties } = buildCssProperties(properties);
 
-                css += `.${className}${pseudo} {${cssProperties}} `;
+                if(name.startsWith('@')) {
+
+                    let width = '';
+
+                    switch(name.replace('@', '') as MediaProperties) {
+
+                        case 'sm':
+                            width = '640';
+                            break;
+                        case 'md':
+                            width = '768';
+                            break;
+                        case 'lg':
+                            width = '1024';
+                            break;
+                        case 'xl':
+                            width = '1280';
+                            break;
+                        case 'xxl':
+                            width = '1536';
+                            break;
+                    }
+
+                    if(dev)
+                        css += `@media (min-width: ${width}px) {\n  .${className} {\n  ${cssProperties}  }\n}\n`;
+                    else
+                        css += `@media(min-width:${width}px){.${className}{${cssProperties}}}`;
+
+                } else {
+
+                    if(dev)
+                        css += `.${className}${name} {\n${cssProperties}}\n`;
+                    else
+                        css += `.${className}${name}{${cssProperties}}`;
+                }
             });
         }
     });

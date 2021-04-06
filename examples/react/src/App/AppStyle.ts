@@ -22,6 +22,21 @@ const useAppStyle = () => {
         flexDirection: 'column',
         fontSize: calc`10px + ${t.fontSize}`,
         color: t.fg,
+        '@sm': {
+            backgroundColor: 'white',
+        },
+        '@md': {
+            backgroundColor: 'yellow',
+        },
+        '@lg': {
+            backgroundColor: 'orange',
+        },
+        '@xl': {
+            backgroundColor: 'red',
+        },
+        '@xxl': {
+            backgroundColor: 'black',
+        },
     }));
 
     const appLink = css([], t => ({
