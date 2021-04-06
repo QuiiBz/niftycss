@@ -1,10 +1,9 @@
 import React, { createContext, ReactElement, ReactNode } from 'react';
-import Nifty, { NiftyTheme } from '@niftycss/core';
+import Nifty, { NiftyTheme, ThemeProvider } from '@niftycss/core';
 
 type Context = {
     nifty: Nifty<any>,
-    theme: NiftyTheme<any>,
-    setTheme: (theme: NiftyTheme<any>) => void,
+    setTheme: (themeProvider: ThemeProvider<any>) => void,
 };
 
 export const NiftyContext = createContext<Context>({ } as Context);
@@ -18,10 +17,10 @@ interface Props<T> {
 export const NiftyProvider = function<T>({ theme, children }: Props<T>): ReactElement {
 
     const nifty = Nifty.create(theme);
-    const setTheme = (theme: NiftyTheme<T>) => nifty.setTheme(theme);
+    const setTheme = (themeProvider: ThemeProvider<T>) => nifty.setTheme(themeProvider);
 
     return (
-        <NiftyContext.Provider value={{ nifty, theme: nifty.theme, setTheme }}>
+        <NiftyContext.Provider value={{ nifty, setTheme }}>
             { children }
         </NiftyContext.Provider>
     );

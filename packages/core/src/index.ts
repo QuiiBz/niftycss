@@ -39,4 +39,6 @@ export type ClassProvider = string[];
  */
 export type StyleProvider<T> = ((theme: NiftyTheme<T>) => CSSProperties) | CSSProperties;
 
+export type ThemeProvider<T> = ((theme: NiftyTheme<T>) => NiftyTheme<T>) | NiftyTheme<T>;
+
 export default Nifty;

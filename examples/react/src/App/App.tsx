@@ -1,42 +1,24 @@
 import React, { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import logo from '../logo.svg'
+import '../App.css'
 import { useNifty } from '@niftycss/react';
-import { Theme } from './theme';
+import { darkTheme, Theme, whiteTheme } from '../theme';
+import useAppStyle from './AppStyle';
 
 function App() {
   const [count, setCount] = useState(0)
 
-  const { css, setTheme } = useNifty<Theme>();
-
-  const p = css([], t => ({
-    color: t.fg,
-    background: t.bg,
-    padding: '6px 10px',
-  }));
-
-  const btn = css(['test'], t => ({
-    border: 'none',
-    background: t.bg,
-    ':focus': {
-      outline: 'none',
-    },
-    ':hover': {
-      background: t.fg,
-    },
-  }));
+  const { app, appLogo, appHeader, appLink } = useAppStyle();
+  //const { setTheme } = useNifty<Theme>();
 
   return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p className={p}>Hello Vite + React!</p>
+      <div className={app}>
+        <header className={appHeader}>
+          <img src={logo} className={appLogo} alt="logo" />
+          <p>Hello Vite + React!</p>
           <p>
-            <button className={btn} onClick={() => setTheme<Theme>({
-              bg: `#${Math.floor(Math.random()*16777215).toString(16)}`,
-              fg:`#${Math.floor(Math.random()*16777215).toString(16)}`,
-            })}>
-              change theme
+            <button onClick={() => null}> { /*setTheme(theme => theme === whiteTheme ? darkTheme : whiteTheme)}> */}
+              Toggle theme
             </button>
             <button onClick={() => setCount((count) => count + 1)}>
               count is: {count}
@@ -47,7 +29,7 @@ function App() {
           </p>
           <p>
             <a
-                className="App-link"
+                className={appLink}
                 href="https://reactjs.org"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -56,7 +38,7 @@ function App() {
             </a>
             {' | '}
             <a
-                className="App-link"
+                className={appLink}
                 href="https://vitejs.dev/guide/features.html"
                 target="_blank"
                 rel="noopener noreferrer"

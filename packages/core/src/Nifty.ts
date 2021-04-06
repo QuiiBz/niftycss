@@ -1,4 +1,4 @@
-import { ClassProvider, NiftyTheme, Style, StyleProvider } from './index';
+import { ClassProvider, NiftyTheme, Style, StyleProvider, ThemeProvider } from './index';
 import injectCss from './inject/inject';
 import buildCssStyles from './styles/styles';
 
@@ -18,8 +18,7 @@ export default class Nifty<T> {
     public css(classProvider: ClassProvider, styleProvider?: StyleProvider<T>): string {
 
         const className = `nifty-${this._styles.length.toString()}`;
-
-        let classes =classProvider.join(' ');
+        let classes = classProvider.join(' ');
 
         if(classProvider.length > 0)
             classes += ' ';
@@ -48,9 +47,13 @@ export default class Nifty<T> {
         return this._theme!;
     }
 
-    public setTheme(theme: NiftyTheme<T>) {
+    public setTheme(theme: ThemeProvider<T>) {
 
-        this._theme = theme;
+        if(typeof theme === 'function')
+            this._theme = theme(this._theme);
+        else
+            this._theme = theme;
+
         this.update();
     }
 
