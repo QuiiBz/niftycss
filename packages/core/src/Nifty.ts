@@ -6,7 +6,7 @@ import findExistingStyle from './styles/existing';
 export default class Nifty<T, B> {
 
     private _theme: NiftyTheme<T>;
-    private _breakpoints: NiftyTheme<B>;
+    private readonly _breakpoints: NiftyTheme<B>;
     private readonly _styles: Style<T, B>[];
     private _css: string;
 
@@ -44,7 +44,7 @@ export default class Nifty<T, B> {
 
     private update() {
 
-        const css = buildCssStyles(this._styles, this._theme);
+        const css = buildCssStyles(this._breakpoints, this._styles, this._theme);
         this._css = css;
 
         injectCss(css);

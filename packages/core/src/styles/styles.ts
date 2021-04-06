@@ -82,7 +82,12 @@ const buildCssProperties = <B>(properties: CSSProperties<B>): {
     };
 }
 
-const buildCss = <B>(className: string, properties: CSSProperties<B>, context?: string): string => {
+const buildCss = <B>(
+    breakpoints: NiftyTheme<B>,
+    className: string,
+    properties: CSSProperties<B>,
+    context?: string
+): string => {
 
     let css = '';
     const { cssProperties, customProperties } = buildCssProperties(properties);
@@ -91,38 +96,21 @@ const buildCss = <B>(className: string, properties: CSSProperties<B>, context?: 
 
         if(context.startsWith('@')) {
 
-            let width = '';
-
             const customProperties = context.split(' ') as CustomProperties[];
             const customProperty = customProperties[0];
 
-            switch(customProperty) {
+            // @ts-ignore
+            const width = breakpoints[customProperty];
 
-                case '@sm':
-                    width = '640';
-                    break;
-                case '@md':
-                    width = '768';
-                    break;
-                case '@lg':
-                    width = '1024';
-                    break;
-                case '@xl':
-                    width = '1280';
-                    break;
-                case '@xxl':
-                    width = '1536';
-                    break;
-                default:
-                    break;
-            }
+            if(!width)
+                console.warn(`No breakpoint found for ${customProperty}. Availables breakpoints: ${Object.keys(breakpoints)}`);
 
             const cssProperty = customProperties.splice(1).join('');
 
             if(dev)
-                css += `@media (min-width: ${width}px) {\n  .${className}${cssProperty} {\n  ${cssProperties}  }\n}\n`;
+                css += `@media (min-width: ${width}) {\n  .${className}${cssProperty} {\n  ${cssProperties}  }\n}\n`;
             else
-                css += `@media(min-width:${width}px){.${className}${cssProperty}{${cssProperties}}}`;
+                css += `@media(min-width:${width}){.${className}${cssProperty}{${cssProperties}}}`;
 
         } else {
 
@@ -143,7 +131,7 @@ const buildCss = <B>(className: string, properties: CSSProperties<B>, context?: 
     customProperties.forEach(({ name, properties }) => {
 
         const nextContext = context ? `${context} ${name}` : name;
-        const customPropertiesCss = buildCss(className, properties, nextContext);
+        const customPropertiesCss = buildCss(breakpoints, className, properties, nextContext);
 
         css += customPropertiesCss;
     });
@@ -152,6 +140,7 @@ const buildCss = <B>(className: string, properties: CSSProperties<B>, context?: 
 }
 
 const buildCssStyles = <T, B>(
+    breakpoints: NiftyTheme<B>,
     styles: Style<T, B>[],
     theme: NiftyTheme<T>,
 ): string => {
@@ -161,7 +150,7 @@ const buildCssStyles = <T, B>(
     styles.forEach(({ className, styleProvider }) => {
 
         const properties = getStyleFromProvider(styleProvider, theme);
-        css += buildCss(className, properties);
+        css += buildCss(breakpoints, className, properties);
     });
 
     return css;

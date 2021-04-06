@@ -8,15 +8,16 @@ type Context = {
 
 export const NiftyContext = createContext<Context>({ } as Context);
 
-interface Props<T> {
+interface Props<T, B> {
 
     theme: NiftyTheme<T>;
+    breakpoints?: NiftyTheme<B>,
     children: ReactNode;
 }
 
-export const NiftyProvider = function<T>({ theme, children }: Props<T>): ReactElement {
+export const NiftyProvider = function<T, B>({ theme, breakpoints, children }: Props<T, B>): ReactElement {
 
-    const nifty = Nifty.create(theme);
+    const nifty = Nifty.create(theme, breakpoints);
     const setTheme = (themeProvider: ThemeProvider<T>) => nifty.setTheme(themeProvider);
 
     return (
