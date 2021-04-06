@@ -5,7 +5,9 @@ import {
     Style,
     StyleProvider,
     Features,
-    CSSValues, CustomCSSPropertyName, MediaProperties,
+    CSSValues,
+    CustomCSSPropertyName,
+    CustomProperties,
 } from '../index';
 
 const dev = true;
@@ -80,6 +82,75 @@ const buildCssProperties = (properties: CSSProperties): {
     };
 }
 
+const buildCss = (className: string, properties: CSSProperties, context?: string): string => {
+
+    let css = '';
+    const { cssProperties, customProperties } = buildCssProperties(properties);
+
+    if(context) {
+
+        if(context.startsWith('@')) {
+
+            let width = '';
+
+            const customProperties = context.split(' ') as CustomProperties[];
+            const customProperty = customProperties[0];
+
+            switch(customProperty) {
+
+                case '@sm':
+                    width = '640';
+                    break;
+                case '@md':
+                    width = '768';
+                    break;
+                case '@lg':
+                    width = '1024';
+                    break;
+                case '@xl':
+                    width = '1280';
+                    break;
+                case '@xxl':
+                    width = '1536';
+                    break;
+                default:
+                    break;
+            }
+
+            const cssProperty = customProperties.length > 1 ? customProperties[1] : '';
+
+            if(dev)
+                css += `@media (min-width: ${width}px) {\n  .${className}${cssProperty} {\n  ${cssProperties}  }\n}\n`;
+            else
+                css += `@media(min-width:${width}px){.${className}${cssProperty}{${cssProperties}}}`;
+
+        } else {
+
+            if(dev)
+                css += `.${className}${context} {\n${cssProperties}}\n`;
+            else
+                css += `.${className}${context}{${cssProperties}}`;
+        }
+
+    } else {
+
+        if(dev)
+            css += `.${className} {\n${cssProperties}}\n`;
+        else
+            css += `.${className}{${cssProperties}}`;
+    }
+
+    customProperties.forEach(({ name, properties }) => {
+
+        const nextContext = context ? `${context} ${name}` : name;
+        const customPropertiesCss = buildCss(className, properties, nextContext);
+
+        css += customPropertiesCss;
+    });
+
+    return css;
+}
+
 const buildCssStyles = <T>(
     styles: Style<T>[],
     theme: NiftyTheme<T>,
@@ -90,56 +161,7 @@ const buildCssStyles = <T>(
     styles.forEach(({ className, styleProvider }) => {
 
         const properties = getStyleFromProvider(styleProvider, theme);
-        const { cssProperties, customProperties } = buildCssProperties(properties);
-
-        if(dev)
-            css += `.${className} {\n${cssProperties}}\n`;
-        else
-            css += `.${className}{${cssProperties}}`;
-
-        if(customProperties.length > 0) {
-
-            customProperties.forEach(({ name, properties }) => {
-
-                const { cssProperties } = buildCssProperties(properties);
-
-                if(name.startsWith('@')) {
-
-                    let width = '';
-
-                    switch(name.replace('@', '') as MediaProperties) {
-
-                        case 'sm':
-                            width = '640';
-                            break;
-                        case 'md':
-                            width = '768';
-                            break;
-                        case 'lg':
-                            width = '1024';
-                            break;
-                        case 'xl':
-                            width = '1280';
-                            break;
-                        case 'xxl':
-                            width = '1536';
-                            break;
-                    }
-
-                    if(dev)
-                        css += `@media (min-width: ${width}px) {\n  .${className} {\n  ${cssProperties}  }\n}\n`;
-                    else
-                        css += `@media(min-width:${width}px){.${className}{${cssProperties}}}`;
-
-                } else {
-
-                    if(dev)
-                        css += `.${className}${name} {\n${cssProperties}}\n`;
-                    else
-                        css += `.${className}${name}{${cssProperties}}`;
-                }
-            });
-        }
+        css += buildCss(className, properties);
     });
 
     return css;

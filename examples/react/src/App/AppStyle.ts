@@ -22,21 +22,15 @@ const useAppStyle = () => {
         flexDirection: 'column',
         fontSize: calc`10px + ${t.fontSize}`,
         color: t.fg,
+        ':hover': {
+            backgroundColor: 'red'
+        },
         '@sm': {
-            backgroundColor: 'white',
-        },
-        '@md': {
-            backgroundColor: 'yellow',
-        },
-        '@lg': {
-            backgroundColor: 'orange',
-        },
-        '@xl': {
-            backgroundColor: 'red',
-        },
-        '@xxl': {
-            backgroundColor: 'black',
-        },
+            marginTop: '10px',
+            ':hover': {
+                backgroundColor: 'blue'
+            }
+        }
     }));
 
     const appLink = css([], t => ({
