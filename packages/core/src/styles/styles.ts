@@ -12,10 +12,10 @@ import {
 
 const dev = true;
 
-export const getStyleFromProvider = <T>(
-    styleProvider: StyleProvider<T>,
+export const getStyleFromProvider = <T, B>(
+    styleProvider: StyleProvider<T, B>,
     theme: NiftyTheme<T>,
-): CSSProperties => {
+): CSSProperties<B> => {
 
     if(typeof styleProvider === 'function')
         return styleProvider(theme);
@@ -35,20 +35,20 @@ const isCustomProperty = (propertyName: string): boolean => {
     return propertyName.startsWith(':') || propertyName.startsWith('@');
 }
 
-const buildCssProperties = (properties: CSSProperties): {
+const buildCssProperties = <B>(properties: CSSProperties<B>): {
     cssProperties: string,
-    customProperties: CustomCSSProperty[],
+    customProperties: CustomCSSProperty<B>[],
 } => {
 
     let cssProperties = '';
-    const customProperties: CustomCSSProperty[] = [];
+    const customProperties: CustomCSSProperty<B>[] = [];
 
     Object.entries(properties).forEach(([property, propertyValue]) => {
 
         if(isCustomProperty(property)) {
 
             const name = property as CustomCSSPropertyName;
-            const properties = propertyValue as CSSProperties;
+            const properties = propertyValue as CSSProperties<B>;
 
             customProperties.push({
                 name,
@@ -82,7 +82,7 @@ const buildCssProperties = (properties: CSSProperties): {
     };
 }
 
-const buildCss = (className: string, properties: CSSProperties, context?: string): string => {
+const buildCss = <B>(className: string, properties: CSSProperties<B>, context?: string): string => {
 
     let css = '';
     const { cssProperties, customProperties } = buildCssProperties(properties);
@@ -151,8 +151,8 @@ const buildCss = (className: string, properties: CSSProperties, context?: string
     return css;
 }
 
-const buildCssStyles = <T>(
-    styles: Style<T>[],
+const buildCssStyles = <T, B>(
+    styles: Style<T, B>[],
     theme: NiftyTheme<T>,
 ): string => {
 

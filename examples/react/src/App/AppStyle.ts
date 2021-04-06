@@ -1,10 +1,10 @@
 import { calc, flexCenter } from '@niftycss/core';
 import { useNifty } from '@niftycss/react';
-import { Theme } from '../theme';
+import { Breakpoints, Theme } from '../theme';
 
 const useAppStyle = () => {
 
-    const { css } = useNifty<Theme>();
+    const { css } = useNifty<Theme, Breakpoints>();
 
     const app = css([], {
         textAlign: 'center',
@@ -33,6 +33,9 @@ const useAppStyle = () => {
                     outline: 'none',
                 }
             }
+        },
+        '@phone': {
+            
         }
     }));
 

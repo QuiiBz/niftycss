@@ -19,3 +19,13 @@ export type Theme = {
     link: string,
     fontSize: string,
 };
+
+export const breakpoints: Breakpoints = {
+
+    '@phone': '500px',
+}
+
+export type Breakpoints = {
+
+    '@phone': string;
+}

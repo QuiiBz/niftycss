@@ -22,10 +22,10 @@ export type CustomProperties = `@${MediaProperties}`;
 /**
  * A type representing all available css properties.
  */
-export type CSSProperties =
+export type CSSProperties<B> =
     // Pseudo properties
     {
-        [P in CSS.Pseudos]?: CSSProperties
+        [P in CSS.Pseudos]?: CSSProperties<B>
     } &
     // Normal properties
     {
@@ -37,7 +37,7 @@ export type CSSProperties =
     } &
     // Custom properties
     {
-        [P in CustomProperties]?: CSSProperties
+        [P in keyof B]?: CSSProperties<B>
     };
 
 export type CustomCSSPropertyName = CSS.Pseudos | CustomProperties;
@@ -46,9 +46,9 @@ export type CustomCSSPropertyName = CSS.Pseudos | CustomProperties;
  * A type representing a custom css property, which can be a pseudo property or any custom
  * property.
  */
-export type CustomCSSProperty = {
+export type CustomCSSProperty<B> = {
     name: CustomCSSPropertyName,
-    properties: CSSProperties,
+    properties: CSSProperties<B>,
 }
 
 /**
@@ -59,9 +59,9 @@ export type NiftyTheme<T> = Record<keyof T, string>;
 /**
  * A type representing a style, which is composed of a class name, and a style provider.
  */
-export type Style<T> = {
+export type Style<T, B> = {
     className: string,
-    styleProvider: StyleProvider<T>,
+    styleProvider: StyleProvider<T, B>,
 };
 
 /**
@@ -73,13 +73,21 @@ export type ClassProvider = string[];
  * A type representing a function which provides css properties with a callback or an
  * object of css properties.
  */
-export type StyleProvider<T> = ((theme: NiftyTheme<T>) => CSSProperties) | CSSProperties;
+export type StyleProvider<T, B> = ((theme: NiftyTheme<T>) => CSSProperties<B>) | CSSProperties<B>;
 
 /**
  * A type reprensing a function with provides a new theme given the old theme, or the new
  * theme directly.
  */
 export type ThemeProvider<T> = ((theme: NiftyTheme<T>) => NiftyTheme<T>) | NiftyTheme<T>;
+
+export const defaultBreakpoints = {
+    '@sm': '640px',
+    '@md': '768px',
+    '@lg': '1024px',
+    '@xl': '1280px',
+    '@xxl': '1536px',
+};
 
 export { default as Nifty } from './Nifty';
 export * from './utils/cssUtils';

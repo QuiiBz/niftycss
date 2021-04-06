@@ -1,6 +1,6 @@
 import { CSSProperties } from '../index';
 
-export const flexCenter: CSSProperties = {
+export const flexCenter: CSSProperties<unknown> = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

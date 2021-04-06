@@ -2,7 +2,7 @@ import React, { createContext, ReactElement, ReactNode } from 'react';
 import { Nifty, NiftyTheme, ThemeProvider } from '@niftycss/core';
 
 type Context = {
-    nifty: Nifty<any>,
+    nifty: Nifty<any, any>,
     setTheme: (themeProvider: ThemeProvider<any>) => void,
 };
 

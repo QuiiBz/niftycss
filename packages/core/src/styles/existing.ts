@@ -1,18 +1,18 @@
 import { CSSProperties, NiftyTheme, Style, StyleProvider } from '../index';
 import { getStyleFromProvider } from './styles';
 
-const areStyleEquals = <T>(
-    [first, second]: [first: CSSProperties, second: CSSProperties],
+const areStyleEquals = <T, B>(
+    [first, second]: [first: CSSProperties<B>, second: CSSProperties<B>],
 ) => {
 
     return JSON.stringify(first) === JSON.stringify(second);
 }
 
-const findExistingStyle = <T>(
-    styleProvider: StyleProvider<T> | undefined,
-    styles: Style<T>[],
+const findExistingStyle = <T, B>(
+    styleProvider: StyleProvider<T, B> | undefined,
+    styles: Style<T, B>[],
     theme: NiftyTheme<T>,
-): Style<T> | undefined => {
+): Style<T, B> | undefined => {
 
     if(!styleProvider)
         return undefined;

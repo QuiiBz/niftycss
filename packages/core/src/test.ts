@@ -1,9 +1,15 @@
 import { Nifty } from '.';
 
-const nifty = Nifty.create({
+const theme = {
     bg: '#010101',
     hover: '#FBFBFB',
-});
+};
+
+const breakpoints = {
+    '@phone': '500px',
+};
+
+const nifty = Nifty.create(theme, breakpoints);
 
 const div = nifty.css(["p-2"], t => ({
     backgroundColor: t.bg,
@@ -12,6 +18,9 @@ const div = nifty.css(["p-2"], t => ({
     paddingBlock: {
         value: 'test',
         important: true,
+    },
+    '@phone': {
+
     }
 }));
 
