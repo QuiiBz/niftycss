@@ -7,10 +7,8 @@ import {
     Features,
     CSSValues,
     CustomCSSPropertyName,
-    CustomProperties,
-} from '../index';
-
-const dev = true;
+} from '../types';
+import { DEV } from '../utils/constants';
 
 export const getStyleFromProvider = <T, B>(
     styleProvider: StyleProvider<T, B>,
@@ -69,7 +67,7 @@ const buildCssProperties = <B>(properties: CSSProperties<B>): {
 
             const { value, important } = features;
 
-            if(dev)
+            if(DEV)
                 cssProperties += `  ${kebabProperty}: ${value}${important ? ' !important' : ''};\n`;
             else
                 cssProperties += `${kebabProperty}:${value}${important ? '!important' : ''};`;
@@ -86,7 +84,7 @@ const buildCss = <B>(
     breakpoints: NiftyTheme<B>,
     className: string,
     properties: CSSProperties<B>,
-    context?: string
+    context?: CustomCSSPropertyName,
 ): string => {
 
     let css = '';
@@ -96,7 +94,7 @@ const buildCss = <B>(
 
         if(context.startsWith('@')) {
 
-            const customProperties = context.split(' ') as CustomProperties[];
+            const customProperties = context.split(' ');
             const customProperty = customProperties[0];
 
             // @ts-ignore
@@ -107,14 +105,14 @@ const buildCss = <B>(
 
             const cssProperty = customProperties.splice(1).join('');
 
-            if(dev)
+            if(DEV)
                 css += `@media (min-width: ${width}) {\n  .${className}${cssProperty} {\n  ${cssProperties}  }\n}\n`;
             else
                 css += `@media(min-width:${width}){.${className}${cssProperty}{${cssProperties}}}`;
 
         } else {
 
-            if(dev)
+            if(DEV)
                 css += `.${className}${context} {\n${cssProperties}}\n`;
             else
                 css += `.${className}${context}{${cssProperties}}`;
@@ -122,7 +120,7 @@ const buildCss = <B>(
 
     } else {
 
-        if(dev)
+        if(DEV)
             css += `.${className} {\n${cssProperties}}\n`;
         else
             css += `.${className}{${cssProperties}}`;

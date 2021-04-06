@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 import { NiftyContext } from './NiftyContext';
-import { ClassProvider, defaultBreakpoints, NiftyTheme, StyleProvider, ThemeProvider } from '@niftycss/core';
+import { ClassProvider, DEFAULT_BREAKPOINTS, NiftyTheme, StyleProvider, ThemeProvider } from '@niftycss/core';
 
 export const useNifty = <
     T extends NiftyTheme<T>,
-    B extends NiftyTheme<B> = typeof defaultBreakpoints
+    B extends NiftyTheme<B> = typeof DEFAULT_BREAKPOINTS
     >(): {
     css: (classProvider: ClassProvider,
           styleProvider: StyleProvider<T, B>,

@@ -1,7 +1,8 @@
-import { ClassProvider, defaultBreakpoints, NiftyTheme, Style, StyleProvider, ThemeProvider } from './index';
+import { ClassProvider, NiftyTheme, Style, StyleProvider, ThemeProvider } from './types';
 import injectCss from './inject/inject';
 import buildCssStyles from './styles/styles';
 import findExistingStyle from './styles/existing';
+import { DEFAULT_BREAKPOINTS } from './utils/constants';
 
 export default class Nifty<T, B> {
 
@@ -77,8 +78,8 @@ export default class Nifty<T, B> {
 
     public static create<
         T extends NiftyTheme<T>,
-        B extends NiftyTheme<B> = typeof defaultBreakpoints,
-        >(theme: T, breakpoints: B = defaultBreakpoints as unknown as B): Nifty<T, B> {
+        B extends NiftyTheme<B> = typeof DEFAULT_BREAKPOINTS,
+        >(theme: T, breakpoints: B = DEFAULT_BREAKPOINTS as unknown as B): Nifty<T, B> {
 
         return new Nifty<T, B>(theme, breakpoints);
     }
