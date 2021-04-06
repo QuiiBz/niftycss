@@ -26,6 +26,13 @@ const useAppStyle = () => {
 
     const appLink = css([], t => ({
         color:  t.link,
+        ':hover': {
+            color: t.fg,
+        },
+        border: {
+            value: '1px solid #000',
+            important: true,
+        },
     }));
 
     return {

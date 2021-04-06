@@ -1,9 +1,29 @@
 import * as CSS from 'csstype';
 
+export type CSSKeys = keyof CSS.Properties;
+export type CSSValues = CSS.Properties[CSSKeys];
+
+export type Features = {
+    value: CSSValues,
+    important: boolean,
+};
+
 /**
  * A type representing all available css properties.
  */
-export type CSSProperties = CSS.Properties & { [P in CSS.Pseudos]?: CSS.Properties };
+export type CSSProperties =
+    // Pseudo properties
+    {
+        [P in CSS.Pseudos]?: CSS.Properties
+    } &
+    // Normal properties
+    {
+        [P in CSSKeys]?:
+            // Key-value properties
+            CSSValues |
+            // Key-features properties
+            Features
+    };
 
 /**
  * A type representing a pseudo css property, with a pseudo element and an object of

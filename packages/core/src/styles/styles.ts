@@ -1,4 +1,12 @@
-import { NiftyTheme, CSSProperties, PseudoCSSProperty, Style, StyleProvider } from '../index';
+import {
+    NiftyTheme,
+    CSSProperties,
+    PseudoCSSProperty,
+    Style,
+    StyleProvider,
+    Features,
+    CSSValues,
+} from '../index';
 import * as CSS from 'csstype';
 
 export const getStyleFromProvider = <T>(
@@ -27,22 +35,33 @@ const buildCssProperties = (properties: CSSProperties): {
     let cssProperties = '';
     const pseudoProperties: PseudoCSSProperty[] = [];
 
-    Object.entries(properties).forEach(([property, value]) => {
+    Object.entries(properties).forEach(([property, propertyValue]) => {
 
         if(property.startsWith(':')) {
 
             const pseudo = property as CSS.SimplePseudos;
+            const properties = propertyValue as CSSProperties;
 
             pseudoProperties.push({
                 pseudo,
-                properties: value,
+                properties,
             });
 
         } else {
 
             const kebabProperty = pascalToKebabCase(property);
 
-            cssProperties += `${kebabProperty}: ${value};`;
+            let features: Features = {
+                value: propertyValue as CSSValues,
+                important: false,
+            };
+
+            if(typeof propertyValue === 'object')
+                features = propertyValue as Features;
+
+            const { value, important } = features;
+
+            cssProperties += `${kebabProperty}: ${value}${important ? ' !important' : ''};`;
         }
     });
 
