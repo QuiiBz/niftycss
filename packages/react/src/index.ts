@@ -1,2 +1,2 @@
 export { NiftyProvider } from './NiftyContext';
-export { css, useNifty } from './hooks';
+export { useNifty } from './hooks';

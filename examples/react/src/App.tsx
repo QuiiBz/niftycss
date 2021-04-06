@@ -1,20 +1,21 @@
 import React, { useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
-import { useNifty, css } from '@niftycss/react';
+import { useNifty } from '@niftycss/react';
 import { Theme } from './theme';
 
 function App() {
   const [count, setCount] = useState(0)
 
-  const { setTheme } = useNifty();
+  const { css, setTheme } = useNifty<Theme>();
 
-  const p = css<Theme>([], t => ({
+  const p = css([], t => ({
     color: t.fg,
     background: t.bg,
+    padding: '6px 10px',
   }));
 
-  const btn = css<Theme>(['test'], t => ({
+  const btn = css(['test'], t => ({
     border: 'none',
     background: t.bg,
     ':focus': {
@@ -23,9 +24,6 @@ function App() {
     ':hover': {
       background: t.fg,
     },
-    ':not(:hover)': {
-      fontSize: '50px',
-    }
   }));
 
   return (
