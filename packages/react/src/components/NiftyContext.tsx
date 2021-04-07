@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import React, { createContext, ReactElement, ReactNode } from 'react';
 import { Nifty, NiftyTheme, ThemeProvider } from '@niftycss/core';
 

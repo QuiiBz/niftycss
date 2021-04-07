@@ -1,4 +1,11 @@
-import { ClassProvider, NiftyTheme, Style, StyleProvider, ThemeProvider } from './types';
+import {
+    Breakpoints,
+    ClassProvider,
+    NiftyTheme,
+    Style,
+    StyleProvider,
+    ThemeProvider,
+} from './types';
 import injectCss from './inject/inject';
 import buildCssStyles from './styles/styles';
 import findExistingStyle from './styles/existing';
@@ -7,11 +14,11 @@ import { DEFAULT_BREAKPOINTS } from './utils/constants';
 export default class Nifty<T, B> {
 
     private _theme: NiftyTheme<T>;
-    private readonly _breakpoints: NiftyTheme<B>;
+    private readonly _breakpoints: Breakpoints<B>;
     private readonly _styles: Style<T, B>[];
     private _css: string;
 
-    private constructor(theme: NiftyTheme<T>, breakpoints: NiftyTheme<B>) {
+    private constructor(theme: NiftyTheme<T>, breakpoints: Breakpoints<B>) {
 
         this._theme = theme;
         this._breakpoints = breakpoints;
@@ -32,7 +39,7 @@ export default class Nifty<T, B> {
         if(classProvider.length > 0)
             classes += ' ';
 
-        classes += `nifty-${this._styles.length.toString()}`;
+        classes += className;
 
         if(styleProvider) {
 
@@ -53,7 +60,7 @@ export default class Nifty<T, B> {
 
     public get theme(): NiftyTheme<T> {
 
-        return this._theme!;
+        return this._theme;
     }
 
     public setTheme(theme: ThemeProvider<T>) {
@@ -78,7 +85,7 @@ export default class Nifty<T, B> {
 
     public static create<
         T extends NiftyTheme<T>,
-        B extends NiftyTheme<B> = typeof DEFAULT_BREAKPOINTS,
+        B extends Breakpoints<B> = typeof DEFAULT_BREAKPOINTS,
         >(theme: T, breakpoints: B = DEFAULT_BREAKPOINTS as unknown as B): Nifty<T, B> {
 
         return new Nifty<T, B>(theme, breakpoints);

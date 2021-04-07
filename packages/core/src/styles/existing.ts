@@ -1,7 +1,7 @@
 import { CSSProperties, NiftyTheme, Style, StyleProvider } from '../index';
 import { getStyleFromProvider } from './styles';
 
-const areStyleEquals = <T, B>(
+const areStyleEquals = <B>(
     [first, second]: [first: CSSProperties<B>, second: CSSProperties<B>],
 ) => {
 

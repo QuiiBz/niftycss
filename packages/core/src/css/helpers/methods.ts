@@ -1,11 +1,3 @@
-import { CSSProperties } from '../index';
-
-export const flexCenter: CSSProperties<unknown> = {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-}
-
 export const calc = (values: TemplateStringsArray, ...props: string[]): string => {
 
     let str = '';
@@ -17,3 +9,5 @@ export const calc = (values: TemplateStringsArray, ...props: string[]): string =
 
     return `calc(${str})`;
 }
+
+// TODO filters
