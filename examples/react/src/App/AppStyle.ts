@@ -1,4 +1,4 @@
-import { calc, flexCenter } from '@niftycss/core';
+import { calc, flexCenter, paddingX, paddingY } from '@niftycss/core';
 import { useNifty } from '@niftycss/react';
 import { Theme } from '../theme';
 
@@ -26,6 +26,8 @@ const useAppStyle = () => {
 
     const appLink = css([], t => ({
         color:  t.link,
+        ...paddingX`10px`,
+        ...paddingY`10px`,
         ':hover': {
             color: t.fg,
         },
