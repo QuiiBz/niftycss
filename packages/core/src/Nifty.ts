@@ -27,21 +27,34 @@ export default class Nifty<T, B> {
         this._css = '';
     }
 
+    /**
+     * Get the classes for the given class and style providers.
+     *
+     * @param classProvider - The aditionnal classes to use
+     * @param styleProvider - The style provider to generated styles from
+     * @returns The generated class name along with the classes from the class provider
+     */
     public css(classProvider: ClassProvider, styleProvider: StyleProvider<T, B>): string {
 
-        const existingStyle = findExistingStyle(styleProvider, this.styles, this._theme)
+        const { exist, foundClasses } = findExistingStyle(styleProvider, this._styles, this._theme)
 
-        if(existingStyle)
-            return existingStyle.className;
+        // Return the found classes if the style already exist
+        if(exist)
+            return foundClasses;
 
         const { className, classes } = getClasses(classProvider, styleProvider);
 
-        this._styles.push({ className, styleProvider });
+        this._styles.push({ className, classes, styleProvider });
         this.update();
 
         return classes;
     }
 
+    /**
+     * Update the styles by rebuilding them and injecting them in the DOM.
+     *
+     * @private
+     */
     private update() {
 
         const css = buildCssStyles(this._breakpoints, this._styles, this._theme);
@@ -75,6 +88,12 @@ export default class Nifty<T, B> {
         return this._css;
     }
 
+    /**
+     * Create a new Nifty instance with the given theme, and optionnaly custom breakpoints.
+     *
+     * @param theme - The theme to use
+     * @param breakpoints - Optionnal custom breakpoints
+     */
     public static create<
         T extends NiftyTheme<T>,
         B extends Breakpoints<B> = typeof DEFAULT_BREAKPOINTS,

@@ -1,3 +1,7 @@
+/**
+ * The default breakpoints of the `css` method. Can be overrided to use custom
+ * breakpoints.
+ */
 export const DEFAULT_BREAKPOINTS = {
     '@sm': '640px',
     '@md': '768px',
@@ -9,3 +13,6 @@ export const DEFAULT_BREAKPOINTS = {
 export const DEV = true;
 
 export const CLASS_PREFIX = 'nifty';
+
+export const DOM_NODE_ID = 'nifty-styles';
+

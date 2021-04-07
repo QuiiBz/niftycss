@@ -60,10 +60,11 @@ export type NiftyTheme<T> = Record<keyof T, string>;
 export type Breakpoints<B> = NiftyTheme<B>;
 
 /**
- * A type representing a style, which is composed of a class name, and a style provider.
+ * A type representing a style, which is composed of a class name, the classes and a style provider.
  */
 export type Style<T, B> = {
     className: string,
+    classes: string,
     styleProvider: StyleProvider<T, B>,
 };
 

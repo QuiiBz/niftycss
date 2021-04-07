@@ -1,5 +1,17 @@
 import { CSSProperties } from '../../types';
 
+/**
+ * Set the same value for padding in the X direction, which represent `paddingLeft`
+ * and `paddingRight`.
+ *
+ * @param value - The padding value
+ * @returns The CSS properties
+ *
+ * @example
+ * ...paddingX`10px`
+ *
+ * ...paddingX`${t.inset}`
+ */
 export const paddingX = (value: TemplateStringsArray): CSSProperties<unknown> => {
 
     const padding = value.raw.join('');
@@ -10,6 +22,18 @@ export const paddingX = (value: TemplateStringsArray): CSSProperties<unknown> =>
     };
 }
 
+/**
+ * Set the same value for padding in the Y direction, which represent `paddingTop`
+ * and `paddingBottom`
+ *
+ * @param value - The padding value
+ * @returns The CSS properties
+ *
+ * @example
+ * ...paddingY`10px`
+ *
+ * ...paddingY`${t.inset}`
+ */
 export const paddingY = (value: TemplateStringsArray): CSSProperties<unknown> => {
 
     const padding = value.raw.join('');
