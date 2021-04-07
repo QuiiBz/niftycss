@@ -7,4 +7,14 @@
     </a>
 </p>
 
-A CSS-in-JS library to rapidly create reusable designs.
+A CSS-in-JS, framework-agnostic library to rapidly create reusable designs.
+
+## Features
+- Theming
+- Responsive with breakpoints directives
+- Custom directives & CSS utilities
+- Framework-agnostic (with wrappers for React, Vue, Svelte)
+- Auto-prefixer
+- Pseudo classes / elements
+- No naming conflicts
+- Dead-code elimination

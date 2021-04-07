@@ -9,9 +9,9 @@ const breakpoints = {
     '@phone': '500px',
 };
 
-const { css, styles, currentCss } = Nifty.create(theme, breakpoints);
+const nifty = Nifty.create(theme, breakpoints);
 
-const div = css(['p-2'], t => ({
+const div = nifty.css(['p-2'], t => ({
     backgroundColor: t.bg,
     fontSize: '12px',
     padding: '4px 8px',
@@ -20,9 +20,12 @@ const div = css(['p-2'], t => ({
         important: true,
     },
     '@phone': {
-
-    }
+        transition: '200ms all linear',
+    },
+    boxSizing: 'border-box',
+    display: 'flex',
+    color: 'blue'
 }));
 
 console.log(div);
-console.log(styles, currentCss);
+console.log(nifty.currentCss);

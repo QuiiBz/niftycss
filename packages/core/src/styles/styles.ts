@@ -1,14 +1,16 @@
 import {
     NiftyTheme,
     CSSProperties,
-    CustomCSSProperty,
+    Directive,
     Style,
     StyleProvider,
     Features,
     CSSValues,
-    CustomCSSPropertyName,
+    DirectiveName,
+    Breakpoints,
 } from '../types';
 import { DEV } from '../utils/constants';
+import { prefix } from 'inline-style-prefixer';
 
 export const getStyleFromProvider = <T, B>(
     styleProvider: StyleProvider<T, B>,
@@ -35,20 +37,20 @@ const isCustomProperty = (propertyName: string): boolean => {
 
 const buildCssProperties = <B>(properties: CSSProperties<B>): {
     cssProperties: string,
-    customProperties: CustomCSSProperty<B>[],
+    directives: Directive<B>[],
 } => {
 
     let cssProperties = '';
-    const customProperties: CustomCSSProperty<B>[] = [];
+    const directives: Directive<B>[] = [];
 
     Object.entries(properties).forEach(([property, propertyValue]) => {
 
         if(isCustomProperty(property)) {
 
-            const name = property as CustomCSSPropertyName;
+            const name = property as DirectiveName;
             const properties = propertyValue as CSSProperties<B>;
 
-            customProperties.push({
+            directives.push({
                 name,
                 properties,
             });
@@ -56,39 +58,51 @@ const buildCssProperties = <B>(properties: CSSProperties<B>): {
         } else {
 
             const kebabProperty = pascalToKebabCase(property);
+            const features: Features[] = [];
 
-            let features: Features = {
-                value: propertyValue as CSSValues,
-                important: false,
-            };
+            if(Array.isArray(propertyValue)) {
 
-            if(typeof propertyValue === 'object')
-                features = propertyValue as Features;
+                for(const propertyValueKey of propertyValue) {
+                    features.push({ value: propertyValueKey, important: false });
+                }
 
-            const { value, important } = features;
+            } else {
 
-            if(DEV)
-                cssProperties += `  ${kebabProperty}: ${value}${important ? ' !important' : ''};\n`;
-            else
-                cssProperties += `${kebabProperty}:${value}${important ? '!important' : ''};`;
+                if(typeof propertyValue === 'object') {
+                    features.push(propertyValue as Features);
+                } else {
+                    features.push({
+                        value: propertyValue as CSSValues,
+                        important: false,
+                    });
+                }
+            }
+
+            features.forEach(({ value, important }) => {
+
+                if(DEV)
+                    cssProperties += `  ${kebabProperty}: ${value}${important ? ' !important' : ''};\n`;
+                else
+                    cssProperties += `${kebabProperty}:${value}${important ? '!important' : ''};`;
+            });
         }
     });
 
     return {
         cssProperties,
-        customProperties,
+        directives,
     };
 }
 
 const buildCss = <B>(
-    breakpoints: NiftyTheme<B>,
+    breakpoints: Breakpoints<B>,
     className: string,
     properties: CSSProperties<B>,
-    context?: CustomCSSPropertyName,
+    context?: DirectiveName,
 ): string => {
 
     let css = '';
-    const { cssProperties, customProperties } = buildCssProperties(properties);
+    const { cssProperties, directives } = buildCssProperties(properties);
 
     if(context) {
 
@@ -102,7 +116,7 @@ const buildCss = <B>(
             const width = breakpoints[customProperty];
 
             if(!width)
-                console.warn(`No breakpoint found for ${customProperty}. Availables breakpoints: ${Object.keys(breakpoints)}`);
+                console.warn(`No breakpoint found for ${customProperty}. Available breakpoints: ${Object.keys(breakpoints)}`);
 
             const cssProperty = customProperties.splice(1).join('');
 
@@ -127,7 +141,7 @@ const buildCss = <B>(
             css += `.${className}{${cssProperties}}`;
     }
 
-    customProperties.forEach(({ name, properties }) => {
+    directives.forEach(({ name, properties }) => {
 
         const nextContext = context ? `${context} ${name}` : name;
         const customPropertiesCss = buildCss(breakpoints, className, properties, nextContext);
@@ -139,7 +153,7 @@ const buildCss = <B>(
 }
 
 const buildCssStyles = <T, B>(
-    breakpoints: NiftyTheme<B>,
+    breakpoints: Breakpoints<B>,
     styles: Style<T, B>[],
     theme: NiftyTheme<T>,
 ): string => {
@@ -148,7 +162,7 @@ const buildCssStyles = <T, B>(
 
     styles.forEach(({ className, styleProvider }) => {
 
-        const properties = getStyleFromProvider(styleProvider, theme);
+        const properties = prefix(getStyleFromProvider(styleProvider, theme));
         css += buildCss(breakpoints, className, properties);
     });
 
