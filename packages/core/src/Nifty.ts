@@ -10,6 +10,7 @@ import injectCss from './inject/inject';
 import buildCssStyles from './styles/styles';
 import findExistingStyle from './styles/existing';
 import { DEFAULT_BREAKPOINTS } from './utils/constants';
+import getClasses from './utils/className';
 
 export default class Nifty<T, B> {
 
@@ -26,26 +27,17 @@ export default class Nifty<T, B> {
         this._css = '';
     }
 
-    public css(classProvider: ClassProvider, styleProvider?: StyleProvider<T, B>): string {
+    public css(classProvider: ClassProvider, styleProvider: StyleProvider<T, B>): string {
 
         const existingStyle = findExistingStyle(styleProvider, this.styles, this._theme)
 
-        if(styleProvider && existingStyle)
+        if(existingStyle)
             return existingStyle.className;
 
-        const className = `nifty-${this._styles.length.toString()}`;
-        let classes = classProvider.join(' ');
+        const { className, classes } = getClasses(classProvider, styleProvider);
 
-        if(classProvider.length > 0)
-            classes += ' ';
-
-        classes += className;
-
-        if(styleProvider) {
-
-            this._styles.push({ className, styleProvider });
-            this.update();
-        }
+        this._styles.push({ className, styleProvider });
+        this.update();
 
         return classes;
     }

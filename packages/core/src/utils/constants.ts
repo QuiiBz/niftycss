@@ -7,3 +7,5 @@ export const DEFAULT_BREAKPOINTS = {
 };
 
 export const DEV = true;
+
+export const CLASS_PREFIX = 'nifty';

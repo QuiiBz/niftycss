@@ -9,10 +9,12 @@
     "watch": "tsc -w"
   },
   "dependencies": {
-    "inline-style-prefixer": "^6.0.0"
+    "inline-style-prefixer": "^6.0.0",
+    "murmurhash": "^2.0.0"
   },
   "devDependencies": {
     "@types/inline-style-prefixer": "^5.0.0",
+    "@types/murmurhash": "^2.0.0",
     "csstype": "^3.0.7",
     "typescript": "^4.2.3"
   }
