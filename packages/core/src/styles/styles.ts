@@ -97,6 +97,7 @@ const buildCss = <B>(
             const customProperties = context.split(' ');
             const customProperty = customProperties[0];
 
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             const width = breakpoints[customProperty];
 

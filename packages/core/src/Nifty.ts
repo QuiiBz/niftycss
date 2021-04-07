@@ -53,7 +53,7 @@ export default class Nifty<T, B> {
 
     public get theme(): NiftyTheme<T> {
 
-        return this._theme!;
+        return this._theme;
     }
 
     public setTheme(theme: ThemeProvider<T>) {
