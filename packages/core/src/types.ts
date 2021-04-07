@@ -19,7 +19,7 @@ export type Features = {
  * A type representing all available css properties.
  */
 export type CSSProperties<B> =
-// Pseudo properties
+    // Pseudo properties
     {
         [P in CSS.Pseudos]?: CSSProperties<B>
     } &
@@ -33,7 +33,7 @@ export type CSSProperties<B> =
         // Key-features properties
         Features
     } &
-    // Custom properties
+    // Directives properties
     {
         [P in keyof B]?: CSSProperties<B>
     };
