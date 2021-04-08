@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Inject CSS Benchmark</title>
+    </head>
+    <body>
+        <script src="libs/lodash.js"></script>
+        <script src="libs/benchmark.js"></script>
+        <script>
+            const suite = new Benchmark.Suite;
+
+            const rules = 100;
+            const chunkSize = 10;
+
+            const createStyleSheet = () => {
+                const style = document.createElement('style')
+                document.head.appendChild(style)
+                return {
+                    style,
+                    remove: () => document.head.removeChild(style)
+                }
+            }
+
+            /*const chunks = [];
+            let chunk = '';
+
+            for(let i = 0; i < rules; ++i) {
+
+                if((i !== 0 && i % chunkSize === 0) || chunkSize === i) {
+
+                    chunks.push(chunk);
+                    chunk = '';
+
+                } else
+                    chunk += '.c' + i + '{font-size: ' + (i + 2) + 'px}';
+            }
+
+            chunks.push(chunk);*/
+
+            let css = '';
+
+            for(let i = 0; i < rules; ++i)
+                css += '.c' + i + '{font-size: ' + (i + 2) + 'px}';
+
+            suite
+                .add('Insert rule', () => {
+
+                    const { style, remove } = createStyleSheet();
+                    const sheet = style.sheet;
+
+                    for(let i = 0; i < rules; ++i)
+                        sheet.insertRule('.c' + i + '{font-size: ' + (i + 2) + 'px}');
+
+                    remove();
+                })
+                /*.add('Insert chunk rule', () => {
+
+                    const { style, remove } = createStyleSheet();
+                    const sheet = style.sheet;
+
+                    for(let i = 0; i < chunks; ++i) {
+
+                        try {
+
+                            sheet.insertRule(chunks[i]);
+                        } catch (err) {
+
+                            console.log('error thrown')
+                        }
+                    }
+
+                    remove();
+                })*/
+                .add('Text content', () => {
+
+                    const { style, remove } = createStyleSheet();
+
+                    style.textContent = css;
+
+                    remove();
+                })
+                .on('cycle', (event) => {
+                    console.log(String(event.target));
+                })
+                .on('complete', function() {
+                    console.log('Fastest is ' + this.filter('fastest').map('name'));
+                })
+                .run({ 'async': true });
+        </script>
+    </body>
+</html>
