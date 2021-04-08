@@ -6,17 +6,18 @@ export const useNifty = <
     T extends NiftyTheme<T>,
     B extends NiftyTheme<B> = typeof DEFAULT_BREAKPOINTS
     >(): {
-    css: (classProvider: ClassProvider,
-          styleProvider: StyleProvider<T, B>,
+    css: (
+        styleProvider: StyleProvider<T, B>,
+        classProvider?: ClassProvider,
     ) => string,
     setTheme: (theme: ThemeProvider<T>) => void,
 } => {
 
     const { nifty, setTheme } = useContext(NiftyContext);
 
-    const css = (classProvider: ClassProvider,
-                 styleProvider: StyleProvider<T, B>,
-    ) => nifty.css(classProvider, styleProvider);
+    const css = (styleProvider: StyleProvider<T, B>,
+                 classProvider?: ClassProvider,
+    ) => nifty.css(styleProvider, classProvider);
 
     return {
         css,

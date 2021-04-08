@@ -32,11 +32,11 @@ export default class Nifty<T, B> {
     /**
      * Get the classes for the given class and style providers.
      *
-     * @param classProvider - The aditionnal classes to use
      * @param styleProvider - The style provider to generated styles from
+     * @param classProvider - The aditionnal classes to use
      * @returns The generated class name along with the classes from the class provider
      */
-    public css(classProvider: ClassProvider, styleProvider: StyleProvider<T, B>): string {
+    public css(styleProvider: StyleProvider<T, B>, classProvider: ClassProvider = []): string {
 
         const { exist, foundClasses } = findExistingStyle(styleProvider, this._styles, this._theme)
 

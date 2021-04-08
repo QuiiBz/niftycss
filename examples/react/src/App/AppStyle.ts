@@ -6,16 +6,16 @@ const useAppStyle = () => {
 
     const { css } = useNifty<Theme>();
 
-    const app = css([], {
+    const app = css( {
         textAlign: 'center',
     });
 
-    const appLogo = css([], {
+    const appLogo = css({
         height: '40vmin',
         pointerEvents: 'none',
     });
 
-    const appHeader = css([], t => ({
+    const appHeader = css(t => ({
         backgroundColor: t.bg,
         minHeight: '100vh',
         ...flexCenter,
@@ -24,7 +24,7 @@ const useAppStyle = () => {
         color: t.fg,
     }));
 
-    const appLink = css([], t => ({
+    const appLink = css(t => ({
         color:  t.link,
         ...paddingX`10px`,
         ...paddingY`10px`,
