@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import reactRefresh from '@vitejs/plugin-react-refresh';
+import * as path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -10,4 +11,9 @@ export default defineConfig({
       '@niftycss/react'
     ],
   },
+  resolve: {
+    alias: {
+      react: path.resolve('./node_modules/react')
+    }
+  }
 });

@@ -10,7 +10,7 @@ export const DEFAULT_BREAKPOINTS = {
     '@xxl': '1536px',
 };
 
-export const DEV = true;
+export const DEV = process.env.NODE_ENV === 'development';
 
 export const CLASS_PREFIX = 'nifty';
 
