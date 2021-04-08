@@ -52,8 +52,6 @@ export default class Nifty<T, B> {
 
     /**
      * Update the styles by rebuilding them and injecting them in the DOM.
-     *
-     * @private
      */
     private update() {
 
