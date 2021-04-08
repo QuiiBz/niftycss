@@ -1,13 +1,13 @@
 import {
     Breakpoints,
-    ClassProvider,
+    ClassProvider, InjectMode,
     NiftyTheme,
     Style,
     StyleProvider,
     ThemeProvider,
 } from './types';
 import injectCss from './inject/inject';
-import buildCssStyles from './styles/styles';
+import buildCssRules from './styles/styles';
 import findExistingStyle from './styles/existing';
 import { DEFAULT_BREAKPOINTS } from './utils/constants';
 import getClasses from './utils/className';
@@ -17,14 +17,16 @@ export default class Nifty<T, B> {
     private _theme: NiftyTheme<T>;
     private readonly _breakpoints: Breakpoints<B>;
     private readonly _styles: Style<T, B>[];
-    private _css: string;
+    private _css: string[];
+    private _injectMode: InjectMode;
 
     private constructor(theme: NiftyTheme<T>, breakpoints: Breakpoints<B>) {
 
         this._theme = theme;
         this._breakpoints = breakpoints;
         this._styles = [];
-        this._css = '';
+        this._css = [];
+        this._injectMode = 'textContent';
     }
 
     /**
@@ -55,10 +57,10 @@ export default class Nifty<T, B> {
      */
     private update() {
 
-        const css = buildCssStyles(this._breakpoints, this._styles, this._theme);
+        const css = buildCssRules(this._breakpoints, this._styles, this._theme);
         this._css = css;
 
-        injectCss(css);
+        injectCss(css, this._injectMode);
     }
 
     public get theme(): NiftyTheme<T> {
@@ -81,9 +83,19 @@ export default class Nifty<T, B> {
         return this._styles;
     }
 
-    public get currentCss(): string {
+    public get currentCss(): string[] {
 
         return this._css;
+    }
+
+    public get injectMode(): InjectMode {
+
+        return this._injectMode;
+    }
+
+    public set injectMode(injectMode: InjectMode) {
+
+        this._injectMode = injectMode;
     }
 
     /**

@@ -94,14 +94,14 @@ const buildCssProperties = <B>(properties: CSSProperties<B>): {
     };
 }
 
-const buildCss = <B>(
+const buildRules = <B>(
     breakpoints: Breakpoints<B>,
     className: string,
     properties: CSSProperties<B>,
     context?: DirectiveName,
-): string => {
+): string[] => {
 
-    let css = '';
+    const css: string[] = [];
     const { cssProperties, directives } = buildCssProperties(properties);
 
     if(context) {
@@ -121,52 +121,52 @@ const buildCss = <B>(
             const cssProperty = customProperties.splice(1).join('');
 
             if(DEV)
-                css += `@media (min-width: ${width}) {\n  .${className}${cssProperty} {\n  ${cssProperties}  }\n}\n`;
+                css.push(`@media (min-width: ${width}) {\n  .${className}${cssProperty} {\n  ${cssProperties}  }\n}\n`);
             else
-                css += `@media(min-width:${width}){.${className}${cssProperty}{${cssProperties}}}`;
+                css.push(`@media(min-width:${width}){.${className}${cssProperty}{${cssProperties}}}`);
 
         } else {
 
             if(DEV)
-                css += `.${className}${context} {\n${cssProperties}}\n`;
+                css.push(`.${className}${context} {\n${cssProperties}}\n`);
             else
-                css += `.${className}${context}{${cssProperties}}`;
+                css.push(`.${className}${context}{${cssProperties}}`);
         }
 
     } else {
 
         if(DEV)
-            css += `.${className} {\n${cssProperties}}\n`;
+            css.push(`.${className} {\n${cssProperties}}\n`);
         else
-            css += `.${className}{${cssProperties}}`;
+            css.push(`.${className}{${cssProperties}}`);
     }
 
     directives.forEach(({ name, properties }) => {
 
         const nextContext = context ? `${context} ${name}` : name;
-        const customPropertiesCss = buildCss(breakpoints, className, properties, nextContext);
+        const customPropertiesCss = buildRules(breakpoints, className, properties, nextContext);
 
-        css += customPropertiesCss;
+        css.push(...customPropertiesCss);
     });
 
     return css;
 }
 
-const buildCssStyles = <T, B>(
+const buildCssRules = <T, B>(
     breakpoints: Breakpoints<B>,
     styles: Style<T, B>[],
     theme: NiftyTheme<T>,
-): string => {
+): string[] => {
 
-    let css = '';
+    const css: string[] = [];
 
     styles.forEach(({ className, styleProvider }) => {
 
         const properties = prefix(getStyleFromProvider(styleProvider, theme));
-        css += buildCss(breakpoints, className, properties);
+        css.push(...buildRules(breakpoints, className, properties));
     });
 
     return css;
 }
 
-export default buildCssStyles;
+export default buildCssRules;

@@ -1,4 +1,5 @@
 import { DOM_NODE_ID } from '../utils/constants';
+import { InjectMode } from '../types';
 
 /**
  * Get the DOM node for the styles. The DOM node will be created if he his
@@ -18,8 +19,9 @@ const getDomNode = (): HTMLStyleElement | undefined => {
 
         element = document.createElement('style');
         element.id = DOM_NODE_ID;
+        element.appendChild(document.createTextNode(''));
 
-        document.head.append(element);
+        document.head.appendChild(element);
     }
 
     return element as HTMLStyleElement;
@@ -29,13 +31,24 @@ const getDomNode = (): HTMLStyleElement | undefined => {
  * Inject the given CSS in the DOM. Do nothing if we are not in a browser.
  *
  * @param css - The css to inject
+ * @param mode - The injection mode to use
  */
-const injectCss = (css: string) => {
+const injectCss = (css: string[], mode: InjectMode = 'textContent') => {
 
     const domNode = getDomNode();
 
-    if(domNode)
-        domNode.textContent = css;
+    if(domNode) {
+
+        if(mode === 'insertRule') {
+
+            const { sheet } = domNode;
+
+            if(sheet)
+                css.forEach((rule) => sheet.insertRule(rule));
+
+        } else if(mode === 'textContent')
+            domNode.textContent = css.join('');
+    }
 }
 
 export default injectCss;

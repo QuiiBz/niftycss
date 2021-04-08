@@ -84,3 +84,8 @@ export type StyleProvider<T, B> = ((theme: NiftyTheme<T>) => CSSProperties<B>) |
  * theme directly.
  */
 export type ThemeProvider<T> = ((theme: NiftyTheme<T>) => NiftyTheme<T>) | NiftyTheme<T>;
+
+/**
+ * The CSS injection mode.
+ */
+export type InjectMode = 'insertRule' | 'textContent';
