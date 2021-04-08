@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "commonjs",
+    "module": "ESNext",
     "lib": ["DOM", "ESNext"],
     "declaration": true,
     "outDir": "./lib",
     "strict": true,
     "esModuleInterop": true,
+    "moduleResolution": "Node",
     "jsx": "react"
   },
   "include": [
