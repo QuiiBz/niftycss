@@ -1,13 +1,12 @@
 import {
     Breakpoints,
     ClassProvider,
-    InjectMode,
     NiftyTheme,
     Style,
     StyleProvider,
     ThemeProvider,
 } from './types';
-import injectCss from './inject/inject';
+import { injectCss, InjectMode } from '@niftycss/dom';
 import buildCssRules from './styles/styles';
 import findExistingStyle from './styles/existing';
 import { DEFAULT_BREAKPOINTS } from './utils/constants';

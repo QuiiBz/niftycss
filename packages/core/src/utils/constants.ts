@@ -13,5 +13,3 @@ export const DEFAULT_BREAKPOINTS = {
 export const DEV = process.env.NODE_ENV === 'development';
 
 export const CLASS_PREFIX = 'nifty';
-
-export const DOM_NODE_ID = 'nifty-styles';

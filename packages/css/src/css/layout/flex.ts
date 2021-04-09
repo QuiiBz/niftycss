@@ -1,4 +1,4 @@
-import { CSSProperties } from '../../types';
+import { CSSProperties } from '@niftycss/core';
 
 /**
  * Get centered horizontaly and verticaly flexbox CSS properties.

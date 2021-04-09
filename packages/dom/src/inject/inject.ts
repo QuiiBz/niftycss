@@ -33,7 +33,7 @@ const getDomNode = (): HTMLStyleElement | undefined => {
  * @param css - The css to inject
  * @param mode - The injection mode to use
  */
-const injectCss = (css: string[], mode: InjectMode = 'textContent') => {
+export const injectCss = (css: string[], mode: InjectMode = 'textContent') => {
 
     const domNode = getDomNode();
 
@@ -50,5 +50,3 @@ const injectCss = (css: string[], mode: InjectMode = 'textContent') => {
             domNode.textContent = css.join('');
     }
 }
-
-export default injectCss;
