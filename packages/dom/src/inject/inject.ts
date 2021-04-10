@@ -32,21 +32,46 @@ const getDomNode = (): HTMLStyleElement | undefined => {
  *
  * @param css - The css to inject
  * @param mode - The injection mode to use
+ * @param debug - If we should debug the injection
  */
-export const injectCss = (css: string[], mode: InjectMode = 'textContent') => {
+export const injectCss = (css: string[], mode: InjectMode = 'textContent', debug: boolean) => {
 
     const domNode = getDomNode();
 
     if(domNode) {
 
+        const debugName = `Time taken to inject CSS (mode: ${mode})`;
+
+        if(debug)
+            console.time(debugName);
+
         if(mode === 'insertRule') {
 
             const { sheet } = domNode;
 
-            if(sheet)
-                css.forEach((rule) => sheet.insertRule(rule));
+            if(!sheet)
+                return;
+
+            if(sheet.rules.length > 0) {
+
+                for(const rule in sheet.rules) {
+
+                    try {
+
+                        sheet.deleteRule(Number(rule))
+                        // eslint-disable-next-line no-empty
+                    } catch(e) { }
+                }
+            }
+
+            css.forEach((rule) => sheet.insertRule(rule));
 
         } else if(mode === 'textContent')
             domNode.textContent = css.join('');
+        else
+            console.error(`Unknow injection mode: ${mode}. Should be one of '${'insertRule' as InjectMode}', '${'textContent' as InjectMode}'`);
+
+        if(debug)
+            console.timeEnd(debugName)
     }
 }

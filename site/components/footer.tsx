@@ -1,11 +1,12 @@
 import Container from './container'
 import { EXAMPLE_PATH } from '../lib/constants'
 import useFooterStyle from './footer-style';
+import { darkTheme, setTheme, whiteTheme } from '../lib/nifty';
 
 const Footer = () => {
   const { footer, title, button, simpleButton } = useFooterStyle();
   return (
-    <footer className={footer}>
+    <footer onClick={() => setTheme(t => t === whiteTheme ? darkTheme : whiteTheme)} className={footer}>
       <Container>
         <div className="py-28 flex flex-col lg:flex-row items-center">
           <h3 className={title}>
