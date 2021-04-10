@@ -16,15 +16,17 @@ const getClassName = <T extends NiftyTheme, B extends Breakpoints>(styleProvider
     // murmurhash throws an error with object strings so we encode it ourselve
     if(typeof styleProvider !== 'function')
         encoded = new TextEncoder().encode(JSON.stringify(styleProvider));
-    else
+    else {
+
         encoded = styleProvider
             .toString()
-            .replaceAll(/[ \n;"']/g, '')
-            .replaceAll(/(function\(.*\))|(.*=>)/g, '')
-            .replaceAll(/return/g, '')
-            .replaceAll('(', '{')
-            .replaceAll(')', '}')
-            .replaceAll(/.\./g, 't.');
+            .replace(/[ \n;"']/g, '')
+            .replace(/(function\(.*\))|(.*=>)/g, '')
+            .replace(/return/g, '')
+            .replace(/\(/g, '{')
+            .replace(/\)/g, '}')
+            .replace(/.\./g, 't.');
+    }
 
     const hash = murmurhash(encoded).toString(36);
 

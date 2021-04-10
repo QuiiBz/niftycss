@@ -32,7 +32,7 @@ const pascalToKebabCase = (property: string): string => {
 
 const isCustomProperty = (propertyName: string): boolean => {
 
-    return propertyName.startsWith(':') || propertyName.startsWith('@');
+    return propertyName.startsWith(':') || propertyName.startsWith('$');
 }
 
 const buildCssProperties = <B extends Breakpoints>(properties: CSSProperties<B>): {
@@ -106,7 +106,7 @@ const buildRules = <B extends Breakpoints>(
 
     if(context) {
 
-        if(context.startsWith('@')) {
+        if(context.startsWith('$')) {
 
             const customProperties = context.split(' ');
             const customProperty = customProperties[0];
