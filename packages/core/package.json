@@ -15,5 +15,9 @@
     "csstype": "^3.0.7",
     "inline-style-prefixer": "^6.0.0",
     "murmurhash": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/inline-style-prefixer": "^5.0.0",
+    "@types/murmurhash": "^2.0.0"
   }
 }

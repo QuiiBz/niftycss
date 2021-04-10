@@ -19,11 +19,12 @@ const getClassName = <T, B>(styleProvider: StyleProvider<T, B>): string => {
     else
         encoded = styleProvider
             .toString()
-            .replaceAll(/ /g, '')
-            .replace('function(', '')
-            .replace('){\n', '')
-            .replace('treturn', 't=>(')
-            .replace('};\n}', '})');
+            .replaceAll(/[ \n;"']/g, '')
+            .replaceAll(/(function\(.*\))|(.*=>)/g, '')
+            .replaceAll(/return/g, '')
+            .replaceAll('(', '{')
+            .replaceAll(')', '}')
+            .replaceAll(/.\./g, 't.');
 
     const hash = murmurhash(encoded).toString(36);
 
