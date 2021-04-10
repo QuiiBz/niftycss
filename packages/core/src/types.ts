@@ -18,7 +18,7 @@ export type Features = {
 /**
  * A type representing all available css properties.
  */
-export type CSSProperties<B> =
+export type CSSProperties<B extends Breakpoints> =
     // Pseudo properties
     {
         [P in CSS.Pseudos]?: CSSProperties<B>
@@ -44,7 +44,7 @@ export type DirectiveName = CSS.Pseudos | string;
 /**
  * A type representing a directive with its name and the css properties.
  */
-export type Directive<B> = {
+export type Directive<B extends Breakpoints> = {
     name: DirectiveName,
     properties: CSSProperties<B>,
 }
@@ -52,17 +52,17 @@ export type Directive<B> = {
 /**
  * A type representing a Nifty theme.
  */
-export type NiftyTheme<T> = Record<keyof T, string>;
+export type NiftyTheme = Record<string, string>;
 
 /**
  * A type representing the breakpoints.
  */
-export type Breakpoints<B> = NiftyTheme<B>;
+export type Breakpoints = Record<string, string>;
 
 /**
  * A type representing a style, which is composed of a class name, the classes and a style provider.
  */
-export type Style<T, B> = {
+export type Style<T extends NiftyTheme, B extends Breakpoints> = {
     className: string,
     classes: string,
     styleProvider: StyleProvider<T, B>,
@@ -77,10 +77,10 @@ export type ClassProvider = string[];
  * A type representing a function which provides css properties with a callback or an
  * object of css properties.
  */
-export type StyleProvider<T, B> = ((theme: NiftyTheme<T>) => CSSProperties<B>) | CSSProperties<B>;
+export type StyleProvider<T extends NiftyTheme, B extends Breakpoints> = ((theme: T) => CSSProperties<B>) | CSSProperties<B>;
 
 /**
  * A type representing a function with provides a new theme given the old theme, or the new
  * theme directly.
  */
-export type ThemeProvider<T> = ((theme: NiftyTheme<T>) => NiftyTheme<T>) | NiftyTheme<T>;
+export type ThemeProvider<T extends NiftyTheme> = ((theme: T) => T) | T;

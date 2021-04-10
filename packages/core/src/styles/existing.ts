@@ -1,4 +1,4 @@
-import { ClassProvider, CSSProperties, NiftyTheme, Style, StyleProvider } from '../types';
+import { Breakpoints, ClassProvider, CSSProperties, NiftyTheme, Style, StyleProvider } from '../types';
 import { getStyleFromProvider } from './styles';
 
 /**
@@ -8,7 +8,7 @@ import { getStyleFromProvider } from './styles';
  * @param second - The second style to check
  * @returns True if the styles are equals, false else
  */
-const areStyleEquals = <B>(
+const areStyleEquals = <B extends Breakpoints >(
     [first, second]: [first: CSSProperties<B>, second: CSSProperties<B>],
 ) => {
 
@@ -24,11 +24,11 @@ const areStyleEquals = <B>(
  * @param theme - The current app theme
  * @returns An object of if the style already exist and the found classes
  */
-const findExistingStyle = <T, B>(
+const findExistingStyle = <T extends NiftyTheme, B extends Breakpoints>(
     styleProvider: StyleProvider<T, B>,
     classProvider: ClassProvider,
     styles: Style<T, B>[],
-    theme: NiftyTheme<T>,
+    theme: T,
 ): {
     exist: boolean,
     foundClasses: string,

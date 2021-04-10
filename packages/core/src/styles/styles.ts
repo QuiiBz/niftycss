@@ -12,9 +12,9 @@ import {
 import { prefix } from 'inline-style-prefixer';
 import { DEV } from '../utils/constants';
 
-export const getStyleFromProvider = <T, B>(
+export const getStyleFromProvider = <T extends NiftyTheme, B extends Breakpoints>(
     styleProvider: StyleProvider<T, B>,
-    theme: NiftyTheme<T>,
+    theme: T,
 ): CSSProperties<B> => {
 
     if(typeof styleProvider === 'function')
@@ -35,7 +35,7 @@ const isCustomProperty = (propertyName: string): boolean => {
     return propertyName.startsWith(':') || propertyName.startsWith('@');
 }
 
-const buildCssProperties = <B>(properties: CSSProperties<B>): {
+const buildCssProperties = <B extends Breakpoints>(properties: CSSProperties<B>): {
     cssProperties: string,
     directives: Directive<B>[],
 } => {
@@ -94,8 +94,8 @@ const buildCssProperties = <B>(properties: CSSProperties<B>): {
     };
 }
 
-const buildRules = <B>(
-    breakpoints: Breakpoints<B>,
+const buildRules = <B extends Breakpoints>(
+    breakpoints: B,
     className: string,
     properties: CSSProperties<B>,
     context?: DirectiveName,
@@ -152,10 +152,10 @@ const buildRules = <B>(
     return css;
 }
 
-const buildCssRules = <T, B>(
-    breakpoints: Breakpoints<B>,
+const buildCssRules = <T extends NiftyTheme, B extends Breakpoints>(
     styles: Style<T, B>[],
-    theme: NiftyTheme<T>,
+    theme: T,
+    breakpoints: B,
 ): string[] => {
 
     const css: string[] = [];

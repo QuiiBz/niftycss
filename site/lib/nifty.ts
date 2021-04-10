@@ -1,6 +1,6 @@
 import { Nifty } from '@niftycss/core';
 
-interface Theme {
+type Theme = {
     black: string,
     white: string,
     accent1: string,

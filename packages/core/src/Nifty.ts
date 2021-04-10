@@ -12,23 +12,25 @@ import findExistingStyle from './styles/existing';
 import { DEFAULT_BREAKPOINTS, DEV } from './utils/constants';
 import getClasses from './utils/className';
 
-export default class Nifty<T, B> {
+export default class Nifty<T extends NiftyTheme, B extends Breakpoints> {
 
-    private _theme: NiftyTheme<T>;
-    private readonly _breakpoints: Breakpoints<B>;
-    private readonly _styles: Style<T, B>[];
-    private _css: string[];
+    private _theme: T;
+    private readonly _breakpoints: B;
     private _injectMode: InjectMode;
     private _debug: boolean;
 
-    private constructor(theme: NiftyTheme<T>, breakpoints: Breakpoints<B>) {
+    private readonly _styles: Style<T, B>[];
+    private _css: string[];
+
+    private constructor(theme: T, breakpoints: B) {
 
         this._theme = theme;
         this._breakpoints = breakpoints;
-        this._styles = [];
-        this._css = [];
         this._injectMode = DEV ? 'insertRule' : 'textContent';
         this._debug = false;
+
+        this._styles = [];
+        this._css = [];
     }
 
     /**
@@ -59,25 +61,13 @@ export default class Nifty<T, B> {
      */
     private update() {
 
-        const css = buildCssRules(this._breakpoints, this._styles, this._theme);
+        const css = buildCssRules(this._styles, this._theme, this._breakpoints);
         this._css = css;
 
-        injectCss(css, this._injectMode, this._debug);
-    }
-
-    public get theme(): NiftyTheme<T> {
-
-        return this._theme;
-    }
-
-    setTheme = (theme: ThemeProvider<T>) => {
-
-        if(typeof theme === 'function')
-            this._theme = theme(this._theme);
-        else
-            this._theme = theme;
-
-        this.update();
+        injectCss(css, {
+            injectMode: this._injectMode,
+            debug: this._debug,
+        });
     }
 
     public get styles(): Style<T, B>[] {
@@ -90,9 +80,14 @@ export default class Nifty<T, B> {
         return this._css;
     }
 
-    public get injectMode(): InjectMode {
+    setTheme = (theme: ThemeProvider<T>) => {
 
-        return this._injectMode;
+        if(typeof theme === 'function')
+            this._theme = theme(this._theme);
+        else
+            this._theme = theme;
+
+        this.update();
     }
 
     setInjectMode = (injectMode: InjectMode) => {
@@ -112,8 +107,8 @@ export default class Nifty<T, B> {
      * @param breakpoints - Optionnal custom breakpoints
      */
     public static create<
-        T extends NiftyTheme<T>,
-        B extends Breakpoints<B> = typeof DEFAULT_BREAKPOINTS,
+        T extends NiftyTheme,
+        B extends Breakpoints = typeof DEFAULT_BREAKPOINTS,
         >(theme: T, breakpoints: B = DEFAULT_BREAKPOINTS as unknown as B): Nifty<T, B> {
 
         return new Nifty<T, B>(theme, breakpoints);

@@ -34,18 +34,18 @@ const getDomNode = (): HTMLStyleElement | undefined => {
  * @param mode - The injection mode to use
  * @param debug - If we should debug the injection
  */
-export const injectCss = (css: string[], mode: InjectMode = 'textContent', debug: boolean) => {
+export const injectCss = (css: string[], { injectMode, debug }: { injectMode: InjectMode, debug: boolean}) => {
 
     const domNode = getDomNode();
 
     if(domNode) {
 
-        const debugName = `Time taken to inject CSS (mode: ${mode})`;
+        const debugName = `Time taken to inject CSS (mode: ${injectMode})`;
 
         if(debug)
             console.time(debugName);
 
-        if(mode === 'insertRule') {
+        if(injectMode === 'insertRule') {
 
             const { sheet } = domNode;
 
@@ -66,10 +66,10 @@ export const injectCss = (css: string[], mode: InjectMode = 'textContent', debug
 
             css.forEach((rule) => sheet.insertRule(rule));
 
-        } else if(mode === 'textContent')
+        } else if(injectMode === 'textContent')
             domNode.textContent = css.join('');
         else
-            console.error(`Unknow injection mode: ${mode}. Should be one of '${'insertRule' as InjectMode}', '${'textContent' as InjectMode}'`);
+            console.error(`Unknow injection mode: ${injectMode}. Should be one of '${'insertRule' as InjectMode}', '${'textContent' as InjectMode}'`);
 
         if(debug)
             console.timeEnd(debugName)

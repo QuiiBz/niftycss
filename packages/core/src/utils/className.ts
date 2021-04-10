@@ -1,4 +1,4 @@
-import { ClassProvider, StyleProvider } from '../types';
+import { Breakpoints, ClassProvider, NiftyTheme, StyleProvider } from '../types';
 import murmurhash from 'murmurhash';
 import { CLASS_PREFIX } from './constants';
 
@@ -9,7 +9,7 @@ import { CLASS_PREFIX } from './constants';
  * @param styleProvider - The style provider to get the class name from
  * @returns The class name for this style provider
  */
-const getClassName = <T, B>(styleProvider: StyleProvider<T, B>): string => {
+const getClassName = <T extends NiftyTheme, B extends Breakpoints>(styleProvider: StyleProvider<T, B>): string => {
 
     let encoded: string | Uint8Array;
 
@@ -38,7 +38,7 @@ const getClassName = <T, B>(styleProvider: StyleProvider<T, B>): string => {
  * @param styleProvider - The style provider to get the class name from
  * @returns An object containing the class name and the classes
  */
-const getClasses = <T, B>(
+const getClasses = <T extends NiftyTheme, B extends Breakpoints>(
     classProvider: ClassProvider,
     styleProvider: StyleProvider<T, B>,
 ): {
