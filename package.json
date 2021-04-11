@@ -10,7 +10,7 @@
   "scripts": {
     "build": "preconstruct build",
     "watch": "preconstruct watch",
-    "lint": "eslint . --ext .ts,.tsx",
+    "lint": "eslint . --ext .js,.ts,.tsx",
     "postinstall": "preconstruct dev"
   },
   "devDependencies": {
@@ -18,12 +18,14 @@
     "@babel/preset-env": "^7.13.15",
     "@babel/preset-typescript": "^7.13.0",
     "@preconstruct/cli": "^2.0.7",
-    "@typescript-eslint/eslint-plugin": "^4.21.0",
-    "@typescript-eslint/parser": "^4.21.0",
+    "@typescript-eslint/eslint-plugin": "^4.4.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "eslint": "^7.23.0",
-    "eslint-plugin-react": "^7.23.1",
-    "eslint-plugin-tsdoc": "^0.2.11",
+    "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.3",
+    "eslint-plugin-react-hooks": "^4.0.8",
     "typescript": "^4.2.3"
   },
   "preconstruct": {

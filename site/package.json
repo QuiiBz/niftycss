@@ -8,24 +8,25 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@niftycss/core": "file:../packages/core",
     "classnames": "2.2.6",
     "date-fns": "2.10.0",
     "gray-matter": "4.0.2",
     "next": "latest",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "remark": "11.0.2",
     "remark-html": "10.0.0",
+    "next-transpile-modules": "^6.4.0",
     "typescript": "^4.0.3"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.10",
     "@types/jest": "^25.2.2",
     "@types/node": "^14.0.1",
-    "@types/react": "^16.9.35",
-    "@types/react-dom": "^16.9.8",
+    "@types/react": "^17.0.2",
+    "@types/react-dom": "^17.0.2",
     "autoprefixer": "^10.2.1",
-    "next-transpile-modules": "^6.4.0",
     "postcss": "^8.2.4",
     "tailwindcss": "^2.0.2"
   }

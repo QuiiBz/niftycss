@@ -1,4 +1,4 @@
-import { CSSProperties } from '../../types';
+import { CSSProperties } from '@niftycss/core';
 
 /**
  * Set the same value for padding in the X direction, which represent `paddingLeft`
@@ -12,15 +12,14 @@ import { CSSProperties } from '../../types';
  *
  * ...paddingX`${t.inset}`
  */
-export const paddingX = (value: TemplateStringsArray): CSSProperties<unknown> => {
-
+export const paddingX = (value: TemplateStringsArray): CSSProperties<{}> => {
     const padding = value.raw.join('');
 
     return {
         paddingLeft: padding,
         paddingRight: padding,
     };
-}
+};
 
 /**
  * Set the same value for padding in the Y direction, which represent `paddingTop`
@@ -34,12 +33,11 @@ export const paddingX = (value: TemplateStringsArray): CSSProperties<unknown> =>
  *
  * ...paddingY`${t.inset}`
  */
-export const paddingY = (value: TemplateStringsArray): CSSProperties<unknown> => {
-
+export const paddingY = (value: TemplateStringsArray): CSSProperties<{}> => {
     const padding = value.raw.join('');
 
     return {
         paddingTop: padding,
         paddingBottom: padding,
     };
-}
+};

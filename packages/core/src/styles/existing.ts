@@ -1,4 +1,6 @@
-import { Breakpoints, ClassProvider, CSSProperties, NiftyTheme, Style, StyleProvider } from '../types';
+import {
+    Breakpoints, ClassProvider, CSSProperties, NiftyTheme, Style, StyleProvider,
+} from '../types';
 import { getStyleFromProvider } from './styles';
 
 /**
@@ -10,10 +12,7 @@ import { getStyleFromProvider } from './styles';
  */
 const areStyleEquals = <B extends Breakpoints >(
     [first, second]: [first: CSSProperties<B>, second: CSSProperties<B>],
-) => {
-
-    return JSON.stringify(first) === JSON.stringify(second);
-}
+) => JSON.stringify(first) === JSON.stringify(second);
 
 /**
  * Find if the given style provider has already been loaded in the given style.
@@ -33,11 +32,9 @@ const findExistingStyle = <T extends NiftyTheme, B extends Breakpoints>(
     exist: boolean,
     foundClasses: string,
 } => {
-
     const prevStyle = getStyleFromProvider(styleProvider, theme);
-    const style = styles.find(({ classes, styleProvider }) => {
-
-        const currentStyle = getStyleFromProvider(styleProvider, theme);
+    const style = styles.find(({ classes, styleProvider: currentStyleProvider }) => {
+        const currentStyle = getStyleFromProvider(currentStyleProvider, theme);
 
         return areStyleEquals([prevStyle, currentStyle]) && classes === classProvider.join(' ');
     });
@@ -46,6 +43,6 @@ const findExistingStyle = <T extends NiftyTheme, B extends Breakpoints>(
         exist: style !== undefined,
         foundClasses: style?.classes || '',
     };
-}
+};
 
 export default findExistingStyle;

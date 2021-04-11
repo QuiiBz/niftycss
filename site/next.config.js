@@ -1,6 +1,6 @@
 const withTM = require('next-transpile-modules')([
     '@niftycss/core',
-    '@niftycss/dom'
+    '@niftycss/dom',
 ]);
 
 module.exports = withTM({});

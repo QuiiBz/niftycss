@@ -1,4 +1,4 @@
-import { CSSProperties } from '../../types';
+import { CSSProperties } from '@niftycss/core';
 
 /**
  * Set the same value for margin in the X direction, which represent `marginLeft`
@@ -12,15 +12,14 @@ import { CSSProperties } from '../../types';
  *
  * ...marginX`${t.inset}`
  */
-export const marginX = (value: TemplateStringsArray): CSSProperties<unknown> => {
-
+export const marginX = (value: TemplateStringsArray): CSSProperties<{}> => {
     const padding = value.raw.join('');
 
     return {
         marginLeft: padding,
         marginRight: padding,
     };
-}
+};
 
 /**
  * Set the same value for margin in the Y direction, which represent `marginTop`
@@ -34,12 +33,11 @@ export const marginX = (value: TemplateStringsArray): CSSProperties<unknown> => 
  *
  * ...marginY`${t.inset}`
  */
-export const marginY = (value: TemplateStringsArray): CSSProperties<unknown> => {
-
+export const marginY = (value: TemplateStringsArray): CSSProperties<{}> => {
     const padding = value.raw.join('');
 
     return {
         marginTop: padding,
         marginBottom: padding,
     };
-}
+};

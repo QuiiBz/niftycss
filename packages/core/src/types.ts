@@ -47,7 +47,7 @@ export type DirectiveName = CSS.Pseudos | string;
 export type Directive<B extends Breakpoints> = {
     name: DirectiveName,
     properties: CSSProperties<B>,
-}
+};
 
 /**
  * A type representing a Nifty theme.
@@ -77,7 +77,9 @@ export type ClassProvider = string[];
  * A type representing a function which provides css properties with a callback or an
  * object of css properties.
  */
-export type StyleProvider<T extends NiftyTheme, B extends Breakpoints> = ((theme: T) => CSSProperties<B>) | CSSProperties<B>;
+export type StyleProvider<T extends NiftyTheme, B extends Breakpoints> =
+    ((theme: T) => CSSProperties<B>) |
+    CSSProperties<B>;
 
 /**
  * A type representing a function with provides a new theme given the old theme, or the new

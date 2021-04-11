@@ -6,11 +6,11 @@ import { CSSProperties } from '@niftycss/core';
  * @example
  * ...flexCenter
  */
-export const flexCenter: CSSProperties<unknown> = {
+export const flexCenter: CSSProperties<{}> = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-}
+};
 
 /**
  * Get flexbox in Y direction (column) CSS properties.
@@ -18,10 +18,10 @@ export const flexCenter: CSSProperties<unknown> = {
  * @example
  * ...flexColumn
  */
-export const flexColumn: CSSProperties<unknown> = {
+export const flexColumn: CSSProperties<{}> = {
     display: 'flex',
     flexDirection: 'column',
-}
+};
 
 /**
  * Get flexbox in X direction (row) CSS properties.
@@ -29,7 +29,7 @@ export const flexColumn: CSSProperties<unknown> = {
  * @example
  * ...flexRow
  */
-export const flexRow: CSSProperties<unknown> = {
+export const flexRow: CSSProperties<{}> = {
     display: 'flex',
     flexDirection: 'row',
-}
+};

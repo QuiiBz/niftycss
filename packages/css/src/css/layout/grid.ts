@@ -1,6 +1,7 @@
-import { CSSProperties } from '../../types';
+import { CSSProperties } from '@niftycss/core';
 
 // TODO grids
-export const grid: CSSProperties<unknown> = {
+// eslint-disable-next-line import/prefer-default-export
+export const grid: CSSProperties<{}> = {
 
-}
+};
