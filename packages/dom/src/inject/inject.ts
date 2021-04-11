@@ -34,7 +34,7 @@ const getDomNode = (): HTMLStyleElement | undefined => {
  * @param mode - The injection mode to use
  * @param debug - If we should debug the injection
  */
-export const injectCss = (css: string[], { injectMode, debug }: { injectMode: InjectMode, debug: boolean}) => {
+export const injectCss = (css: string[], { injectMode, debug }: { injectMode: InjectMode, debug: boolean }) => {
 
     const domNode = getDomNode();
 

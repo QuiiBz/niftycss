@@ -28,7 +28,9 @@
   },
   "preconstruct": {
     "packages": [
-      "packages/*"
+      "packages/core",
+      "packages/css",
+      "packages/dom"
     ]
   }
 }

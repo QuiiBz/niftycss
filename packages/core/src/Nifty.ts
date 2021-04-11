@@ -18,6 +18,7 @@ export default class Nifty<T extends NiftyTheme, B extends Breakpoints> {
     private readonly _breakpoints: B;
     private _injectMode: InjectMode;
     private _debug: boolean;
+    public _ssr: boolean;
 
     private readonly _styles: Style<T, B>[];
     private _css: string[];
@@ -28,6 +29,7 @@ export default class Nifty<T extends NiftyTheme, B extends Breakpoints> {
         this._breakpoints = breakpoints;
         this._injectMode = DEV ? 'insertRule' : 'textContent';
         this._debug = false;
+        this._ssr = false;
 
         this._styles = [];
         this._css = [];
@@ -56,6 +58,15 @@ export default class Nifty<T extends NiftyTheme, B extends Breakpoints> {
         return classes;
     }
 
+    getSSR = (): string => {
+
+        if(this._ssr)
+            return this._css.join('');
+
+        console.warn('CSS requested but not using SSR.')
+        return '';
+    }
+
     /**
      * Update the styles by rebuilding them and injecting them in the DOM.
      */
@@ -64,21 +75,16 @@ export default class Nifty<T extends NiftyTheme, B extends Breakpoints> {
         const css = buildCssRules(this._styles, this._theme, this._breakpoints);
         this._css = css;
 
+        if(this._ssr)
+            return;
+
         injectCss(css, {
             injectMode: this._injectMode,
             debug: this._debug,
         });
     }
 
-    public get styles(): Style<T, B>[] {
-
-        return this._styles;
-    }
-
-    public get currentCss(): string[] {
-
-        return this._css;
-    }
+    styles = (): Style<T, B>[] => this._styles;
 
     setTheme = (theme: ThemeProvider<T>) => {
 
@@ -90,15 +96,9 @@ export default class Nifty<T extends NiftyTheme, B extends Breakpoints> {
         this.update();
     }
 
-    setInjectMode = (injectMode: InjectMode) => {
-
-        this._injectMode = injectMode;
-    }
-
-    setDebug = (debug: boolean) => {
-
-        this._debug = debug;
-    }
+    setInjectMode = (injectMode: InjectMode) => this._injectMode = injectMode;
+    setDebug = (debug: boolean) => this._debug = debug;
+    setSSR = (ssr: boolean) => this._ssr = ssr;
 
     /**
      * Create a new Nifty instance with the given theme, and optionnaly custom breakpoints.

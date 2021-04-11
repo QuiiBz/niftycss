@@ -21,8 +21,9 @@ export const darkTheme: Theme = {
     accent2: 'rgba(21, 21, 21)',
 }
 
-const nifty = Nifty.create(whiteTheme);
+export const nifty = Nifty.create(whiteTheme);
 nifty.setInjectMode('textContent');
 nifty.setDebug(true);
+nifty.setSSR(true);
 
 export const { css, setTheme } = nifty;
