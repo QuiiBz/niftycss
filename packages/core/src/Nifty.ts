@@ -53,7 +53,7 @@ export default class Nifty<T extends NiftyTheme, B extends Breakpoints> {
         const { className, classes } = getClasses(classProvider, styleProvider);
 
         this._styles.push({ className, classes, styleProvider });
-        this.update();
+        this.update(false);
 
         return classes;
     }
@@ -69,13 +69,15 @@ export default class Nifty<T extends NiftyTheme, B extends Breakpoints> {
 
     /**
      * Update the styles by rebuilding them and injecting them in the DOM.
+     *
+     * @param force - If we should force the updated even if using SSR.
      */
-    private update() {
+    private update(force: boolean) {
 
         const css = buildCssRules(this._styles, this._theme, this._breakpoints);
         this._css = css;
 
-        if(this._ssr)
+        if(this._ssr && !force)
             return;
 
         injectCss(css, {
@@ -93,7 +95,7 @@ export default class Nifty<T extends NiftyTheme, B extends Breakpoints> {
         else
             this._theme = theme;
 
-        this.update();
+        this.update(true);
     }
 
     setInjectMode = (injectMode: InjectMode) => this._injectMode = injectMode;

@@ -10,11 +10,9 @@
 A CSS-in-JS, framework-agnostic library to rapidly create reusable designs.
 
 ## Features
-- Theming
-- Responsive with breakpoints directives
+- Framework-agnostic
 - Custom directives & CSS utilities
-- Framework-agnostic (with wrappers for React, Vue, Svelte)
-- Auto-prefixer
-- Pseudo classes / elements
-- No naming conflicts
-- Dead-code elimination
+- Responsive with breakpoints directives
+- Theming & SSR
+- Auto-prefixer & pseudo classes
+- No naming conflicts & Dead-code elimination

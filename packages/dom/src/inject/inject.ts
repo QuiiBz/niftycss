@@ -1,5 +1,6 @@
 import { DOM_NODE_ID } from '../utils/constants';
 import { InjectMode } from '../types';
+import { DEV } from '@niftycss/core';
 
 /**
  * Get the DOM node for the styles. The DOM node will be created if he his
@@ -31,8 +32,7 @@ const getDomNode = (): HTMLStyleElement | undefined => {
  * Inject the given CSS in the DOM. Do nothing if we are not in a browser.
  *
  * @param css - The css to inject
- * @param mode - The injection mode to use
- * @param debug - If we should debug the injection
+ * @param options - The injection mode to use and if we want debug
  */
 export const injectCss = (css: string[], { injectMode, debug }: { injectMode: InjectMode, debug: boolean }) => {
 
@@ -42,7 +42,7 @@ export const injectCss = (css: string[], { injectMode, debug }: { injectMode: In
 
         const debugName = `Time taken to inject CSS (mode: ${injectMode})`;
 
-        if(debug)
+        if(debug && DEV)
             console.time(debugName);
 
         if(injectMode === 'insertRule') {
@@ -71,7 +71,7 @@ export const injectCss = (css: string[], { injectMode, debug }: { injectMode: In
         else
             console.error(`Unknow injection mode: ${injectMode}. Should be one of '${'insertRule' as InjectMode}', '${'textContent' as InjectMode}'`);
 
-        if(debug)
+        if(debug && DEV)
             console.timeEnd(debugName)
     }
 }

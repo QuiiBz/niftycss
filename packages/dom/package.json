@@ -9,5 +9,8 @@
   "license": "MIT",
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {
+    "@niftycss/core": "^1.0.0"
+  }
 }
