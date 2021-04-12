@@ -80,7 +80,8 @@ export default class Nifty<T extends NiftyTheme, B extends Breakpoints> {
         });
     }
 
-    styles = (): Style<T, B>[] => this._styles;
+    getStyles = (): Style<T, B>[] => this._styles;
+    getTheme = (): T => this._theme;
 
     setTheme = (theme: ThemeProvider<T>) => {
         if (typeof theme === 'function') this._theme = theme(this._theme);

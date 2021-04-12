@@ -1,20 +1,22 @@
-import Alert from './alert';
-import Footer from './footer';
+import { FC, ReactElement, ReactNode } from 'react';
+import Footer from './footer/footer';
 import Meta from './meta';
+import Header from './header/header';
+import backgroundStyle from './styles/background';
 
-type Props = {
-    preview?: boolean
-    children: React.ReactNode
-};
+interface Props {
+    title?: string;
+    children: ReactNode;
+}
 
-const Layout = ({ preview, children }: Props) => (
+const Layout: FC<Props> = ({ title, children }: Props): ReactElement => (
     <>
-        <Meta />
-        <div className="min-h-screen">
-            <Alert preview={preview} />
+        <Meta title={title} />
+        <div className={backgroundStyle}>
+            <Header />
             <main>{children}</main>
+            <Footer />
         </div>
-        <Footer />
     </>
 );
 

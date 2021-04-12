@@ -1,29 +1,32 @@
 import { Nifty } from '@niftycss/core';
 
 type Theme = {
-    black: string,
-    white: string,
-    accent1: string,
-    accent2: string,
+    bg: string,
+    border: string,
+    accent: string,
+    textLight: string,
+    textDark: string,
 };
 
 export const whiteTheme: Theme = {
-    black: '#000000',
-    white: '#FFFFFF',
-    accent1: 'rgba(250, 250, 250)',
-    accent2: 'rgba(234, 234, 234)',
+    bg: '#FFFFFF',
+    border: '#E5E7EB',
+    accent: '#06B6D4',
+    textLight: '#6B7280',
+    textDark: '#111827',
 };
 
 export const darkTheme: Theme = {
-    black: '#FFFFFF',
-    white: '#000000',
-    accent1: 'rgba(5, 5, 5)',
-    accent2: 'rgba(21, 21, 21)',
+    bg: '#000000',
+    border: '#374151',
+    accent: '#06B6D4',
+    textLight: '#9CA3AF',
+    textDark: '#F9FAFB',
 };
 
 export const nifty = Nifty.create(whiteTheme);
 nifty.setInjectMode('textContent');
 nifty.setDebug(true);
-nifty.setSSR(true);
+nifty.setSSR(false);
 
-export const { css, setTheme } = nifty;
+export const { css, setTheme, getTheme } = nifty;

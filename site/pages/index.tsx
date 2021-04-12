@@ -1,61 +1,77 @@
-import Head from 'next/head';
-import Container from '../components/container';
-import MoreStories from '../components/more-stories';
-import HeroPost from '../components/hero-post';
-import Intro from '../components/intro';
+import { FC, ReactElement } from 'react';
 import Layout from '../components/layout';
-import { getAllPosts } from '../lib/api';
-import { CMS_NAME } from '../lib/constants';
-import Post from '../types/post';
+import homeStyle from '../components/styles/home';
 
-type Props = {
-    allPosts: Post[]
-};
+const Index: FC = (): ReactElement => {
+    const code = `const style = css(t => ({
+    ...flexCenter,
+    ...paddingX\`1rem\`,
+    color: t.text,
+    ':hover': {
+        color: t.accent,
+    },
+    $sm: {
+        fontSize: t.fontSmall,
+    },
+})`;
 
-const Index = ({ allPosts }: Props) => {
-    const heroPost = allPosts[0];
-    const morePosts = allPosts.slice(1);
+    const result = `.nifty-29byuu {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  color: #010101;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+}
+.nifty-29byuu:hover {
+  color: blue;
+}
+@media (min-width: 640px) {
+  .nifty-29byuu {
+    font-size: 0.8rem;
+  }
+}`;
+
+    /* const nifty = Nifty.create({
+        text: '#010101',
+        accent: 'blue',
+        fontSmall: '0.8rem',
+    });
+
+    const style = nifty.css((t) => ({
+        ...flexCenter,
+        ...paddingX`1rem`,
+        color: t.text,
+        ':hover': {
+            color: t.accent,
+        },
+        $sm: {
+            fontSize: t.fontSmall,
+        },
+    })); */
+
     return (
-        <>
-            <Layout>
-                <Head>
-                    <title>
-                        Next.js Blog Example with
-                        {CMS_NAME}
-                    </title>
-                </Head>
-                <Container>
-                    <Intro />
-                    {heroPost && (
-                        <HeroPost
-                            title={heroPost.title}
-                            coverImage={heroPost.coverImage}
-                            date={heroPost.date}
-                            author={heroPost.author}
-                            slug={heroPost.slug}
-                            excerpt={heroPost.excerpt}
-                        />
-                    )}
-                    {morePosts.length > 0 && <MoreStories posts={morePosts} />}
-                </Container>
-            </Layout>
-        </>
+        <Layout>
+            <div className={homeStyle}>
+                <pre style={{ marginRight: '4rem' }}>
+                    <code>
+                        { code }
+                    </code>
+                </pre>
+                <pre style={{ marginLeft: '4rem' }}>
+                    <code>
+                        { result }
+                    </code>
+                </pre>
+            </div>
+        </Layout>
     );
 };
 
 export default Index;
-
-export const getStaticProps = async () => {
-    const allPosts = getAllPosts([
-        'title',
-        'date',
-        'slug',
-        'author',
-        'coverImage',
-        'excerpt',
-    ]);
-
-    return {
-        props: { allPosts },
-    };
-};

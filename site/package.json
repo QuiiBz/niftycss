@@ -8,7 +8,8 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@niftycss/core": "file:../packages/core",
+    "@niftycss/core": "^1.0.0",
+    "@niftycss/css": "^1.0.0",
     "classnames": "2.2.6",
     "date-fns": "2.10.0",
     "gray-matter": "4.0.2",

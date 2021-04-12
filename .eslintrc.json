@@ -15,6 +15,7 @@
       "allowAfterThis": true
     }],
     "@typescript-eslint/lines-between-class-members": 0,
-    "no-console": 0
+    "no-console": 0,
+    "jsx-a11y/anchor-is-valid": 0
   }
 }

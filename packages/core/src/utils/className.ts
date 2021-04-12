@@ -22,11 +22,13 @@ const getClassName = <T extends NiftyTheme, B extends Breakpoints>(
         encoded = styleProvider
             .toString()
             .replace(/[ \n;"']/g, '')
-            .replace(/(function\(.*\))|(.*=>)/g, '')
+            .replace(/(function\(.*?\))|(.*=>)/g, '')
             .replace(/return/g, '')
             .replace(/\(/g, '{')
             .replace(/\)/g, '}')
-            .replace(/.\./g, 't.');
+            .replace(/.\./g, 't.')
+            .replace(/,.*_niftycss_css__WEBPACK_IMPORTED_MODULE.*/g, '')
+            .replace(/{_objectSpread/g, '_objectSpread');
     }
 
     const hash = murmurhash(encoded).toString(36);
