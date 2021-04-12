@@ -1,6 +1,6 @@
 {
   "name": "@niftycss/css",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "CSS utilities for NiftyCSS",
   "main": "dist/niftycss-css.cjs.js",
   "module": "dist/niftycss-css.esm.js",
@@ -11,6 +11,6 @@
     "dist"
   ],
   "dependencies": {
-    "@niftycss/core": "^1.0.0"
+    "@niftycss/core": "^0.0.1"
   }
 }

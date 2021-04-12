@@ -1,6 +1,6 @@
 {
   "name": "@niftycss/core",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A CSS-in-JS, framework-agnostic library to rapidly create reusable designs",
   "main": "dist/niftycss-core.cjs.js",
   "module": "dist/niftycss-core.esm.js",
@@ -11,7 +11,7 @@
     "dist"
   ],
   "dependencies": {
-    "@niftycss/dom": "^1.0.0",
+    "@niftycss/dom": "^0.0.1",
     "csstype": "^3.0.7",
     "inline-style-prefixer": "^6.0.0",
     "murmurhash": "^2.0.0"
