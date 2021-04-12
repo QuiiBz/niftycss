@@ -1,6 +1,7 @@
 import { FC, ReactElement } from 'react';
 import Layout from '../components/layout';
 import homeStyle from '../components/styles/home';
+import Code from '../components/code/code';
 
 const Index: FC = (): ReactElement => {
     const code = `const style = css(t => ({
@@ -13,7 +14,7 @@ const Index: FC = (): ReactElement => {
     $sm: {
         fontSize: t.fontSmall,
     },
-})`;
+});`;
 
     const result = `.nifty-29byuu {
   display: -webkit-box;
@@ -38,37 +39,11 @@ const Index: FC = (): ReactElement => {
   }
 }`;
 
-    /* const nifty = Nifty.create({
-        text: '#010101',
-        accent: 'blue',
-        fontSmall: '0.8rem',
-    });
-
-    const style = nifty.css((t) => ({
-        ...flexCenter,
-        ...paddingX`1rem`,
-        color: t.text,
-        ':hover': {
-            color: t.accent,
-        },
-        $sm: {
-            fontSize: t.fontSmall,
-        },
-    })); */
-
     return (
         <Layout>
             <div className={homeStyle}>
-                <pre style={{ marginRight: '4rem' }}>
-                    <code>
-                        { code }
-                    </code>
-                </pre>
-                <pre style={{ marginLeft: '4rem' }}>
-                    <code>
-                        { result }
-                    </code>
-                </pre>
+                <Code title="Write this" language="javascript" code={code} />
+                <Code title="Get all of that" language="css" code={result} />
             </div>
         </Layout>
     );

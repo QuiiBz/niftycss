@@ -5,6 +5,6 @@ import containerStyle from './container';
 const homeStyle = css({
     ...marginY`5rem`,
     ...flexCenter,
-}, containerStyle);
+}, containerStyle, 'space-x-8');
 
 export default homeStyle;

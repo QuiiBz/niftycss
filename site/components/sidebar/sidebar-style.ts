@@ -13,7 +13,7 @@ const sidebarStyle = {
     }),
     title: css((t) => ({
         color: t.textDark,
-    }), 'uppercase font-semibold text-sm mt-8'),
+    }), 'uppercase font-semibold text-xs mt-10'),
     docs: css({
         ...flexColumn,
     }),

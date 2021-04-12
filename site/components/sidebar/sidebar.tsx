@@ -29,6 +29,7 @@ const Sidebar: FC<Props> = ({ docs }: Props): ReactElement => {
         <ul className={sidebarStyle.container}>
             {
                 sidebar
+                    // @ts-ignore
                     .sort((a, b) => (Category[a.category] > Category[b.category] ? 1 : -1))
                     .map(({ category, docs: categoryDocs }) => (
                         <li className={sidebarStyle.category} key={category}>

@@ -48,18 +48,30 @@ export default class Nifty<T extends NiftyTheme, B extends Breakpoints> {
         // Return the found classes if the style already exist
         if (exist) return foundClasses;
 
-        const { className, classes } = getClasses(classProvider, styleProvider);
+        const {
+            className,
+            classes,
+        } = getClasses(classProvider, styleProvider);
 
-        this._styles.push({ className, classes, styleProvider });
+        this._styles.push({
+            className,
+            classes,
+            styleProvider,
+        });
         this.update(false);
 
         return classes;
     };
 
     getSSR = (): string => {
-        if (this._ssr) return this._css.join('');
+        if (this._ssr) {
+            if (!DEV) return this._css.join('');
 
-        console.warn('CSS requested but not using SSR.');
+            console.warn('Not using SSR while in dev.');
+        } else {
+            console.warn('CSS requested but not using SSR.');
+        }
+
         return '';
     };
 
@@ -72,7 +84,7 @@ export default class Nifty<T extends NiftyTheme, B extends Breakpoints> {
         const css = buildCssRules(this._styles, this._theme, this._breakpoints);
         this._css = css;
 
-        if (this._ssr && !force) return;
+        if (!force && !DEV && this._ssr) return;
 
         injectCss(css, {
             injectMode: this._injectMode,
@@ -108,8 +120,7 @@ export default class Nifty<T extends NiftyTheme, B extends Breakpoints> {
      * @param theme - The theme to use
      * @param breakpoints - Optionnal custom breakpoints
      */
-    public static create<
-        Theme extends NiftyTheme,
+    public static create<Theme extends NiftyTheme,
         Breakpoint extends Breakpoints = typeof DEFAULT_BREAKPOINTS,
     >(
         theme: Theme,

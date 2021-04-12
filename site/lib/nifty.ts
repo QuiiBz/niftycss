@@ -27,6 +27,6 @@ export const darkTheme: Theme = {
 export const nifty = Nifty.create(whiteTheme);
 nifty.setInjectMode('textContent');
 nifty.setDebug(true);
-nifty.setSSR(false);
+nifty.setSSR(true);
 
 export const { css, setTheme, getTheme } = nifty;

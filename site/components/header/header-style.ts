@@ -7,8 +7,12 @@ const headerStyle = {
         ...flexRow,
         borderColor: t.border,
         justifyContent: 'space-between',
+        alignItems: 'center',
     }), containerStyle, 'border-b py-4'),
-    buttons: css({}, 'space-x-5'),
+    buttons: css({
+        ...flexRow,
+        alignItems: 'center',
+    }, 'space-x-5'),
     button: css((t) => ({
         color: t.textLight,
         borderColor: 'transparent',
@@ -17,6 +21,10 @@ const headerStyle = {
             borderColor: t.accent,
         },
     }), 'border-b-2'),
+    buttonSelected: css((t) => ({
+        color: t.textDark,
+        borderColor: t.accent,
+    })),
 };
 
 export default headerStyle;
