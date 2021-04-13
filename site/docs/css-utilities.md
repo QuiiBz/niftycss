@@ -1,7 +1,7 @@
 ---
 title: 'CSS Utilities'
 category: 'Features'
-order: 3
+order: 5
 ---
 
 This is CSS utilities content

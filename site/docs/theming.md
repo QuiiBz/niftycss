@@ -1,7 +1,7 @@
 ---
 title: 'Theming'
 category: 'Features'
-order: 1
+order: 2
 ---
 
 This is Theming content

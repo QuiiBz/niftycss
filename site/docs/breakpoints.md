@@ -1,7 +1,7 @@
 ---
 title: 'Breakpoints'
 category: 'Features'
-order: 2
+order: 4
 ---
 
 This is Breakpoints content

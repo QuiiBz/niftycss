@@ -4,7 +4,14 @@ import homeStyle from '../components/styles/home';
 import Code from '../components/code/code';
 
 const Index: FC = (): ReactElement => {
-    const code = `const style = css(t => ({
+    const code = `
+const { css } = Nifty.create({
+    text: '#010101',
+    accent: 'blue',
+    fontSmall: '0.8rem',
+});
+    
+const style = css(t => ({
     ...flexCenter,
     ...paddingX\`1rem\`,
     color: t.text,
