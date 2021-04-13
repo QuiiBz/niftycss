@@ -1,7 +1,7 @@
 ---
 title: 'SSR'
 category: 'Features'
-order: 7
+order: 8
 ---
 
 This is TailwindCSS content

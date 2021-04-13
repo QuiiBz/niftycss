@@ -27,37 +27,39 @@ const Sidebar: FC<Props> = ({ docs }: Props): ReactElement => {
 
     return (
         <ul className={sidebarStyle.container}>
-            {
-                sidebar
+            <div style={{ position: 'sticky', top: 0 }}>
+                {
+                    sidebar
                     // @ts-ignore
-                    .sort((a, b) => (Category[a.category] > Category[b.category] ? 1 : -1))
-                    .map(({ category, docs: categoryDocs }) => (
-                        <li className={sidebarStyle.category} key={category}>
-                            <p className={sidebarStyle.title}>{ category }</p>
-                            <ul className={sidebarStyle.docs}>
-                                {
-                                    categoryDocs
-                                        .sort((a, b) => (a.order > b.order ? 1 : -1))
-                                        .map(({ title, slug }) => (
-                                            <Link
-                                                key={slug}
-                                                href={`/docs/${slug}`}
-                                            >
-                                                <li
-                                                    className={sidebarStyle.doc}
-                                                    style={slug === routerSlug ? {
-                                                        color: getTheme().accent,
-                                                    } : {}}
+                        .sort((a, b) => (Category[a.category] > Category[b.category] ? 1 : -1))
+                        .map(({ category, docs: categoryDocs }) => (
+                            <li className={sidebarStyle.category} key={category}>
+                                <p className={sidebarStyle.title}>{ category }</p>
+                                <ul className={sidebarStyle.docs}>
+                                    {
+                                        categoryDocs
+                                            .sort((a, b) => (a.order > b.order ? 1 : -1))
+                                            .map(({ title, slug }) => (
+                                                <Link
+                                                    key={slug}
+                                                    href={`/docs/${slug}`}
                                                 >
-                                                    { title }
-                                                </li>
-                                            </Link>
-                                        ))
-                                }
-                            </ul>
-                        </li>
-                    ))
-            }
+                                                    <li
+                                                        className={sidebarStyle.doc}
+                                                        style={slug === routerSlug ? {
+                                                            color: getTheme().accent,
+                                                        } : {}}
+                                                    >
+                                                        { title }
+                                                    </li>
+                                                </Link>
+                                            ))
+                                    }
+                                </ul>
+                            </li>
+                        ))
+                }
+            </div>
         </ul>
     );
 };

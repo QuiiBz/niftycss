@@ -6,6 +6,7 @@ type Theme = {
     accent: string,
     textLight: string,
     textDark: string,
+    code: string,
 };
 
 export const whiteTheme: Theme = {
@@ -14,6 +15,7 @@ export const whiteTheme: Theme = {
     accent: '#06B6D4',
     textLight: '#6B7280',
     textDark: '#111827',
+    code: '#DCDCDC',
 };
 
 export const darkTheme: Theme = {
@@ -22,11 +24,12 @@ export const darkTheme: Theme = {
     accent: '#06B6D4',
     textLight: '#9CA3AF',
     textDark: '#F9FAFB',
+    code: '#DCDCDC',
 };
 
 export const nifty = Nifty.create(whiteTheme);
 nifty.setInjectMode('textContent');
-nifty.setDebug(true);
+nifty.setDebug(false);
 nifty.setSSR(true);
 
 export const { css, setTheme, getTheme } = nifty;

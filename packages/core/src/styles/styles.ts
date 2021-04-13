@@ -25,7 +25,7 @@ const pascalToKebabCase = (property: string): string => property
     .replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2')
     .toLowerCase();
 
-const isCustomProperty = (propertyName: string): boolean => propertyName.startsWith(':') || propertyName.startsWith('$');
+const isCustomProperty = (propertyName: string): boolean => propertyName.startsWith(':') || propertyName.startsWith('$') || propertyName.startsWith('.') || propertyName.startsWith('*');
 
 const buildCssProperties = <B extends Breakpoints>(properties: CSSProperties<B>): {
     cssProperties: string,
@@ -82,6 +82,7 @@ const buildRules = <B extends Breakpoints>(
     const css: string[] = [];
     const { cssProperties, directives } = buildCssProperties(properties);
 
+    // TODO need refactor
     if (context) {
         if (context.startsWith('$')) {
             const customProperties = context.split(' ');
@@ -97,13 +98,17 @@ const buildRules = <B extends Breakpoints>(
 
             if (DEV) css.push(`@media (min-width: ${width}) {\n  .${className}${cssProperty} {\n  ${cssProperties}  }\n}\n`);
             else css.push(`@media(min-width:${width}){.${className}${cssProperty}{${cssProperties}}}`);
+        } else if (context.startsWith('.')) {
+            css.push(`.${className} ${context} {\n${cssProperties}}\n`);
+        } else if (context.startsWith('*')) {
+            css.push(`.${className} ${context.replace('*', '')} {\n${cssProperties}}\n`);
         } else if (DEV) css.push(`.${className}${context} {\n${cssProperties}}\n`);
         else css.push(`.${className}${context}{${cssProperties}}`);
     } else if (DEV) css.push(`.${className} {\n${cssProperties}}\n`);
     else css.push(`.${className}{${cssProperties}}`);
 
     directives.forEach(({ name, properties: theProperties }) => {
-        const nextContext = context ? `${context} ${name}` : name;
+        const nextContext = context ? `${context}${name.startsWith(':') ? name : ` ${name}`}` : name;
         const customPropertiesCss = buildRules(breakpoints, className, theProperties, nextContext);
 
         css.push(...customPropertiesCss);
