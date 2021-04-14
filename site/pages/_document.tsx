@@ -19,7 +19,7 @@ export default class MyDocument extends Document {
     static async getInitialProps(ctx: DocumentContext) {
         // Run the parent `getInitialProps`, it now includes the custom `renderPage`
         const initialProps = await Document.getInitialProps(ctx);
-        console.log(nifty.getSSR());
+
         return {
             ...initialProps,
             styles: (
