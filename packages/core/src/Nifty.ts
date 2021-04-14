@@ -51,7 +51,7 @@ export default class Nifty<T extends NiftyTheme, B extends Breakpoints> {
         const {
             className,
             classes,
-        } = getClasses(classProvider, styleProvider);
+        } = getClasses(classProvider, styleProvider, this._theme);
 
         this._styles.push({
             className,
@@ -64,14 +64,9 @@ export default class Nifty<T extends NiftyTheme, B extends Breakpoints> {
     };
 
     getSSR = (): string => {
-        if (this._ssr) {
-            if (!DEV) return this._css.join('');
+        if (this._ssr) return this._css.join('');
 
-            console.warn('Not using SSR while in dev.');
-        } else {
-            console.warn('CSS requested but not using SSR.');
-        }
-
+        console.warn('CSS requested but not using SSR.');
         return '';
     };
 
@@ -84,7 +79,7 @@ export default class Nifty<T extends NiftyTheme, B extends Breakpoints> {
         const css = buildCssRules(this._styles, this._theme, this._breakpoints);
         this._css = css;
 
-        if (!force && !DEV && this._ssr) return;
+        if (!force && this._ssr) return;
 
         injectCss(css, {
             injectMode: this._injectMode,

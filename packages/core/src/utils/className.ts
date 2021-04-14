@@ -3,35 +3,22 @@ import {
     Breakpoints, ClassProvider, NiftyTheme, StyleProvider,
 } from '../types';
 import { CLASS_PREFIX } from './constants';
+import { getStyleFromProvider } from '../styles/styles';
 
 /**
  * Get the class name of the given style provider. The class name is unique and
  * is generated from the style provider. This avoid any naming conflicts.
  *
  * @param styleProvider - The style provider to get the class name from
+ * @param theme - The current theme
  * @returns The class name for this style provider
  */
 const getClassName = <T extends NiftyTheme, B extends Breakpoints>(
     styleProvider: StyleProvider<T, B>,
+    theme: T,
 ): string => {
-    let encoded: string | Uint8Array;
-
-    // murmurhash throws an error with object strings so we encode it ourselve
-    if (typeof styleProvider !== 'function') encoded = new TextEncoder().encode(JSON.stringify(styleProvider));
-    else {
-        encoded = styleProvider
-            .toString()
-            .replace(/[ \n;"']/g, '')
-            .replace(/(function\(.*?\))|(.*=>)/g, '')
-            .replace(/return/g, '')
-            .replace(/\(/g, '{')
-            .replace(/\)/g, '}')
-            .replace(/.\./g, 't.')
-            .replace(/,.*_niftycss_css__WEBPACK_IMPORTED_MODULE.*/g, '')
-            .replace(/{_objectSpread/g, '_objectSpread');
-    }
-
-    const hash = murmurhash(encoded).toString(36);
+    const style = getStyleFromProvider(styleProvider, theme);
+    const hash = murmurhash(JSON.stringify(style)).toString(36);
 
     return `${CLASS_PREFIX}-${hash}`;
 };
@@ -41,16 +28,18 @@ const getClassName = <T extends NiftyTheme, B extends Breakpoints>(
  *
  * @param classProvider - The list of aditionnal classes to use
  * @param styleProvider - The style provider to get the class name from
+ * @param theme - The current theme
  * @returns An object containing the class name and the classes
  */
 const getClasses = <T extends NiftyTheme, B extends Breakpoints>(
     classProvider: ClassProvider,
     styleProvider: StyleProvider<T, B>,
+    theme: T,
 ): {
     className: string,
     classes: string,
 } => {
-    const className = getClassName(styleProvider);
+    const className = getClassName(styleProvider, theme);
     let classes = classProvider.join(' ');
 
     // Add a space before the list of classes if the class provider
