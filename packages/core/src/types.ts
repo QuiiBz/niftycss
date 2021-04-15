@@ -1,4 +1,5 @@
 import * as CSS from 'csstype';
+import HTMLTag from './html';
 
 // The type of all CSS keys
 export type CSSKeys = keyof CSS.Properties;
@@ -36,6 +37,10 @@ export type CSSProperties<B extends Breakpoints> =
     // Directives properties
     {
         [P in keyof B]?: CSSProperties<B>
+    } &
+    // HTML Tags selectors
+    {
+        [P in `*${HTMLTag}`]?: CSSProperties<B>
     };
 
 // A type representing the name of the directives.
