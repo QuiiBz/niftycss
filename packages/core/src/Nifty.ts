@@ -58,7 +58,9 @@ export default class Nifty<T extends NiftyTheme, B extends Breakpoints> {
             classes,
             styleProvider,
         });
-        this.update(false);
+
+        // TODO: only force update when page changed
+        this.update(true);
 
         return classes;
     };
