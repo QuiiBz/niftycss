@@ -1,6 +1,6 @@
 {
   "name": "site",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "scripts": {
     "dev": "next",
     "build": "next build",
@@ -8,8 +8,8 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@niftycss/core": "^0.0.3",
-    "@niftycss/css": "^0.0.3",
+    "@niftycss/core": "^0.0.4",
+    "@niftycss/css": "^0.0.4",
     "classnames": "2.2.6",
     "date-fns": "2.10.0",
     "gray-matter": "4.0.2",
