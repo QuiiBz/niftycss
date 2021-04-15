@@ -1,6 +1,6 @@
 module.exports = {
     // Add the .ts files which contains Nifty styles to don't purge them
-    purge: ['./components/**/*.tsx', './pages/**/*.tsx', './components/**/*.ts'],
+    purge: ['./components/**/*.*', './pages/**/*.tsx'],
     theme: {
         extend: {
             colors: {

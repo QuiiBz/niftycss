@@ -23,7 +23,7 @@ const docStyle = {
         },
         '*a': {
             textDecoration: 'underline',
-            textDecorationColor: t.accent,
+            textDecorationColor: t.accentDark,
             ':hover': {
                 color: t.textDark,
             },
