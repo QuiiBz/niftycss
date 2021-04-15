@@ -1,10 +1,17 @@
-import { flexCenter, marginY } from '@niftycss/css';
+import {
+    flexCenter, flexColumn, marginY,
+} from '@niftycss/css';
 import { css } from '../../lib/nifty';
 import containerStyle from './container';
 
-const homeStyle = css({
-    ...marginY`5rem`,
-    ...flexCenter,
-}, containerStyle, 'space-x-8');
+const homeStyle = {
+    main: css({
+        ...flexColumn,
+        ...marginY`5rem`,
+    }, containerStyle),
+    container: css({
+        ...flexCenter,
+    }, 'space-x-8 mb-12'),
+};
 
 export default homeStyle;
