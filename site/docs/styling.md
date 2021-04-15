@@ -61,4 +61,35 @@ Refer to [breakpoints documentation](/docs/breakpoints)
 
 ## Using selectors
 
+## Using class names or existing Nifty styles
+To use any other class name along with your Nifty style, just add a string containing the classes after the `style provider`:
+
+```typescript
+css({
+    display: 'flex',
+}, 'pt-0 border-b');
+```
+
+You can also use an existing Nifty style here, to inherit it styles:
+```typescript
+const container = css({
+    display: 'flex',
+    margin: 'auto',
+});
+
+css({
+    display: 'flex',
+}, container);
+```
+
+It's also possible to combine Nifty styles and existing class name, since the `class provider` accept an array of strings:
+
+```typescript
+css({
+    display: 'flex',
+}, container, 'pt-0 border-b');
+```
+
+You can add any number of existing class name of Nifty styles.
+
 ## Using `!important` modifier
