@@ -76,10 +76,12 @@ const buildRules = <T extends NiftyTheme, B extends Breakpoints>(
     // eslint-disable-next-line prefer-const
     let { cssProperties, directives } = buildCssProperties(properties);
 
-    Object.keys(theme).sort((a, b) => (a.length > b.length ? -1 : 1)).forEach((themeKey) => {
-        console.log(themeKey);
-        cssProperties = cssProperties.replaceAll(`$${themeKey}`, theme[themeKey]);
-    });
+    Object
+        .keys(theme)
+        .sort((a, b) => (a.length > b.length ? -1 : 1))
+        .forEach((themeKey) => {
+            cssProperties = cssProperties.replaceAll(`$${themeKey}`, theme[themeKey]);
+        });
 
     // TODO need refactor
     if (context) {

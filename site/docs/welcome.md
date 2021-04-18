@@ -13,7 +13,7 @@ Here is an example code of a basic usage (picked from the home page).
 
 - At the left, you can find the actual code written in a JavaScript file (or [TypeScript](/docs/typescript))
 - At the right, you can find the produced CSS, which will be injected or [Server-Side Renderer](/docs/ssr) based on your settings
-
-![](https://i.imgur.com/GtDXQur.png)
+__
+![](https://i.imgur.com/7EMFWpl.png)
 
 ## What is CSS-in-JS?
