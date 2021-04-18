@@ -6,12 +6,12 @@ const codeStyle = {
         ...flexColumn,
         alignItems: 'center',
     }),
-    title: css((t) => ({
-        color: t.textLight,
-    }), 'mb-4 font-semibold text-md'),
-    code: css((t) => ({
+    title: css({
+        color: '$textLight',
+    }, 'mb-4 font-semibold text-md'),
+    code: css({
         background: {
-            value: t.textDark,
+            value: '$textDark',
             important: true,
         },
         padding: {
@@ -23,10 +23,10 @@ const codeStyle = {
             width: '0.5rem',
         },
         '::-webkit-scrollbar-thumb': {
-            background: t.accent,
+            background: '$accent',
             borderRadius: '1rem',
         },
-    }), 'rounded-2xl w-96'),
+    }, 'rounded-2xl w-96'),
 };
 
 export default codeStyle;

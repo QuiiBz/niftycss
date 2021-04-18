@@ -13,15 +13,15 @@ const CODE_SNIPPETS: CodeSnippet[] = [
     fontSmall: '0.8rem',
 });
     
-const style = css(t => ({
+const style = css({
     ...flexCenter,
     ...paddingX\`1rem\`,
-    color: t.text,
+    color: '$text',
     ':hover': {
-        color: t.accent,
+        color: '$accent',
     },
     $sm: {
-        fontSize: t.fontSmall,
+        fontSize: '$fontSmall',
     },
 });`,
         language: 'javascript',

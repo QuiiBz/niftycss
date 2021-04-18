@@ -2,25 +2,25 @@ import { flexRow, paddingX, paddingY } from '@niftycss/css';
 import { css } from '../../lib/nifty';
 
 const buttonStyle = {
-    button: css((t) => ({
+    button: css({
         ...paddingX`2rem`,
         ...paddingY`0.75rem`,
         ...flexRow,
-        color: t.bg,
-        backgroundColor: t.accent,
+        color: '$bg',
+        backgroundColor: '$accent',
         ':focus': {
             outline: 'none',
         },
         ':hover': {
-            backgroundColor: t.accentDark,
+            backgroundColor: '$accentDark',
         },
         '*svg': {
-            color: t.bg,
+            color: '$bg',
             width: '1.5rem',
             height: '1.5rem',
             marginRight: '1rem',
         },
-    }), 'rounded-xl'),
+    }, 'rounded-xl'),
 };
 
 export default buttonStyle;

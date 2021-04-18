@@ -11,8 +11,8 @@ const breakpoints = {
 
 const nifty = Nifty.create(theme, breakpoints);
 
-const div = nifty.css((t) => ({
-    backgroundColor: t.bg,
+const div = nifty.css({
+    backgroundColor: '$bg',
     fontSize: '12px',
     padding: '4px 8px',
     paddingBlock: {
@@ -25,6 +25,6 @@ const div = nifty.css((t) => ({
     boxSizing: 'border-box',
     display: 'flex',
     color: 'blue',
-}));
+});
 
 console.log(div);

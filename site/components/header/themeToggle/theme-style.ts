@@ -6,18 +6,18 @@ const themeStyle = {
             outline: 'none',
         },
     }),
-    white: css((t) => ({
-        stroke: t.textLight,
+    white: css({
+        stroke: '$textLight',
         ':hover': {
-            stroke: t.textDark,
+            stroke: '$textDark',
         },
-    }), 'w-5 h-5'),
-    dark: css((t) => ({
-        fill: t.textLight,
+    }, 'w-5 h-5'),
+    dark: css({
+        fill: '$textLight',
         ':hover': {
-            fill: t.textDark,
+            fill: '$textDark',
         },
-    }), 'w-5 h-5'),
+    }, 'w-5 h-5'),
 };
 
 export default themeStyle;

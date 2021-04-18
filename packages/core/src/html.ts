@@ -20,7 +20,7 @@ export type HTMLContentTag =
     'aside' |
     'footer' |
     'header' |
-    `h${1 | 2 | 3 | 4 | 5 | 6}` |
+    `h${1 | 2 | 3 | 4 | 5 | 6}` |
     'main' |
     'nav' |
     'section';
@@ -140,8 +140,8 @@ export type HTMLWebComponentTag =
     'slot' |
     'template';
 
-type HTMLTag = 
-    HTMLRootTag | 
+type HTMLTag =
+    HTMLRootTag |
     HTMLDocumentTag |
     HTMLContentTag |
     HTMLTextTag |
@@ -157,4 +157,3 @@ type HTMLTag =
     HTMLWebComponentTag;
 
 export default HTMLTag;
-    

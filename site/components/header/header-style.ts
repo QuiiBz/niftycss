@@ -3,28 +3,28 @@ import { css } from '../../lib/nifty';
 import containerStyle from '../styles/container';
 
 const headerStyle = {
-    header: css((t) => ({
+    header: css({
         ...flexRow,
-        borderColor: t.border,
+        borderColor: '$border',
         justifyContent: 'space-between',
         alignItems: 'center',
-    }), containerStyle, 'border-b py-4'),
+    }, containerStyle, 'border-b py-4'),
     buttons: css({
         ...flexRow,
         alignItems: 'center',
     }, 'space-x-5'),
-    button: css((t) => ({
-        color: t.textLight,
+    button: css({
+        color: '$textLight',
         borderColor: 'transparent',
         ':hover': {
-            color: t.textDark,
-            borderColor: t.accent,
+            color: '$textDark',
+            borderColor: '$accent',
         },
-    }), 'border-b-2'),
-    buttonSelected: css((t) => ({
-        color: t.textDark,
-        borderColor: t.accent,
-    })),
+    }, 'border-b-2'),
+    buttonSelected: css({
+        color: '$textDark',
+        borderColor: '$accent',
+    }),
 };
 
 export default headerStyle;

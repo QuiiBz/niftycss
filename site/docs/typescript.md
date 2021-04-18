@@ -40,10 +40,10 @@ const darkTheme: Theme = {
 
 This will allow getting auto-completion on the theme of style provider:
 ```typescript
-css(t => {
+css({
     // Shows autocompletion with
-    color: t.te
-    //       textLight
-    //       textDark
+    color: '$te'
+    //      $textLight
+    //      $textDark
 });
 ```

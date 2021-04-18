@@ -3,7 +3,6 @@ import {
     Breakpoints, ClassProvider, NiftyTheme, StyleProvider,
 } from '../types';
 import { CLASS_PREFIX } from './constants';
-import { getStyleFromProvider } from '../styles/styles';
 
 /**
  * Get the class name of the given style provider. The class name is unique and
@@ -15,9 +14,8 @@ import { getStyleFromProvider } from '../styles/styles';
  */
 const getClassName = <T extends NiftyTheme, B extends Breakpoints>(
     styleProvider: StyleProvider<T, B>,
-    theme: T,
 ): string => {
-    const style = getStyleFromProvider(styleProvider, theme);
+    const style = styleProvider;
     const hash = murmurhash(JSON.stringify(style)).toString(36);
 
     return `${CLASS_PREFIX}-${hash}`;
@@ -34,12 +32,11 @@ const getClassName = <T extends NiftyTheme, B extends Breakpoints>(
 const getClasses = <T extends NiftyTheme, B extends Breakpoints>(
     classProvider: ClassProvider,
     styleProvider: StyleProvider<T, B>,
-    theme: T,
 ): {
     className: string,
     classes: string,
 } => {
-    const className = getClassName(styleProvider, theme);
+    const className = getClassName(styleProvider);
     let classes = classProvider.join(' ');
 
     // Add a space before the list of classes if the class provider
