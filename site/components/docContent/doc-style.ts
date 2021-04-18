@@ -61,6 +61,8 @@ const docStyle = {
                 content: 'none',
             },
         },
+        // TODO
+        // @ts-ignore
         '.hljs-comment, .hljs-quote': {
             color: '#57a64a',
         },

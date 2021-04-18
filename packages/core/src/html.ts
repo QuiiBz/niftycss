@@ -26,7 +26,7 @@ export type HTMLContentTag =
     'section';
 
 export type HTMLTextTag =
-    'block-quote' |
+    'blockquote' |
     'dd' |
     'div' |
     'dl' |
@@ -140,7 +140,7 @@ export type HTMLWebComponentTag =
     'slot' |
     'template';
 
-type HTMLTag =
+export type HTMLTag =
     HTMLRootTag |
     HTMLDocumentTag |
     HTMLContentTag |
@@ -156,4 +156,4 @@ type HTMLTag =
     HTMLInteractiveTag |
     HTMLWebComponentTag;
 
-export default HTMLTag;
+export type OptionalHTMLTag = ` ${HTMLTag}` | '';

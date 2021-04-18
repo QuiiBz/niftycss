@@ -1,5 +1,19 @@
 import * as CSS from 'csstype';
-import HTMLTag from './html';
+import { HTMLTag, OptionalHTMLTag } from './html';
+
+declare module 'csstype' {
+    // Add css  rules not shipped into csstype
+    interface Properties {
+        // From https://developer.mozilla.org/en-US/docs/Web/CSS/::-webkit-scrollbar
+        '::-webkit-scrollbar'?: any;
+        '::-webkit-scrollbar-button'?: any;
+        '::-webkit-scrollbar-thumb'?: any;
+        '::-webkit-scrollbar-track'?: any;
+        '::-webkit-scrollbar-track-piece'?: any;
+        '::-webkit-scrollbar-corner'?: any;
+        '::-webkit-resizer'?: any;
+    }
+}
 
 // The type of all CSS keys
 export type CSSKeys = keyof CSS.Properties;
@@ -41,7 +55,7 @@ export type CSSProperties<T extends NiftyTheme, B extends Breakpoints> =
     } &
     // HTML Tags selectors
     {
-        [P in `*${HTMLTag}`]?: CSSProperties<T, B>
+        [P in `*${HTMLTag}${OptionalHTMLTag}`]?: CSSProperties<T, B>
     };
 
 // A type representing the name of the directives.
