@@ -15,7 +15,7 @@ type WebkitScrollbar =
 export type CSSKeys = keyof CSS.Properties;
 
 // The type of all CSS values
-export type CSSValues = CSS.Properties[CSSKeys];
+export type CSSValues = Omit<CSS.Properties[CSSKeys], string & {}>;
 
 /**
  * A type representing additional CSS features. For example, the `important` field represent
