@@ -9,7 +9,7 @@ import {
  * @param second - The second style to check
  * @returns True if the styles are equals, false else
  */
-const areStyleEquals = <T extends NiftyTheme, B extends Breakpoints >(
+export const areStyleEquals = <T extends NiftyTheme, B extends Breakpoints >(
     [first, second]: [first: CSSProperties<T, B>, second: CSSProperties<T, B>],
 ) => JSON.stringify(first) === JSON.stringify(second);
 
