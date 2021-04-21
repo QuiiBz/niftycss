@@ -1,19 +1,15 @@
 import * as CSS from 'csstype';
 import { HTMLTag, OptionalHTMLTag } from './html';
 
-declare module 'csstype' {
-    // Add css  rules not shipped into csstype
-    interface Properties {
-        // From https://developer.mozilla.org/en-US/docs/Web/CSS/::-webkit-scrollbar
-        '::-webkit-scrollbar'?: any;
-        '::-webkit-scrollbar-button'?: any;
-        '::-webkit-scrollbar-thumb'?: any;
-        '::-webkit-scrollbar-track'?: any;
-        '::-webkit-scrollbar-track-piece'?: any;
-        '::-webkit-scrollbar-corner'?: any;
-        '::-webkit-resizer'?: any;
-    }
-}
+// From https://developer.mozilla.org/en-US/docs/Web/CSS/::-webkit-scrollbar
+type WebkitScrollbar =
+    '::-webkit-scrollbar' |
+    '::-webkit-scrollbar-button' |
+    '::-webkit-scrollbar-thumb' |
+    '::-webkit-scrollbar-track' |
+    '::-webkit-scrollbar-track-piece' |
+    '::-webkit-scrollbar-corner' |
+    '::-webkit-resizer';
 
 // The type of all CSS keys
 export type CSSKeys = keyof CSS.Properties;
@@ -36,7 +32,7 @@ export type Features = {
 export type CSSProperties<T extends NiftyTheme, B extends Breakpoints> =
     // Pseudo properties
     {
-        [P in CSS.Pseudos]?: CSSProperties<T, B>
+        [P in CSS.Pseudos | WebkitScrollbar]?: CSSProperties<T, B>
     } &
     // Normal properties
     {
