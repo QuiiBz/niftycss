@@ -4,7 +4,6 @@ import {
     CSSProperties,
     Directive,
     Style,
-    StyleProvider,
     Features,
     CSSValues,
     DirectiveName,
@@ -12,32 +11,25 @@ import {
 } from '../types';
 import { DEV } from '../utils/constants';
 
-export const getStyleFromProvider = <T extends NiftyTheme, B extends Breakpoints>(
-    styleProvider: StyleProvider<T, B>,
-    theme: T,
-): CSSProperties<B> => {
-    if (typeof styleProvider === 'function') return styleProvider(theme);
-
-    return styleProvider;
-};
-
 const pascalToKebabCase = (property: string): string => property
     .replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2')
     .toLowerCase();
 
 const isCustomProperty = (propertyName: string): boolean => propertyName.startsWith(':') || propertyName.startsWith('$') || propertyName.startsWith('.') || propertyName.startsWith('*');
 
-const buildCssProperties = <B extends Breakpoints>(properties: CSSProperties<B>): {
+const buildCssProperties = <T extends NiftyTheme, B extends Breakpoints>(
+    properties: CSSProperties<T, B>,
+): {
     cssProperties: string,
-    directives: Directive<B>[],
+    directives: Directive<T, B>[],
 } => {
     let cssProperties = '';
-    const directives: Directive<B>[] = [];
+    const directives: Directive<T, B>[] = [];
 
     Object.entries(properties).forEach(([propertyKey, propertyValue]) => {
         if (isCustomProperty(propertyKey)) {
             const name = propertyKey as DirectiveName;
-            const property = propertyValue as CSSProperties<B>;
+            const property = propertyValue as CSSProperties<T, B>;
 
             directives.push({
                 name,
@@ -73,14 +65,26 @@ const buildCssProperties = <B extends Breakpoints>(properties: CSSProperties<B>)
     };
 };
 
-const buildRules = <B extends Breakpoints>(
+const buildRules = <T extends NiftyTheme, B extends Breakpoints>(
+    theme: T,
     breakpoints: B,
     className: string,
-    properties: CSSProperties<B>,
+    properties: CSSProperties<T, B>,
     context?: DirectiveName,
 ): string[] => {
     const css: string[] = [];
-    const { cssProperties, directives } = buildCssProperties(properties);
+    // eslint-disable-next-line prefer-const
+    let { cssProperties, directives } = buildCssProperties(properties);
+
+    Object
+        .keys(theme)
+        .sort((a, b) => (a.length > b.length ? -1 : 1))
+        .forEach((themeKey) => {
+            const themeKeyRegex = `\\$${themeKey}`;
+            const regex = new RegExp(themeKeyRegex, 'g');
+
+            cssProperties = cssProperties.replace(regex, theme[themeKey]);
+        });
 
     // TODO need refactor
     if (context) {
@@ -109,7 +113,13 @@ const buildRules = <B extends Breakpoints>(
 
     directives.forEach(({ name, properties: theProperties }) => {
         const nextContext = context ? `${context}${name.startsWith(':') ? name : ` ${name}`}` : name;
-        const customPropertiesCss = buildRules(breakpoints, className, theProperties, nextContext);
+        const customPropertiesCss = buildRules(
+            theme,
+            breakpoints,
+            className,
+            theProperties,
+            nextContext,
+        );
 
         css.push(...customPropertiesCss);
     });
@@ -125,8 +135,8 @@ const buildCssRules = <T extends NiftyTheme, B extends Breakpoints>(
     const css: string[] = [];
 
     styles.forEach(({ className, styleProvider }) => {
-        const properties = prefix(getStyleFromProvider(styleProvider, theme));
-        css.push(...buildRules(breakpoints, className, properties));
+        const properties = prefix(styleProvider);
+        css.push(...buildRules(theme, breakpoints, className, properties));
     });
 
     return css;

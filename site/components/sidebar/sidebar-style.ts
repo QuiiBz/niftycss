@@ -2,28 +2,28 @@ import { flexColumn, paddingX } from '@niftycss/css';
 import { css } from '../../lib/nifty';
 
 const sidebarStyle = {
-    container: css((t) => ({
+    container: css({
         ...flexColumn,
         ...paddingX`2rem`,
-        borderColor: t.border,
+        borderColor: '$border',
         width: 'fit-content',
-    }), 'border-r'),
+    }, 'border-r'),
     category: css({
         ...flexColumn,
     }),
-    title: css((t) => ({
-        color: t.textDark,
-    }), 'uppercase font-semibold text-xs mt-10'),
+    title: css({
+        color: '$textDark',
+    }, 'uppercase font-semibold text-xs mt-10'),
     docs: css({
         ...flexColumn,
     }),
-    doc: css((t) => ({
-        color: t.textLight,
+    doc: css({
+        color: '$textLight',
         cursor: 'pointer',
         ':hover': {
-            color: t.textDark,
+            color: '$textDark',
         },
-    }), 'mt-4 text-sm'),
+    }, 'mt-4 text-sm'),
 };
 
 export default sidebarStyle;

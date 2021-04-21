@@ -1,7 +1,6 @@
 import {
     Breakpoints, ClassProvider, CSSProperties, NiftyTheme, Style, StyleProvider,
 } from '../types';
-import { getStyleFromProvider } from './styles';
 
 /**
  * Check if two styles are equals.
@@ -10,8 +9,8 @@ import { getStyleFromProvider } from './styles';
  * @param second - The second style to check
  * @returns True if the styles are equals, false else
  */
-const areStyleEquals = <B extends Breakpoints >(
-    [first, second]: [first: CSSProperties<B>, second: CSSProperties<B>],
+const areStyleEquals = <T extends NiftyTheme, B extends Breakpoints >(
+    [first, second]: [first: CSSProperties<T, B>, second: CSSProperties<T, B>],
 ) => JSON.stringify(first) === JSON.stringify(second);
 
 /**
@@ -27,14 +26,13 @@ const findExistingStyle = <T extends NiftyTheme, B extends Breakpoints>(
     styleProvider: StyleProvider<T, B>,
     classProvider: ClassProvider,
     styles: Style<T, B>[],
-    theme: T,
 ): {
     exist: boolean,
     foundClasses: string,
 } => {
-    const prevStyle = getStyleFromProvider(styleProvider, theme);
+    const prevStyle = styleProvider;
     const style = styles.find(({ classes, styleProvider: currentStyleProvider }) => {
-        const currentStyle = getStyleFromProvider(currentStyleProvider, theme);
+        const currentStyle = currentStyleProvider;
 
         return areStyleEquals([prevStyle, currentStyle]) && classes === classProvider.join(' ');
     });

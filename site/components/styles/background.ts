@@ -1,8 +1,8 @@
 import { css } from '../../lib/nifty';
 
-const backgroundStyle = css((t) => ({
-    background: t.bg,
+const backgroundStyle = css({
+    background: '$bg',
     transition: '.3s ease',
-}));
+});
 
 export default backgroundStyle;

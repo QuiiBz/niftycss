@@ -21,15 +21,13 @@ const nifty = Nifty.create(theme);
 ```
 
 ## Using a theme
-To use your freshly created theme, you will need to change your `style provider` to be a function, which accepts one argument: the current theme.
-
-Usually, you will name this argument `t` (which refers to the current theme), to keep it clear and simple.
+To use your freshly created theme, append the `$` symbol and write the key of the theme value you want to use. Using [TypeScript](/docs/typescript) provides auto-completion for the theme keys:
 
 ```typescript
-css(t => ({
-    backgroundColor: t.bg,
+css({
+    backgroundColor: '$bg',
     display: 'flex',
-}));
+});
 ```
 
 ## Switching to another theme

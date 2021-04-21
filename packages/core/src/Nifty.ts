@@ -43,7 +43,7 @@ export default class Nifty<T extends NiftyTheme, B extends Breakpoints> {
         const {
             exist,
             foundClasses,
-        } = findExistingStyle(styleProvider, classProvider, this._styles, this._theme);
+        } = findExistingStyle(styleProvider, classProvider, this._styles);
 
         // Return the found classes if the style already exist
         if (exist) return foundClasses;
@@ -51,7 +51,7 @@ export default class Nifty<T extends NiftyTheme, B extends Breakpoints> {
         const {
             className,
             classes,
-        } = getClasses(classProvider, styleProvider, this._theme);
+        } = getClasses(classProvider, styleProvider);
 
         this._styles.push({
             className,

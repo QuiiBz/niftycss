@@ -5,11 +5,11 @@ const docStyle = {
     container: css({
         ...marginY`2rem`,
     }, 'max-w-2xl mx-auto'),
-    title: css((t) => ({
-        color: t.textDark,
-    }), 'text-4xl font-bold'),
-    content: css((t) => ({
-        color: t.textLight,
+    title: css({
+        color: '$textDark',
+    }, 'text-4xl font-bold'),
+    content: css({
+        color: '$textLight',
         '*p': {
             ...marginY`1.5rem`,
         },
@@ -23,37 +23,37 @@ const docStyle = {
         },
         '*a': {
             textDecoration: 'underline',
-            textDecorationColor: t.accentDark,
+            textDecorationColor: '$accentDark',
             ':hover': {
-                color: t.textDark,
+                color: '$textDark',
             },
         },
         '*blockquote': {
-            borderLeft: `0.25rem solid ${t.accent}`,
+            borderLeft: '0.25rem solid $accent',
             paddingLeft: '1rem',
         },
         '*h2': {
-            color: t.textDark,
+            color: '$textDark',
             fontSize: '1.5rem',
             lineHeight: '2rem',
             fontWeight: 600,
             marginTop: '2.5rem',
         },
         '*h3': {
-            color: t.textDark,
+            color: '$textDark',
             fontSize: '1.25rem',
             lineHeight: '1.75rem',
             fontWeight: 500,
             marginTop: '2rem',
         },
         '*pre': {
-            background: t.textDark,
-            color: t.code,
+            background: '$textDark',
+            color: '$code',
             padding: '1.5rem',
             borderRadius: '1rem',
         },
         '*pre code': {
-            color: t.code,
+            color: '$code',
             '::before': {
                 content: 'none',
             },
@@ -61,6 +61,8 @@ const docStyle = {
                 content: 'none',
             },
         },
+        // TODO
+        // @ts-ignore
         '.hljs-comment, .hljs-quote': {
             color: '#57a64a',
         },
@@ -77,7 +79,7 @@ const docStyle = {
             color: '#d69d85',
         },
         '*code': {
-            color: t.accent,
+            color: '$accent',
             fontSize: '14px',
             '::before': {
                 content: '"`"',
@@ -86,7 +88,7 @@ const docStyle = {
                 content: '"`"',
             },
         },
-    }), 'text-md'),
+    }, 'text-md'),
 };
 
 export default docStyle;

@@ -1,10 +1,21 @@
 import * as CSS from 'csstype';
+import { HTMLTag, OptionalHTMLTag } from './html';
+
+// From https://developer.mozilla.org/en-US/docs/Web/CSS/::-webkit-scrollbar
+type WebkitScrollbar =
+    '::-webkit-scrollbar' |
+    '::-webkit-scrollbar-button' |
+    '::-webkit-scrollbar-thumb' |
+    '::-webkit-scrollbar-track' |
+    '::-webkit-scrollbar-track-piece' |
+    '::-webkit-scrollbar-corner' |
+    '::-webkit-resizer';
 
 // The type of all CSS keys
 export type CSSKeys = keyof CSS.Properties;
 
 // The type of all CSS values
-export type CSSValues = CSS.Properties[CSSKeys];
+export type CSSValues = Omit<CSS.Properties[CSSKeys], string & {}>;
 
 /**
  * A type representing additional CSS features. For example, the `important` field represent
@@ -18,14 +29,15 @@ export type Features = {
 /**
  * A type representing all available css properties.
  */
-export type CSSProperties<B extends Breakpoints> =
+export type CSSProperties<T extends NiftyTheme, B extends Breakpoints> =
     // Pseudo properties
     {
-        [P in CSS.Pseudos]?: CSSProperties<B>
+        [P in CSS.Pseudos | WebkitScrollbar]?: CSSProperties<T, B>
     } &
     // Normal properties
     {
         [P in CSSKeys]?:
+        `$${string & keyof T}` |
         // Key-value properties
         CSSValues |
         // Key-array of values properties
@@ -35,7 +47,11 @@ export type CSSProperties<B extends Breakpoints> =
     } &
     // Directives properties
     {
-        [P in keyof B]?: CSSProperties<B>
+        [P in keyof B]?: CSSProperties<T, B>
+    } &
+    // HTML Tags selectors
+    {
+        [P in `*${HTMLTag}${OptionalHTMLTag}`]?: CSSProperties<T, B>
     };
 
 // A type representing the name of the directives.
@@ -44,9 +60,9 @@ export type DirectiveName = CSS.Pseudos | string;
 /**
  * A type representing a directive with its name and the css properties.
  */
-export type Directive<B extends Breakpoints> = {
+export type Directive<T extends NiftyTheme, B extends Breakpoints> = {
     name: DirectiveName,
-    properties: CSSProperties<B>,
+    properties: CSSProperties<T, B>,
 };
 
 /**
@@ -77,9 +93,7 @@ export type ClassProvider = string[];
  * A type representing a function which provides css properties with a callback or an
  * object of css properties.
  */
-export type StyleProvider<T extends NiftyTheme, B extends Breakpoints> =
-    ((theme: T) => CSSProperties<B>) |
-    CSSProperties<B>;
+export type StyleProvider<T extends NiftyTheme, B extends Breakpoints> = CSSProperties<T, B>;
 
 /**
  * A type representing a function with provides a new theme given the old theme, or the new
