@@ -2,7 +2,6 @@ import { css } from '../../lib/nifty';
 
 const backgroundStyle = css({
     background: '@bg',
-    transition: '.3s ease',
-});
+}, 'transition duration-300 ease-out');
 
 export default backgroundStyle;
