@@ -42,8 +42,8 @@ This will allow getting auto-completion on the theme of style provider:
 ```typescript
 css({
     // Shows autocompletion with
-    color: '$te'
-    //      $textLight
-    //      $textDark
+    color: '@te'
+    //      @textLight
+    //      @textDark
 });
 ```

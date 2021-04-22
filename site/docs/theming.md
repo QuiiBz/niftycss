@@ -21,11 +21,11 @@ const nifty = Nifty.create(theme);
 ```
 
 ## Using a theme
-To use your freshly created theme, append the `$` symbol and write the key of the theme value you want to use. Using [TypeScript](/docs/typescript) provides auto-completion for the theme keys:
+To use your freshly created theme, append the `@` symbol and write the key of the theme value you want to use. Using [TypeScript](/docs/typescript) provides auto-completion for the theme keys:
 
 ```typescript
 css({
-    backgroundColor: '$bg',
+    backgroundColor: '@bg',
     display: 'flex',
 });
 ```
