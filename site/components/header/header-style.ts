@@ -5,7 +5,7 @@ import containerStyle from '../styles/container';
 const headerStyle = {
     header: css({
         ...flexRow,
-        borderColor: '$border',
+        borderColor: '@border',
         justifyContent: 'space-between',
         alignItems: 'center',
     }, containerStyle, 'border-b py-4'),
@@ -14,16 +14,16 @@ const headerStyle = {
         alignItems: 'center',
     }, 'space-x-5'),
     button: css({
-        color: '$textLight',
+        color: '@textLight',
         borderColor: 'transparent',
         ':hover': {
-            color: '$textDark',
-            borderColor: '$accent',
+            color: '@textDark',
+            borderColor: '@accent',
         },
     }, 'border-b-2'),
     buttonSelected: css({
-        color: '$textDark',
-        borderColor: '$accent',
+        color: '@textDark',
+        borderColor: '@accent',
     }),
 };
 

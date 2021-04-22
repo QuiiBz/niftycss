@@ -7,11 +7,11 @@ const codeStyle = {
         alignItems: 'center',
     }),
     title: css({
-        color: '$textLight',
+        color: '@textLight',
     }, 'mb-4 font-semibold text-md'),
     code: css({
         background: {
-            value: '$textDark',
+            value: '@textDark',
             important: true,
         },
         padding: {
@@ -23,7 +23,7 @@ const codeStyle = {
             width: '0.5rem',
         },
         '::-webkit-scrollbar-thumb': {
-            background: '$accent',
+            background: '@accent',
             borderRadius: '1rem',
         },
     }, 'rounded-2xl w-96'),

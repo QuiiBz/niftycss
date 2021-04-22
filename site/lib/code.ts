@@ -16,12 +16,12 @@ const CODE_SNIPPETS: CodeSnippet[] = [
 const style = css({
     ...flexCenter,
     ...paddingX\`1rem\`,
-    color: '$text',
+    color: '@text',
     ':hover': {
-        color: '$accent',
+        color: '@accent',
     },
     $sm: {
-        fontSize: '$fontSmall',
+        fontSize: '@fontSmall',
     },
 });`,
         language: 'javascript',
