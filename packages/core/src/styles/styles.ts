@@ -47,7 +47,7 @@ const buildCssProperties = <T extends NiftyTheme, B extends Breakpoints>(
                 features.push(propertyValue as Features);
             } else {
                 features.push({
-                    value: propertyValue as CSSValues,
+                    value: propertyValue as unknown as CSSValues,
                     important: false,
                 });
             }
@@ -106,7 +106,7 @@ const buildRules = <T extends NiftyTheme, B extends Breakpoints>(
             css.push(`.${className} ${context} {\n${cssProperties}}\n`);
         } else if (context.startsWith('*')) {
             css.push(`.${className} ${context.replace('*', '')} {\n${cssProperties}}\n`);
-        } else if (DEV) css.push(`.${className}${context} {\n${cssProperties}}\n`);
+        } else if (DEV) css.push(`.${className}${context.replace('*', '')} {\n${cssProperties}}\n`);
         else css.push(`.${className}${context}{${cssProperties}}`);
     } else if (DEV) css.push(`.${className} {\n${cssProperties}}\n`);
     else css.push(`.${className}{${cssProperties}}`);
