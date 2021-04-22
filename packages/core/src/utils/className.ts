@@ -12,7 +12,7 @@ import { CLASS_PREFIX } from './constants';
  * @param theme - The current theme
  * @returns The class name for this style provider
  */
-const getClassName = <T extends NiftyTheme, B extends Breakpoints>(
+export const getClassName = <T extends NiftyTheme, B extends Breakpoints>(
     styleProvider: StyleProvider<T, B>,
 ): string => {
     const style = styleProvider;

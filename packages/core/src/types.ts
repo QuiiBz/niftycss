@@ -37,7 +37,8 @@ export type CSSProperties<T extends NiftyTheme, B extends Breakpoints> =
     // Normal properties
     {
         [P in CSSKeys]?:
-        `$${string & keyof T}` |
+        // Theme properties
+        `@${string & keyof T}` |
         // Key-value properties
         CSSValues |
         // Key-array of values properties

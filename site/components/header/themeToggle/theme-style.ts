@@ -7,15 +7,15 @@ const themeStyle = {
         },
     }),
     white: css({
-        stroke: '$textLight',
+        stroke: '@textLight',
         ':hover': {
-            stroke: '$textDark',
+            stroke: '@textDark',
         },
     }, 'w-5 h-5'),
     dark: css({
-        fill: '$textLight',
+        fill: '@textLight',
         ':hover': {
-            fill: '$textDark',
+            fill: '@textDark',
         },
     }, 'w-5 h-5'),
 };

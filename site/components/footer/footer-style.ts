@@ -4,12 +4,12 @@ import containerStyle from '../styles/container';
 
 const footerStyle = {
     footer: css({
-        borderColor: '$border',
+        borderColor: '@border',
         ...paddingY`2rem`,
         ...flexCenter,
     }, containerStyle, 'border-t'),
     text: css({
-        color: '$textLight',
+        color: '@textLight',
     }),
 };
 

@@ -6,10 +6,10 @@ const docStyle = {
         ...marginY`2rem`,
     }, 'max-w-2xl mx-auto'),
     title: css({
-        color: '$textDark',
+        color: '@textDark',
     }, 'text-4xl font-bold'),
     content: css({
-        color: '$textLight',
+        color: '@textLight',
         '*p': {
             ...marginY`1.5rem`,
         },
@@ -23,37 +23,37 @@ const docStyle = {
         },
         '*a': {
             textDecoration: 'underline',
-            textDecorationColor: '$accentDark',
+            textDecorationColor: '@accentDark',
             ':hover': {
-                color: '$textDark',
+                color: '@textDark',
             },
         },
         '*blockquote': {
-            borderLeft: '0.25rem solid $accent',
+            borderLeft: '0.25rem solid @accent',
             paddingLeft: '1rem',
         },
         '*h2': {
-            color: '$textDark',
+            color: '@textDark',
             fontSize: '1.5rem',
             lineHeight: '2rem',
             fontWeight: 600,
             marginTop: '2.5rem',
         },
         '*h3': {
-            color: '$textDark',
+            color: '@textDark',
             fontSize: '1.25rem',
             lineHeight: '1.75rem',
             fontWeight: 500,
             marginTop: '2rem',
         },
         '*pre': {
-            background: '$textDark',
-            color: '$code',
+            background: '@textDark',
+            color: '@code',
             padding: '1.5rem',
             borderRadius: '1rem',
         },
         '*pre code': {
-            color: '$code',
+            color: '@code',
             '::before': {
                 content: 'none',
             },
@@ -79,7 +79,7 @@ const docStyle = {
             color: '#d69d85',
         },
         '*code': {
-            color: '$accent',
+            color: '@accent',
             fontSize: '14px',
             '::before': {
                 content: '"`"',

@@ -80,7 +80,7 @@ const buildRules = <T extends NiftyTheme, B extends Breakpoints>(
         .keys(theme)
         .sort((a, b) => (a.length > b.length ? -1 : 1))
         .forEach((themeKey) => {
-            const themeKeyRegex = `\\$${themeKey}`;
+            const themeKeyRegex = `\\@${themeKey}`;
             const regex = new RegExp(themeKeyRegex, 'g');
 
             cssProperties = cssProperties.replace(regex, theme[themeKey]);
