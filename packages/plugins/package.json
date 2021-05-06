@@ -1,0 +1,16 @@
+{
+  "name": "@niftycss/plugins",
+  "version": "0.0.5",
+  "description": "Package to create plugins for NiftyCSS",
+  "main": "dist/niftycss-plugins.cjs.js",
+  "module": "dist/niftycss-plugins.esm.js",
+  "types": "dist/niftycss-plugins.cjs.d.ts",
+  "repository": "https://github.com/QuiiBz/niftycss",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@niftycss/core": "^0.0.5"
+  }
+}

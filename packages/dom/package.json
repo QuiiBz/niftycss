@@ -1,0 +1,16 @@
+{
+  "name": "@niftycss/dom",
+  "version": "0.0.5",
+  "description": "DOM utils for NiftyCSS",
+  "main": "dist/niftycss-dom.cjs.js",
+  "module": "dist/niftycss-dom.esm.js",
+  "types": "dist/niftycss-dom.cjs.d.ts",
+  "repository": "https://github.com/QuiiBz/niftycss",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@niftycss/core": "^0.0.5"
+  }
+}

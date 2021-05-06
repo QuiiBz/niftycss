@@ -1,0 +1,19 @@
+.markdown p,
+.markdown ul,
+.markdown ol,
+.markdown blockquote {
+  @apply my-6;
+}
+
+.markdown h2 {
+  @apply text-2xl mt-12 mb-4 font-semibold leading-snug;
+}
+
+.markdown h3 {
+  @apply text-xl mt-8 mb-4 font-semibold leading-snug;
+}
+
+.markdown a {
+  @apply underline;
+  text-decoration-color: lightblue;
+}

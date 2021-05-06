@@ -1,0 +1,20 @@
+{
+  "name": "@niftycss/plugin-autoprefixer",
+  "version": "0.0.5",
+  "description": "Autoprefixer for NiftyCSS",
+  "main": "dist/niftycss-plugin-autoprefixer.cjs.js",
+  "module": "dist/niftycss-plugin-autoprefixer.esm.js",
+  "types": "dist/niftycss-plugin-autoprefixer.cjs.d.ts",
+  "repository": "https://github.com/QuiiBz/niftycss",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@niftycss/plugins": "^0.0.5",
+    "inline-style-prefixer": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/inline-style-prefixer": "^5.0.0"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "@niftycss/plugin-important",
+  "version": "0.0.5",
+  "description": "!important for NiftyCSS",
+  "main": "dist/niftycss-plugin-important.cjs.js",
+  "module": "dist/niftycss-plugin-important.esm.js",
+  "types": "dist/niftycss-plugin-important.cjs.d.ts",
+  "repository": "https://github.com/QuiiBz/niftycss",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@niftycss/plugins": "^0.0.5"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "name": "niftycss",
+  "version": "0.0.5",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "examples/*",
+    "site"
+  ],
+  "scripts": {
+    "build": "preconstruct build",
+    "watch": "preconstruct watch",
+    "generate-css-utilities": "node scripts/generate-css-utilities",
+    "test": "yarn test:lint && yarn test:specs",
+    "test:specs": "yarn jest --verbose",
+    "test:lint": "eslint . --ext .ts,.tsx",
+    "postinstall": "preconstruct dev"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.15",
+    "@babel/preset-env": "^7.13.15",
+    "@babel/preset-typescript": "^7.13.0",
+    "@preconstruct/cli": "^2.0.7",
+    "@types/jest": "^26.0.22",
+    "@typescript-eslint/eslint-plugin": "^4.4.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "eslint": "^7.23.0",
+    "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.3",
+    "eslint-plugin-react-hooks": "^4.0.8",
+    "extract-comments": "^1.1.0",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.5.5",
+    "typescript": "^4.2.4"
+  },
+  "preconstruct": {
+    "packages": [
+      "packages/core",
+      "packages/css",
+      "packages/dom",
+      "packages/react",
+      "packages/plugins",
+      "packages/plugin-autoprefixer",
+      "packages/plugin-important"
+    ]
+  },
+  "dependencies": {
+    "@babel/preset-react": "^7.13.13"
+  }
+}

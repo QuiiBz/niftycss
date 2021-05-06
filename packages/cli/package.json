@@ -1,0 +1,17 @@
+{
+  "name": "@niftycss/cli",
+  "version": "0.0.5",
+  "description": "CLI for nifty",
+  "main": "src/index.js",
+  "repository": "https://github.com/QuiiBz/niftycss",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "electron": "^12.0.2"
+  }
+}

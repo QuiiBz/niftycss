@@ -1,0 +1,23 @@
+{
+  "extends": [
+    "airbnb-typescript"
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "@typescript-eslint/indent": [2, 4],
+    "react/jsx-indent": [2, 4],
+    "react/jsx-indent-props": [2, 4],
+    "react/react-in-jsx-scope": 0,
+    "react/require-default-props": 0,
+    "no-underscore-dangle": [2, {
+      "allowAfterThis": true
+    }],
+    "@typescript-eslint/lines-between-class-members": 0,
+    "no-console": 0,
+    "jsx-a11y/anchor-is-valid": 0,
+    "import/no-cycle": 0,
+    "import/prefer-default-export": 0
+  }
+}
