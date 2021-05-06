@@ -11,6 +11,7 @@ interface Props {
     children: ReactNode;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Layout: FC<Props> = ({ title, docs, children }: Props): ReactElement => (
     <>
         <Meta title={title} />

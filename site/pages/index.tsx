@@ -11,6 +11,7 @@ type Props = {
     types: string;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Index: FC<Props> = ({ types }: Props): ReactElement => (
     <Layout>
         <Grid>

@@ -25,7 +25,8 @@ export default class MyDocument extends Document {
             styles: (
                 <>
                     { initialProps.styles }
-                    <style id="nifty-styles" dangerouslySetInnerHTML={{ __html: getSSR() }} key={Date.now()} />
+                    {/* eslint-disable-next-line react/no-danger */}
+                    <style id="nifty-styles" dangerouslySetInnerHTML={{ __html: getSSR() }} />
                 </>
             ),
         };
