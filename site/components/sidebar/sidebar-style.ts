@@ -27,6 +27,9 @@ const sidebarStyle = {
     }), 'border-r pb-10'),
     category: css({
         ...flexColumn,
+        ':last-child': {
+            paddingBottom: '120px',
+        },
     }),
     title: css({
         color: '@gray600',
