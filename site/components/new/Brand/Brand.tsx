@@ -8,9 +8,10 @@ import CopyCodeButton from '../CopyCodeButton/CopyCodeButton';
 
 const Container = styled('div', {
     ...flexColumn,
-    ...marginY`80px`,
+    ...marginY`120px`,
     gridArea: '1 / 2 / 2 / 3',
     $lg: {
+        ...marginY`80px`,
         justifyContent: 'flex-end',
         marginTop: '0',
         marginBottom: '30px',

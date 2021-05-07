@@ -1,4 +1,4 @@
-import { flexRow, paddingY } from '@niftycss/css';
+import { flexRow, paddingY, paddingX } from '@niftycss/css';
 import {
     FC, ReactElement, useEffect, useState,
 } from 'react';
@@ -17,14 +17,19 @@ import DocType from '../../../types/docs';
 const HeaderContainer = styled('div', {
     ...flexRow,
     ...paddingY`12px`,
+    ...paddingX`20px`,
     alignItems: 'center',
     justifyContent: 'space-between',
     height: HEADER_HEIGHT,
     borderBottom: '1px solid @gray400',
     position: 'fixed',
     top: 0,
-    width: 'max(80vw, 340px)',
+    left: 0,
+    backdropFilter: 'blur(8px)',
+    zIndex: 9,
+    width: '100vw',
     $md: {
+        ...paddingX`0`,
         position: 'initial',
         width: 'initial',
     },

@@ -19,7 +19,7 @@ interface Props {
 
 const style = css({
     ...flexRow,
-    marginTop: HEADER_HEIGHT,
+    paddingTop: HEADER_HEIGHT,
     $md: {
         marginTop: 0,
     },
