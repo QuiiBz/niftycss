@@ -1,5 +1,5 @@
 import { box } from '@niftycss/css';
-import { styled } from '../../../lib/nifty';
+import { styled } from '../../lib/nifty';
 
 type Props = {
     responsiveOnly?: boolean;

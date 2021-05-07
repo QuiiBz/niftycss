@@ -1,10 +1,10 @@
 import { FC, ReactElement } from 'react';
 import fs from 'fs';
 import Layout from '../components/Layout';
-import Grid from '../components/new/Grid/Grid';
-import Brand from '../components/new/Brand/Brand';
-import Feature from '../components/new/Feature/Feature';
-import CodePreview from '../components/new/CodePreview/CodePreview';
+import Grid from '../components/Grid/Grid';
+import Brand from '../components/Brand/Brand';
+import Feature from '../components/Feature/Feature';
+import CodePreview from '../components/CodePreview/CodePreview';
 import FEATURES from '../lib/features';
 import DocType from '../types/docs';
 import { getAllDocs } from '../lib/api';

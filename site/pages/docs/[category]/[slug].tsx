@@ -7,7 +7,7 @@ import Layout from '../../../components/Layout';
 import { getAllDocs, getDocsBySlug } from '../../../lib/api';
 import markdownToHtml from '../../../lib/markdownToHtml';
 import DocType from '../../../types/docs';
-import Sidebar from '../../../components/sidebar/sidebar';
+import Sidebar from '../../../components/Sidebar/Sidebar';
 import Container from '../../../components/styles/Container';
 import { css } from '../../../lib/nifty';
 import { HEADER_HEIGHT } from '../../../lib/constants';
@@ -21,7 +21,7 @@ const style = css({
     ...flexRow,
     paddingTop: HEADER_HEIGHT,
     $md: {
-        marginTop: 0,
+        paddingTop: 0,
     },
 });
 

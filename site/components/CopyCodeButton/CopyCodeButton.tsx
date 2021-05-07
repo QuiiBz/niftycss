@@ -5,7 +5,7 @@ import {
 import {
     FC, MouseEvent, ReactElement, useState,
 } from 'react';
-import { styled } from '../../../lib/nifty';
+import { styled } from '../../lib/nifty';
 
 type ButtonProps = {
     iconSide: 'left' | 'right';

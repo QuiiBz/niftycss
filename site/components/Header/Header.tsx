@@ -4,15 +4,15 @@ import {
 } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { styled } from '../../../lib/nifty';
+import { styled } from '../../lib/nifty';
 import HeaderButton from './HeaderButton';
 import HeaderSearch from './HeaderSearch';
-import Container from '../../styles/Container';
-import { HEADER_HEIGHT } from '../../../lib/constants';
+import Container from '../styles/Container';
+import { HEADER_HEIGHT } from '../../lib/constants';
 import ThemeToggle from './ThemeToggle';
 import HeaderToggle from './HeaderToggle';
-import Sidebar from '../../sidebar/sidebar';
-import DocType from '../../../types/docs';
+import Sidebar from '../Sidebar/Sidebar';
+import DocType from '../../types/docs';
 
 const HeaderContainer = styled('div', {
     ...flexRow,

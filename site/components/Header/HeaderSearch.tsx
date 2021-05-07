@@ -1,6 +1,6 @@
 import { box, flexRow, paddingX } from '@niftycss/css';
 import { FC, ReactElement } from 'react';
-import { css, styled } from '../../../lib/nifty';
+import { css, styled } from '../../lib/nifty';
 
 const Search = styled('div', {
     ...flexRow,

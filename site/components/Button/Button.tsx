@@ -4,7 +4,7 @@ import {
 } from '@niftycss/css';
 import Link from 'next/link';
 import { FC, ReactElement, ReactNode } from 'react';
-import { css } from '../../../lib/nifty';
+import { css } from '../../lib/nifty';
 
 type ButtonProps = {
     iconSide: 'left' | 'right';

@@ -1,8 +1,60 @@
 import { FC, ReactElement } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { flexColumn, paddingX } from '@niftycss/css';
 import DocType from '../../types/docs';
-import sidebarStyle from './sidebar-style';
+import { HEADER_HEIGHT } from '../../lib/constants';
+import { css, styled } from '../../lib/nifty';
+
+type SidebarProps = {
+    responsive: boolean;
+    toggled?: boolean;
+};
+
+const Container = styled<SidebarProps>('ul', ({ responsive, toggled = false }) => ({
+    ...flexColumn,
+    ...paddingX`2rem`,
+    borderColor: '@gray400',
+    minWidth: '17rem',
+    display: responsive ? 'block' : 'none',
+    position: responsive ? 'fixed' : 'sticky',
+    left: toggled ? 0 : '-100%',
+    top: responsive ? HEADER_HEIGHT : 0,
+    overflowY: 'scroll',
+    height: '100vh',
+    zIndex: 9,
+    background: '@bg',
+    $lg: {
+        display: responsive ? 'none' : 'block',
+    },
+}), 'border-r pb-10');
+
+const Category = styled('li', {
+    ...flexColumn,
+    ':last-child': {
+        paddingBottom: '120px',
+    },
+});
+
+const Title = styled('h2', {
+    color: '@gray600',
+}, 'uppercase font-semibold text-sm lg:text-xs mt-10');
+
+const Docs = styled('ul', {
+    ...flexColumn,
+});
+
+const doc = css({
+    color: '@gray500',
+    cursor: 'pointer',
+    ':hover': {
+        color: '@gray600',
+    },
+}, 'transition mt-4 text-md lg:text-sm');
+
+const docSelected = css({
+    color: '@primary600!',
+});
 
 type Props = {
     docs: DocType[];
@@ -30,12 +82,12 @@ const Sidebar: FC<Props> = ({ docs, responsive, toggled = false }: Props): React
     const routerSlug = router.query.slug;
 
     return (
-        <ul className={sidebarStyle.container({ responsive, toggled })}>
+        <Container responsive={responsive} toggled={toggled}>
             {
                 sidebar.map(({ category, docs: categoryDocs }) => (
-                    <li className={sidebarStyle.category} key={category}>
-                        <p className={sidebarStyle.title}>{ category.replace('-', ' ') }</p>
-                        <ul className={sidebarStyle.docs}>
+                    <Category key={category}>
+                        <Title>{ category.replace('-', ' ') }</Title>
+                        <Docs>
                             {
                                 categoryDocs
                                     .sort((a, b) => (a.order > b.order ? 1 : -1))
@@ -44,17 +96,17 @@ const Sidebar: FC<Props> = ({ docs, responsive, toggled = false }: Props): React
                                             key={slug}
                                             href={`/docs/${category}/${slug}`}
                                         >
-                                            <li className={`${sidebarStyle.doc} ${slug === routerSlug && sidebarStyle.docSelected}`}>
+                                            <li className={`${doc} ${slug === routerSlug && docSelected}`}>
                                                 { title }
                                             </li>
                                         </Link>
                                     ))
                             }
-                        </ul>
-                    </li>
+                        </Docs>
+                    </Category>
                 ))
             }
-        </ul>
+        </Container>
     );
 };
 

@@ -3,7 +3,7 @@ import {
 } from 'react';
 import {
     darkTheme, setTheme, whiteTheme, getTheme,
-} from '../../../lib/nifty';
+} from '../../lib/nifty';
 import IconButton from '../Button/IconButton';
 
 const ThemeToggle: FC = (): ReactElement => {

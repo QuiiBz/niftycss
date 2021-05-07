@@ -1,6 +1,6 @@
 import { box, flexColumn, paddingX } from '@niftycss/css';
 import { FC, ReactElement } from 'react';
-import { styled } from '../../../lib/nifty';
+import { styled } from '../../lib/nifty';
 import Button from '../Button/Button';
 
 const Container = styled('div', {

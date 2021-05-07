@@ -7,8 +7,8 @@ import {
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
 import typescript from 'react-syntax-highlighter/dist/cjs/languages/hljs/typescript';
 import vs from 'react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-dark';
-import TABS from '../../../lib/code';
-import { css, styled } from '../../../lib/nifty';
+import TABS from '../../lib/code';
+import { css, styled } from '../../lib/nifty';
 
 SyntaxHighlighter.registerLanguage('typescript', typescript);
 

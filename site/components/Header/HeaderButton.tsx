@@ -1,6 +1,6 @@
 import { FC, ReactElement } from 'react';
 import Link from 'next/link';
-import { css } from '../../../lib/nifty';
+import { css } from '../../lib/nifty';
 
 type StyledProps = {
     selected: boolean;

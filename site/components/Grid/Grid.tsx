@@ -1,6 +1,6 @@
 import { calc, flexColumn, paddingX } from '@niftycss/css';
-import { HEADER_HEIGHT } from '../../../lib/constants';
-import { styled } from '../../../lib/nifty';
+import { HEADER_HEIGHT } from '../../lib/constants';
+import { styled } from '../../lib/nifty';
 
 const Grid = styled('div', {
     ...flexColumn,

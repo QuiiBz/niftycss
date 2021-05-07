@@ -2,7 +2,7 @@ import {
     calc, flexColumn, flexRow, marginY,
 } from '@niftycss/css';
 import { FC, ReactElement } from 'react';
-import { css, styled } from '../../../lib/nifty';
+import { css, styled } from '../../lib/nifty';
 import Button from '../Button/Button';
 import CopyCodeButton from '../CopyCodeButton/CopyCodeButton';
 

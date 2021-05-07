@@ -1,7 +1,7 @@
 import { FC, ReactElement, ReactNode } from 'react';
 import Footer from './Footer/Footer';
 import Meta from './meta';
-import Header from './new/Header/Header';
+import Header from './Header/Header';
 import DocType from '../types/docs';
 import Background from './Background';
 
