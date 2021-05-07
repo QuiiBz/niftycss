@@ -18,6 +18,7 @@ const Container = styled('div', {
     borderRadius: '16px',
     gridArea: '1 / 3 / 2 / 5',
     width: '100%',
+    maxWidth: '500px',
     height: '374px',
     position: 'relative',
     marginBottom: '80px',
