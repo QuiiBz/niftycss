@@ -4,11 +4,13 @@ import { useRouter } from 'next/router';
 import DocType from '../../types/docs';
 import sidebarStyle from './sidebar-style';
 
-interface Props {
+type Props = {
     docs: DocType[];
-}
+    responsive: boolean;
+    toggled?: boolean;
+};
 
-const Sidebar: FC<Props> = ({ docs }: Props): ReactElement => {
+const Sidebar: FC<Props> = ({ docs, responsive, toggled = false }: Props): ReactElement => {
     const categories = [
         'getting-started',
         'features',
@@ -28,7 +30,7 @@ const Sidebar: FC<Props> = ({ docs }: Props): ReactElement => {
     const routerSlug = router.query.slug;
 
     return (
-        <ul className={sidebarStyle.container}>
+        <ul className={sidebarStyle.container({ responsive, toggled })}>
             {
                 sidebar.map(({ category, docs: categoryDocs }) => (
                     <li className={sidebarStyle.category} key={category}>

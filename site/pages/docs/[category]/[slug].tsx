@@ -10,6 +10,7 @@ import DocType from '../../../types/docs';
 import Sidebar from '../../../components/sidebar/sidebar';
 import Container from '../../../components/styles/Container';
 import { css } from '../../../lib/nifty';
+import { HEADER_HEIGHT } from '../../../lib/constants';
 
 interface Props {
     docs: DocType[];
@@ -18,9 +19,9 @@ interface Props {
 
 const style = css({
     ...flexRow,
-    paddingTop: '57px',
-    $lg: {
-        paddingTop: 0,
+    paddingTop: HEADER_HEIGHT,
+    $md: {
+        marginTop: 0,
     },
 });
 
@@ -37,7 +38,7 @@ const Doc: FC<Props> = ({ docs, doc }: Props): ReactElement => {
             ) : (
                 <Container>
                     <div className={style}>
-                        <Sidebar docs={docs} />
+                        <Sidebar docs={docs} responsive={false} />
                         <DocContent doc={doc} />
                     </div>
                 </Container>

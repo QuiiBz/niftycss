@@ -6,7 +6,11 @@ import Button from '../Button/Button';
 const Container = styled('div', {
     ...flexColumn,
     ...paddingX`20px`,
-    position: 'relative',
+    marginBottom: '80px',
+    $lg: {
+        position: 'relative',
+        marginBottom: '0',
+    },
     '*svg': {
         ...box`40px`,
         color: '@primary500',
@@ -15,8 +19,11 @@ const Container = styled('div', {
 });
 
 const Content = styled('div', {
-    position: 'absolute',
-    bottom: '80px',
+    maxWidth: '340px',
+    $lg: {
+        position: 'absolute',
+        bottom: '80px',
+    },
 });
 
 const Title = styled('h2', {
@@ -30,7 +37,9 @@ const Description = styled('p', {
     fontSize: '16px',
     color: '@gray500',
     marginBottom: '20px',
-    height: '93px',
+    $lg: {
+        height: '93px',
+    },
 });
 
 type Props = {

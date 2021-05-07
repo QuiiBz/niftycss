@@ -1,4 +1,6 @@
-import { box, calc, marginY } from '@niftycss/css';
+import {
+    box, calc, marginX, marginY,
+} from '@niftycss/css';
 import DocType from '../../types/docs';
 import { styled } from '../../lib/nifty';
 
@@ -8,7 +10,11 @@ interface Props {
 
 const Container = styled('div', {
     ...marginY`2rem`,
-}, 'max-w-2xl mx-auto lg:ml-36');
+    ...marginX`auto`,
+    $lg: {
+        marginLeft: '144px',
+    },
+}, 'max-w-2xl');
 
 const Title = styled('h1', {
     color: '@gray600',

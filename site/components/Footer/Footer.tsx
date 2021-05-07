@@ -5,6 +5,7 @@ import Container from '../styles/Container';
 
 const Text = styled('p', {
     color: '@gray500',
+    textAlign: 'center',
 });
 
 const FooterContainer = styled('footer', {

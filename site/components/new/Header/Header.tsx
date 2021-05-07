@@ -1,5 +1,7 @@
-import { flexRow, paddingY } from '@niftycss/css';
-import { FC, ReactElement } from 'react';
+import { flexRow, paddingY, paddingX } from '@niftycss/css';
+import {
+    FC, ReactElement, useEffect, useState,
+} from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { styled } from '../../../lib/nifty';
@@ -7,15 +9,30 @@ import HeaderButton from './HeaderButton';
 import HeaderSearch from './HeaderSearch';
 import Container from '../../styles/Container';
 import { HEADER_HEIGHT } from '../../../lib/constants';
-import ThemeToggle from '../Button/ThemeToggle';
+import ThemeToggle from './ThemeToggle';
+import HeaderToggle from './HeaderToggle';
+import Sidebar from '../../sidebar/sidebar';
+import DocType from '../../../types/docs';
 
 const HeaderContainer = styled('div', {
     ...flexRow,
     ...paddingY`12px`,
+    ...paddingX`20px`,
     alignItems: 'center',
     justifyContent: 'space-between',
     height: HEADER_HEIGHT,
     borderBottom: '1px solid @gray400',
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    backdropFilter: 'blur(8px)',
+    zIndex: 9,
+    width: '100vw',
+    $md: {
+        ...paddingX`0`,
+        position: 'initial',
+        width: 'initial',
+    },
 });
 
 const Group = styled('div', {
@@ -23,8 +40,25 @@ const Group = styled('div', {
     alignItems: 'center',
 });
 
-const Header: FC = (): ReactElement => {
-    const { asPath } = useRouter();
+type Props = {
+    docs: DocType[];
+};
+
+const Header: FC<Props> = ({ docs }: Props): ReactElement => {
+    const [headerToggled, setHeaderToggled] = useState(false);
+    const { asPath, events } = useRouter();
+
+    const toggleHeader = () => setHeaderToggled(!headerToggled);
+
+    useEffect(() => {
+        const closeHeader = () => setHeaderToggled(false);
+
+        events.on('routeChangeComplete', closeHeader);
+
+        return () => {
+            events.off('routeChangeComplete', closeHeader);
+        };
+    }, []);
 
     return (
         <Container>
@@ -43,6 +77,7 @@ const Header: FC = (): ReactElement => {
                             </svg>
                         </a>
                     </Link>
+                    <HeaderToggle onClick={toggleHeader} />
                     <HeaderSearch />
                 </Group>
                 <Group>
@@ -55,6 +90,7 @@ const Header: FC = (): ReactElement => {
                     <ThemeToggle />
                 </Group>
             </HeaderContainer>
+            <Sidebar docs={docs} responsive toggled={headerToggled} />
         </Container>
     );
 };
