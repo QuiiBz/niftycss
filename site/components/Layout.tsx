@@ -5,18 +5,17 @@ import Header from './new/Header/Header';
 import DocType from '../types/docs';
 import Background from './Background';
 
-interface Props {
+type Props = {
     title?: string;
-    docs?: DocType[];
+    docs: DocType[];
     children: ReactNode;
-}
+};
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Layout: FC<Props> = ({ title, docs, children }: Props): ReactElement => (
     <>
         <Meta title={title} />
         <Background>
-            <Header />
+            <Header docs={docs} />
             <main>{children}</main>
             <Footer />
         </Background>

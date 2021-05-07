@@ -1,6 +1,6 @@
 import { box, flexRow, paddingX } from '@niftycss/css';
 import { FC, ReactElement } from 'react';
-import { styled } from '../../../lib/nifty';
+import { css, styled } from '../../../lib/nifty';
 
 const Search = styled('div', {
     ...flexRow,
@@ -21,6 +21,13 @@ const Search = styled('div', {
     },
 }, 'transition');
 
+const hideResponsive = css({
+    display: 'none',
+    $md: {
+        display: 'initial',
+    },
+});
+
 const Keys = styled('span', {
     ...paddingX`4px`,
     color: '@gray500',
@@ -28,14 +35,14 @@ const Keys = styled('span', {
     borderRadius: '4px',
     fontSize: '14px',
     marginLeft: '10px',
-}, 'transition');
+}, hideResponsive, 'transition');
 
 const HeaderSearch: FC = (): ReactElement => (
     <Search>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
-        Search anything...
+        <span className={hideResponsive}>Search anything...</span>
         <Keys>⌘K</Keys>
     </Search>
 );

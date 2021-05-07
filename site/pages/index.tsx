@@ -6,14 +6,17 @@ import Brand from '../components/new/Brand/Brand';
 import Feature from '../components/new/Feature/Feature';
 import CodePreview from '../components/new/CodePreview/CodePreview';
 import FEATURES from '../lib/features';
+import DocType from '../types/docs';
+import { getAllDocs } from '../lib/api';
 
 type Props = {
+    docs: DocType[];
     types: string;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Index: FC<Props> = ({ types }: Props): ReactElement => (
-    <Layout>
+const Index: FC<Props> = ({ docs, types }: Props): ReactElement => (
+    <Layout docs={docs}>
         <Grid>
             <Brand />
             <CodePreview />
@@ -36,6 +39,14 @@ const Index: FC<Props> = ({ types }: Props): ReactElement => (
 );
 
 export async function getStaticProps() {
+    const docs = getAllDocs([
+        'title',
+        'slug',
+        'category',
+        'order',
+        'content',
+    ]);
+
     // Get the content of the types, remove the export and import statements and
     // send them as static props to the page.
     const types = [
@@ -55,7 +66,7 @@ export async function getStaticProps() {
         .replace(/\${/g, '\\${');
 
     return {
-        props: { types },
+        props: { docs, types },
     };
 }
 

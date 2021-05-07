@@ -9,8 +9,12 @@ type StyledProps = {
 const link = css<StyledProps>(({ selected }) => ({
     color: selected ? '@primary600!' : '@gray500',
     marginLeft: '20px',
+    display: 'none',
     ':hover': {
         color: '@gray600',
+    },
+    $md: {
+        display: 'block',
     },
 }), 'transition');
 
