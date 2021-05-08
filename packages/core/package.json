@@ -1,7 +1,7 @@
 {
   "name": "@niftycss/core",
   "version": "0.0.5",
-  "description": "A CSS-in-JS, framework-agnostic library to rapidly create reusable designs",
+  "description": "A CSS-in-TS, framework-agnostic library to rapidly create reusable designs",
   "main": "dist/niftycss-core.cjs.js",
   "module": "dist/niftycss-core.esm.js",
   "types": "dist/niftycss-core.cjs.d.ts",

@@ -1,15 +1,15 @@
 ---
 title: 'Browser support'
-order: 5
+order: 3
 ---
 
-We use the [inline-style-prefixer](https://inline-style-prefixer.js.org/) library to automatically add vendor prefixes to your rules. Huge thanks to [Robin Weser](https://twitter.com/robinweser) for creating and maintaing this library.
+We use the [inline-style-prefixer](https://inline-style-prefixer.js.org/) library to automatically add vendor prefixes to your rules. Huge thanks to [Robin Weser](https://twitter.com/robinweser) for creating and maintaining this library.
 
 Based on their documentation:
 > It supports all major browsers with the following versions. For other, unsupported browses, we automatically use a fallback.
 
-> It will only add prefixes if a property still needs them in one of the above mentioned versions.
-Therefore, e.g. border-radius will not be prefixed at all.
+> It will only add prefixes if a property still needs them in one of the above-mentioned versions.
+Therefore, e.g. `border-radius` will not be prefixed at all.
 
 List of supported browsers:
 - Chrome: 55+

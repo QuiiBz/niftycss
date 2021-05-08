@@ -3,9 +3,9 @@ title: 'Breakpoints'
 order: 5
 ---
 
-Instead of writing long media-queries declarations, you can use breakpoints [directives](/docs/features/directives). You can either use the default breakpoints, or create your own.
+Instead of writing long media-queries declarations, you can use breakpoints [directives](/docs/features/directives). You can either use the default breakpoints or create your own.
 
-You will get auto-completion will using [TypeScript](/docs/guides/typescript), even with custom breakpoints.
+You will get auto-completion will using TypeScript, even with custom breakpoints.
 
 ## Table of Contents
 
@@ -48,7 +48,7 @@ This code will generate the following CSS:
 ```
 
 ## Creating custom breakpoints
-Custom breakpoints are a simple key-value object. The key must start by a `$`, since it is used as a [directive](/docs/directives).
+Custom breakpoints are simple key-value objects. The key must start by a `$` since it is used as a [directive](/docs/directives).
 
 Once your breakpoint object is created, pass it as the value of the `breakpoints` property of your `NiftyOptions`:
 

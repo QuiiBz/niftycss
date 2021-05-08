@@ -6,7 +6,7 @@ order: 1
 ## Table of Contents
 
 ## Basic styling
-To create your first styles with NiftyCSS, create a new file named `nifty.[js|ts]` and start by importing the `nifty` method. You will need to provide a `NiftyOptions` object, but we will cover that later.
+To create your first styles with NiftyCSS, create a new file named `nifty.ts` and start by importing the `nifty` method. You will need to provide a `NiftyOptions` object, but we will cover that later.
 
 ```typescript
 import { nifty } from '@niftycss/core';
@@ -14,11 +14,11 @@ import { nifty } from '@niftycss/core';
 export const { css } = createNifty({});
 ```
 
-As you can see, we used destructuring to get a `css` method, which will be used to create your styles. We also immediately export this method, to make it available on your project.
+As you can see, we used destructuration to get a `css` method, which will be used to create your styles. We also immediately export this method, to make it available on your project.
 
-Then, use the `css` method to generate your first style. This will return you the class name corresponding to the styles you wrote.
+Then, use this `css` method to generate your first style. This will return you the class name corresponding to the styles you wrote.
 
-Inside this method, you must provide a `style provider`, which is an object containing the styles you want to define. You will automatically get **auto-completion** from your IDE:
+Inside this method, you must provide a `style provider`, which is an object containing the styles you want to define (See [styling props](/docs/features/styling-props) for another use of the `style provider`). You will automatically get **auto-completion** from your IDE of all available CSS properties:
 
 ```typescript
 import { css } from 'path/to/nifty.ts';
@@ -37,12 +37,12 @@ Then, to apply your newly created style, set the `class` name of your element to
 </div>
 ```
 
-That's it! Next, see how to use specific selectors underneath, or see how to use [themes](/docs/features/theming), [breakpoints](/docs/features/breakpoints) for responsive or [CSS utilities](/docs/features/css-utilities).
+That's it! Next, see how to use specific selectors underneath, or see how to use [themes](/docs/features/theming), [breakpoints](/docs/features/breakpoints) or [CSS utilities](/docs/features/css-utilities).
 
 ## Styled API
 Nifty provides a `styled` API for React, inspired by [styled-components](https://styled-components.com/).
 
-To use it, first install the `@niftycss/react` package:
+To use it, first, install the `@niftycss/react` package:
 
 ```bash
 # Yarn
@@ -109,7 +109,7 @@ css({
 }, container, 'pt-0 border-b');
 ```
 
-You can add any number of existing class name of Nifty styles.
+You can add any number of existing class names or Nifty styles.
 
 ## Targeting pseudo-classes/elements
 To target any pseudo-class or pseudo-element, write its name, and create a new object to defines the styles:

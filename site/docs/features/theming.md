@@ -24,7 +24,7 @@ export const { css } = createNifty({
 ```
 
 ## Using a theme
-To use your freshly created theme, append the `@` symbol and write the key of the theme value you want to use. Using [TypeScript](/docs/guides/typescript) provides auto-completion for the theme keys:
+To use your freshly created theme, append the `@` symbol and write the key of the theme value you want to use. Using TypeScript provides auto-completion for the theme keys:
 
 ```typescript
 css({
@@ -36,7 +36,7 @@ css({
 When Nifty will generate the CSS, the theme keys you wrote will automatically be transformed to the value of the current theme.
 
 ## Switching to another theme
-To switch the current theme to another one (if you want white and dark theme support for instance), you can use the `setTheme` method from the `nifty` meethod. You can either pass the new theme object, or use a function which gives you the current theme and return the new theme:
+To switch the current theme to another one (if you want white and dark theme support for instance), you can use the `setTheme` method from the `nifty` method. You can either pass the new theme object or use a function that gives you the current theme and return the new theme:
 
 > Each theme variation should contain the same keys.
 

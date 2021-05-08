@@ -8,7 +8,7 @@ NiftyCSS is easily extendible with plugins. There are very useful plugins create
 ## Table Of Contents
 
 ## Using plugins
-To use a plugin, import it in your `nifty.[js|ts]` and add it to the `plugins` array of your `NiftyOptions` object:
+To use a plugin, import it in your `nifty.ts` and add it to the `plugins` array of your `NiftyOptions` object:
 ```typescript
 import { nifty } from '@nifty/core';
 import awesome from 'nifty-plugin-awesome';

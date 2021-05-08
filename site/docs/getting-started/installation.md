@@ -3,9 +3,7 @@ title: 'Installation'
 order: 2
 ---
 
-You can install NiftyCSS either with a [package manager](#installing-via-a-package-manager), or with a [CDN](#installing-via-a-cdn).
-
-We **strongly** recommand to use Nifty with a package manager, to get all the available features.
+Currently, Nifty is only available through a [package manager](#installing-via-a-package-manager).
 
 ## Table of Contents
 
@@ -26,9 +24,9 @@ Then, head over to [styling](/docs/features/styling) to learn how to create your
 Not yet supported.
 
 ## Using with X
-We have guides about how to use Nifty with populars frameworks and technologies.
+We have guides about how to use Nifty with popular frameworks and technologies.
 
-The logic is roughly the same for each frameworks, so you can easily integrate Nifty with any other framework or library.
+The logic is roughly the same for each framework, so you can easily integrate Nifty with any other framework or library.
 
 ### Frameworks
 - [NextJS](/docs/guides/nextjs) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ([Example code](https://github.com/QuiiBz/niftycss/tree/main/examples/nextjs))
@@ -36,5 +34,4 @@ The logic is roughly the same for each frameworks, so you can easily integrate N
 - [Gatbsy](/docs/guides/gatbsy) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ([Example code](https://github.com/QuiiBz/niftycss/tree/main/examples/gatbsy))
   
 ### Other technologies
-- [TypeScript](/docs/guides/typescript)
 - [TailwindCSS](/docs/guides/tailwindcss)

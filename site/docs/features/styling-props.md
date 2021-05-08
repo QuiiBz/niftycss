@@ -3,7 +3,9 @@ title: 'Styling props'
 order: 2
 ---
 
-You can use `props` to define style based on custom props declared at the usage-level or component-level if you are using the [styled](/docs/features/styling#styled-api) API.
+You can use `props` to define style based on custom props declared at the usage-level, or component-level if you are using the [styled](/docs/features/styling#styled-api) API.
+
+You will of course get auto-completion when you will use the prop style, but we recommend creating a `type` to also get auto-completion inside your style declaration. See [type-safety](#type-safety).
 
 ## Table of Contents
 
@@ -31,14 +33,14 @@ const Box = styled('div', props => ({
 }))
 ```
 
-Then, you can specify the styling props directly at the component-level, same as any React props:
+Then, you can specify the styling props directly at the component level, same as any React props:
 
 ```tsx
 <Box bg='red' />
 ```
 
-## TypeScript support
-To add types safety, you can create a `type` which specify the schema of the props:
+## Type-safety
+To add types-safety, you can create a `type` that specify the schema of the props:
 
 ```typescript
 // css API

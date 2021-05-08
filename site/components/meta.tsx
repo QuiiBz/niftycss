@@ -37,7 +37,7 @@ const Meta: FC<Props> = ({ title }: Props): ReactElement => (
         <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
         <meta
             name="description"
-            content="A CSS-in-JS, framework-agnostic library to rapidly create reusable designs."
+            content="A CSS-in-TS, framework-agnostic library to rapidly create reusable designs."
         />
         {/* <meta property="og:image" content={HOME_OG_IMAGE_URL} /> */}
         <title>{ title ?? 'NiftyCSS'}</title>
