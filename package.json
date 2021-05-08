@@ -6,7 +6,8 @@
   "workspaces": [
     "packages/*",
     "examples/*",
-    "site"
+    "site",
+    "benchmarks"
   ],
   "scripts": {
     "build": "preconstruct build",
