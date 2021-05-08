@@ -4,7 +4,7 @@ import { createPlugin } from '@niftycss/plugins';
 const autoprefixer = createPlugin({
     hookStyles: (styles) => styles.map((style) => ({
         ...style,
-        styleProvider: prefix(style.styleProvider),
+        cssProperties: prefix(style.cssProperties),
     })),
 });
 
