@@ -14,6 +14,13 @@ import React, {
     FC, ReactElement, useEffect, useRef,
 } from 'react';
 
+type StyledCSS<
+    T extends NiftyTheme,
+    B extends Breakpoints,
+    P extends NiftyProps> = {
+        css?: StyleProvider<T, B, P>
+    };
+
 const createStyled = <
     T extends NiftyTheme,
     B extends Breakpoints = typeof DEFAULT_BREAKPOINTS,
@@ -32,9 +39,17 @@ const createStyled = <
         tag: HTMLTag,
         styleProvider: StyleProvider<T, B, P>,
         ...classProvider: ClassProvider
-    ): FC<P & AllHTMLAttributes<HTMLElement>> => (props: P): ReactElement => {
-        const className = cssWithProps(styleProvider, ...classProvider)(props);
+    ): FC<P & AllHTMLAttributes<HTMLElement> & StyledCSS<T, B, P>> => (
+        props: P & StyledCSS<T, B, P>,
+    ): ReactElement => {
+        let className = cssWithProps(styleProvider, ...classProvider)(props);
         const rendered = useRef(false);
+
+        const { css: cssProp } = props;
+
+        if (cssProp) {
+            className += ` ${cssWithProps(cssProp)(props)}`;
+        }
 
         useEffect(() => {
             if (rendered.current) {
