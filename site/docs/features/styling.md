@@ -72,6 +72,16 @@ const Button = styled('button', {
 <Button>Hello</Button>
 ```
 
+You can also define additional styles at the component-level with the `css` prop, to override or add styles on a per-component basis. You will get the same auto-completion:
+
+```tsx
+<Button>Hello</Button>
+// Change the background for this button only
+<Button css={{
+    background: 'blue',
+}}>Hello</Button>
+```
+
 Any `props` passed to the style component will be transmitted to the generated React component:
 
 ```tsx
