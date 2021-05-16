@@ -70,7 +70,7 @@ const HeaderSearch: FC = (): ReactElement => {
     const [isOpen, setOpen] = useState(false);
 
     useEffect(() => {
-        const keydown = (event) => {
+        const keydown = (event: KeyboardEvent) => {
             if (event.keyCode === 27) {
                 setOpen(false);
             }
@@ -116,4 +116,5 @@ const HeaderSearch: FC = (): ReactElement => {
         </>
     );
 };
+
 export default HeaderSearch;
