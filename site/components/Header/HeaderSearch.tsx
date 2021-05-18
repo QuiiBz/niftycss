@@ -76,7 +76,9 @@ const HeaderSearch: FC = (): ReactElement => {
             }
         };
 
-        if (window.docsearch && isOpen) {
+        // @ts-ignore
+        if (typeof window !== 'undefined' && window.docsearch !== 'undefined' && isOpen) {
+            // @ts-ignore
             window.docsearch({
                 apiKey: 'e87296aaac8a39bcce980a3481d6c225',
                 indexName: 'niftycss',
