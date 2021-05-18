@@ -1,5 +1,10 @@
-import { box, flexRow, paddingX } from '@niftycss/css';
-import { FC, ReactElement } from 'react';
+import {
+    box, flexCenter, flexRow, paddingX, paddingY,
+} from '@niftycss/css';
+import {
+    FC, ReactElement, useEffect, useState,
+} from 'react';
+import { createPortal } from 'react-dom';
 import { css, styled } from '../../lib/nifty';
 
 const Search = styled('div', {
@@ -37,14 +42,81 @@ const Keys = styled('span', {
     marginLeft: '10px',
 }, hideResponsive, 'transition');
 
-const HeaderSearch: FC = (): ReactElement => (
-    <Search>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-        </svg>
-        <span className={hideResponsive}>Search anything...</span>
-        <Keys>⌘K</Keys>
-    </Search>
-);
+const Container = styled('div', {
+    ...flexCenter,
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    zIndex: 9,
+    background: 'rgba(0, 0, 0, 0.5)',
+    backdropFilter: 'blur(10px)',
+});
+
+const Input = styled('input', {
+    ...paddingX`26px`,
+    ...paddingY`12px`,
+    color: '@gray600',
+    fontSize: '18px',
+    boxShadow: '0 0 0 1px @gray400',
+    borderRadius: '12px',
+    ':focus': {
+        outline: 'none',
+    },
+});
+
+const HeaderSearch: FC = (): ReactElement => {
+    const [isOpen, setOpen] = useState(false);
+
+    useEffect(() => {
+        const keydown = (event: KeyboardEvent) => {
+            if (event.keyCode === 27) {
+                setOpen(false);
+            }
+        };
+
+        // @ts-ignore
+        if (typeof window !== 'undefined' && window.docsearch !== 'undefined' && isOpen) {
+            // @ts-ignore
+            window.docsearch({
+                apiKey: 'e87296aaac8a39bcce980a3481d6c225',
+                indexName: 'niftycss',
+                inputSelector: '#docsearch',
+            });
+
+            document.getElementById('#docsearch')?.focus();
+            window.addEventListener('keydown', keydown);
+        }
+
+        return () => window.removeEventListener('keydown', keydown);
+    }, [isOpen]);
+
+    return (
+        <>
+            <Search onClick={() => setOpen(true)}>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <span className={hideResponsive}>Search anything...</span>
+                <Keys>⌘K</Keys>
+            </Search>
+            {
+                isOpen && createPortal(
+                    <Container>
+                        {/* eslint-disable-next-line jsx-a11y/no-autofocus */}
+                        <Input
+                            autoFocus
+                            id="docsearch"
+                            type="text"
+                            placeholder="Search anything"
+                        />
+                    </Container>,
+                    document.body,
+                )
+            }
+        </>
+    );
+};
 
 export default HeaderSearch;
