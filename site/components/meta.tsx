@@ -41,6 +41,8 @@ const Meta: FC<Props> = ({ title }: Props): ReactElement => (
         />
         {/* <meta property="og:image" content={HOME_OG_IMAGE_URL} /> */}
         <title>{ title ?? 'NiftyCSS'}</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js" />
     </Head>
 );
 
