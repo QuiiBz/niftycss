@@ -124,6 +124,7 @@ const CodePreview: FC = (): ReactElement => {
                 {
                     TABS.map(({ id, title }) => (
                         <Tab
+                            key={id}
                             selected={id === tab}
                             onClick={() => onClick(id)}
                         >
