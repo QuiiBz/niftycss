@@ -3,8 +3,4 @@ const withTM = require('next-transpile-modules')([
     '@niftycss/dom',
 ]);
 
-module.exports = withTM({
-    future: {
-        webpack5: true,
-    },
-});
+module.exports = {}
