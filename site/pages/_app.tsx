@@ -8,7 +8,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     return (
         <>
             <Script
-                src="http://134.209.248.49/js/plausible.js"
+                src="http://134.209.248.49:8000/js/plausible.js"
                 data-domain="niftycss.com"
             />
             <Component {...pageProps} />
