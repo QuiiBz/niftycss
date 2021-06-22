@@ -3,4 +3,4 @@ const withTM = require('next-transpile-modules')([
     '@niftycss/dom',
 ]);
 
-module.exports = {}
+module.exports = {};
